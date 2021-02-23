@@ -282,3 +282,14 @@ fetch(`/api/elements${window.location.search}`, { headers: { 'Accept': 'applicat
     }).catch((err) => {
         displayError(`Error while requesting document elements: ${err}`);
     });
+
+  // Get the User Info
+  fetch(`/api/users/sessioninfo`, { headers: { 'Accept': 'application/json' } })
+  .then((resp) => resp.json())
+  .then(async (json) => {
+      console.log(json);
+      const title = document.createTextNode(json.firstName);
+      document.getElementById('name').appendChild(title);
+  }).catch((err) => {
+      displayError(`Error while requesting docuemnt list: ${err}`);
+});
