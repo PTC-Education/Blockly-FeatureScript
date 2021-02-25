@@ -17,7 +17,7 @@ const apiRouter = require('express').Router();
  *      -> 500, { error: '...' }
  */
 apiRouter.get('/elements', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=FEATURESTUDIO`, req, res);
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements`, req, res);
 });
 
 //?elementType=FEATURESTUDIO
