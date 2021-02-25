@@ -13,7 +13,7 @@ function reqListener () {
 		horizontalLayout : false,
 		toolboxPosition : 'start',
 		css : true,
-		media : 'media/',
+		media : '../client/media/',
 		rtl : false,
 		scrollbars : true,
 		sounds : true,
