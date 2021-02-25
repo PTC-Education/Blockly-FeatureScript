@@ -26,6 +26,7 @@ apiRouter.get('/users/sessioninfo', (req, res) => {
 });
 
 apiRouter.post('/test', (req, res) => {
+    console.log('hello')
     console.log(`${onshapeApiUrl}/documents/${req.query.documentId}/elements`)
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/${req.query.documentId}/elements`, req, res);
 });
@@ -43,6 +44,7 @@ apiRouter.post('/test', (req, res) => {
 apiRouter.get('/elements/:eid/parts', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/parts/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.params.eid}`, req, res);
 });
+
 
 /**
  * Get the Parts of the current document/workspace.

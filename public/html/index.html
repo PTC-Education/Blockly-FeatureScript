@@ -50,7 +50,6 @@
 <script src="../client/workspace.js" charset="utf-8"></script>
 <script>
 
-const fetch = require('node-fetch');
 
 
 function runCode(highlighting) {
@@ -122,6 +121,7 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 function testApi() {
+
   fetch(`/api/test`, { headers: { 'Accept': 'application/json' } })
     .then((resp) => resp.json())
     .then(async (json) => {
