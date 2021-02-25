@@ -39,7 +39,7 @@ function reqListener () {
 var oReq = new XMLHttpRequest();
 var workspace;
 oReq.addEventListener("load", reqListener);
-oReq.open("GET", "/public/client/toolbox.xml");
+oReq.open("GET", "/toolbox.xml");
 oReq.send();
 
 /* Inject your workspace */
