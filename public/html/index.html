@@ -1,25 +1,124 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html>
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width'>
-    
-    <link rel='stylesheet' href='css/index.css'>
+  <meta charset="utf-8">
+  <title>Testing blockly</title>
+  <script src="../client/blockly_compressed.js" charset="utf-8"></script>
+  <script src="../client/blocks_compressed.js" charset="utf-8"></script>
+  <script src="../client/javascript_compressed.js" charset="utf-8"></script>
+
+  <script src="../client/acorn.js" charset="utf-8"></script>
+  <script src="../client/interpreter.js" charset="utf-8"></script>
+  <script src="../client/msg/js/en.js" charset="utf-8"></script>
+
+  <style media="screen">
+  body {
+    padding: 0;
+    margin: 0
+  }
+  #blocklyDiv {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+
+  #runButton {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 50%);
+    color: #999;
+    border-radius: 5px;
+  }
+  </style>
+
 </head>
 <body>
-    <div id='greeting'>
-        <h1>Hello <span id='name'> </span></h1>
-
-    </div>
-    <div id='gltf-container'>
-        <div>
-            <select id='elem-selector'>
-                <option href=''>-- Select an Item --</option>
-            </select>
-        </div>
-        <div id='gltf-viewport'></div>
-    </div>
-    
-    <script src='main.js'></script>
+  <div id="blocklyDiv"></div>
+  <button id="runButton" onclick="runCode(true); return">Copy FS Code to Clipboard</button>
 </body>
+<!-- Define your custom blocks -->
+<script src="../client/myBlocksInit.js" charset="utf-8"></script>
+<!-- Define your custom blocks generated code -->
+<script src=".../client/myBlocks.js" charset="utf-8"></script>
+<!-- Init API for your JS Interpreter -->
+<!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
+<!-- Inject your workspace with categories and blocks -->
+<script src="../client/workspace.js" charset="utf-8"></script>
+<script>
+
+
+
+
+function runCode(highlighting) {
+
+  var fsPrefix = `
+    FeatureScript 1389;
+    import(path : "onshape/std/geometry.fs", version : "1389.0");
+  `
+  
+  var fsCode = Blockly.JavaScript.workspaceToCode(workspace);
+
+
+  // TODO: The below modifies the opening lines of the code depending on the presence of precondition, this is a massive hack and should be fixed
+    // break the textblock into an array of lines
+  var lines = fsCode.split('\n');
+  var firstLine = lines[0];
+  console.log("First line: " + firstLine)
+  if (firstLine.includes("var"))
+  {
+    // remove one line, starting at the first position
+    lines.splice(0,1);
+  }else if(!firstLine.includes("precondition")){
+    console.log(lines);
+    //lines.splice(0, 0, "precondition{} \n { var i = 0;")
+  }
+  // join the array back into a single string
+  var fsCodeNoVar = lines.join('\n');
+  
+
+  fsCode =  fsPrefix + fsCodeNoVar;
+  console.log(fsCode);
+  copyToClipboard(fsCode);
+  
+  // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
+  // if (highlighting)
+  //   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+  // else
+  //   Blockly.JavaScript.STATEMENT_PREFIX = null;
+
+  // var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  // var intrepreterAvailable = false;
+  // try {
+  //   myInterpreter = new Interpreter(code, initApi);
+  //   intrepreterAvailable = true;
+  // } catch (e) {
+  //   console.log("You are using eval() function consider using Interpreter\nhttps://developers.google.com/blockly/guides/app-integration/running-javascript#js_interpreter");
+  // } finally {
+  //   if (intrepreterAvailable) {
+  //     nextStep();
+  //   } else {
+  //     eval(code);
+  //   }
+  // }
+  // workspace.highlightBlock(null);
+
+}
+function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    // to avoid breaking orgain page when copying more words
+    // cant copy when adding below this code
+    // dummy.style.display = 'none'
+    document.body.appendChild(dummy);
+    //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+}
+</script>
 </html>
