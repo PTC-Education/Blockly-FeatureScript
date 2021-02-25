@@ -25,8 +25,8 @@ apiRouter.get('/users/sessioninfo', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
-apiRouter.post('/featurestudios', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
+apiRouter.post('/test', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/${req.query.documentId}/elements`, req, res);
 });
 
 
