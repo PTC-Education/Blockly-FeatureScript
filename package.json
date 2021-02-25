@@ -5,8 +5,7 @@
   "main": "bin/www",
   "scripts": {
     "start": "bin/www",
-    "postinstall": "cd public/client && node ./update_blockly.js",
-    "heroku-postbuild": "rollup -c"
+    "postinstall": "cd public/client && node ./update_blockly.js"
   },
   "author": "Ron Gajdos <rgajdos@ptc.com>",
   "license": "MIT",
