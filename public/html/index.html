@@ -121,10 +121,16 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 function testApi() {
+  fetch(`/api/elements`, { headers: { 'Accept': 'application/json' } })
+    .then(response => response.json())
+    .then(json => console.log(json));
+}
 
+/*
   fetch(`/api/users/sessioninfo`, { headers: { 'Accept': 'application/json' } })
     .then(response => response.json())
     .then(json => console.log(json));
 }
+*/
 </script>
 </html>
