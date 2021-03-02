@@ -30,6 +30,10 @@ apiRouter.post('/test', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?withThumbnails=false`, req, res);
 });
 
+apiRouter.get('/documents', (req, res) => {
+    console.log(req.query.documentId)
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/${req.query.documentId}`, req, res);
+});
 
 
 /**
