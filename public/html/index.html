@@ -122,9 +122,9 @@ function copyToClipboard(text) {
 }
 
 
-function updateFeatureStudioContents(fSId, serializationVersion, sourceMicroversion) {
+function updateFeatureStudioContents(fSId, sourceMicroversion) {
 
-  console.log(serializationVersion)
+  console.log(fSId)
   console.log(sourceMicroversion)
 
   fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { body: {'contents':'This was sent through Blockly', 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
@@ -147,7 +147,7 @@ function getFeatureStudioContents(fSId) {
   
   fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => console.log(json.sourceMicroversion))
+  .then(async (json) => updateFeatureStudioContents(fSId, json.sourceMicroversion))
 }
 
 // Get FeatureStudio ID
