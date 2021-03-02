@@ -122,7 +122,7 @@ function copyToClipboard(text) {
 }
 
 function testApi() {
-  fetch(`/api/documents`, { headers: { 'Accept': 'application/json' } })
+  fetch(`/api/documents${location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
   .then(async (json) => console.log(json))
 }
