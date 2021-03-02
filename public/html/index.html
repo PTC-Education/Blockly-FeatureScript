@@ -128,7 +128,7 @@ function testApi() {
 
   fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => console.log(json[0].id)
+  .then(async (json) => console.log(json[0].id))
 
 
   
