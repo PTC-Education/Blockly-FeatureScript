@@ -31,7 +31,7 @@ apiRouter.post('/test', (req, res) => {
 });
 
 apiRouter.get('/documents', (req, res) => {
-    console.log(req.query)
+    console.log(req.query.documentId)
 });
 
 
