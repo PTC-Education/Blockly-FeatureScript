@@ -121,7 +121,7 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 function testApi() {
-  fetch(`/api/test`, {method: 'GET', headers: { 'Accept': 'application/json' } })
+  fetch(`/api/elements`, {method: 'GET', headers: { 'Accept': 'application/json' } })
     .then(response => response.json())
     .then(json => console.log(json));
 }
