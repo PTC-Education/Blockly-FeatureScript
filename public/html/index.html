@@ -121,7 +121,7 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 function testApi() {
-  fetch(`https://cad.onshape.com/api/documents/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/elements?withThumbnails=false`, { method: 'GET', headers: { 'Accept': 'application/json' } })
+  fetch(`/api/test`, {headers: { 'Accept': 'application/json' } })
     .then(response => response.json())
     .then(json => console.log(json));
 }
