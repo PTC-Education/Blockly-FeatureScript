@@ -127,11 +127,11 @@ function testApi() {
 
   fsID = `blockly=50029bb62ea890b577be3177`
 
-  console.log(`/api/featurestudio${window.location.search}&${fsID}`)
+  console.log(`/api/featurestudios${window.location.search}&${fsID}`)
 
-  fetch(`/api/featurestudio${window.location.search}&${fsID}`, { headers: { 'Accept': 'application/json' } })
+  fetch(`/api/featurestudios${window.location.search}&${fsID}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => console.log(json[0].id))
+  .then(async (json) => console.log(json))
 
   // Get elements of Featurestudio type
   /*
