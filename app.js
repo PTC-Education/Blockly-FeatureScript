@@ -76,11 +76,11 @@ app.use('/oauthRedirect', passport.authenticate('onshape', { failureRedirect: '/
 });
 
 app.get('/grantDenied', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'grantDenied.html'));
+    res.sendFile(path.join(__dirname, 'public/client', 'html', 'grantDenied.html'));
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'html', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/client', 'html', 'index.html'));
 });
 
 app.use('/api', require('./api'));
