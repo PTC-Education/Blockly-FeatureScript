@@ -38,6 +38,12 @@ apiRouter.get('/documents/d', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=FEATURESTUDIO&withThumbnails=false`, req, res);
 });
 
+//featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/e/50029bb62ea890b577be3177
+
+// This works!!
+apiRouter.get('/featurestudios', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
+});
 
 
 
