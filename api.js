@@ -46,6 +46,11 @@ apiRouter.get('/featurestudios', (req, res) => {
 });
 
 
+apiRouter.post('/featurestudiosThree', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
+});
+
+
 
 /**
  * Get the Parts of the given Element in the current document/workspace.
