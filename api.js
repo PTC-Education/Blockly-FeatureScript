@@ -32,8 +32,9 @@ apiRouter.post('/test', (req, res) => {
 
 apiRouter.get('/documents', (req, res) => {
     console.log(req.query.documentId)
-    forwardRequestToOnshape(`${onshapeApiUrl}/documents/${req.query.documentId}`, req, res);
 });
+
+
 
 
 /**
