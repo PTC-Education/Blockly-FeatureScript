@@ -121,7 +121,28 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 
-function testApi() {
+function getFeatureStudioContents(fSId) {
+  // Gets the FeatureStudio in the Document
+
+  /*
+  fsID = `blockly=50029bb62ea890b577be3177`
+
+  console.log(`/api/featurestudios${window.location.search}&${fsID}`)
+  */
+
+  fetch(`/api/featurestudios${window.location.search}&${fSId}`, { headers: { 'Accept': 'application/json' } })
+  .then((resp) => resp.json())
+  .then(async (json) => console.log(json))
+}
+
+function testApi(){
+  fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+  .then((resp) => resp.json())
+  .then(async (json) => getFeatureStudioContents(json[0].id))
+}
+
+
+function testApid() {
 
   // Gets the FeatureStudio in the Document
 
