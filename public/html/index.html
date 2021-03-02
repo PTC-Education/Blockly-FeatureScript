@@ -122,10 +122,18 @@ function copyToClipboard(text) {
 }
 
 function testApi() {
+  console.log(`/api/documents/d${window.location.search}`)
+
+  // /api/documents/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/elements?withThumbnails=false
+
+
+  /*
   console.log(`/api/documents${window.location.search}`)
   fetch(`/api/documents${window.location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
   .then(async (json) => console.log(json))
+  */
+
 }
 
 function testApis() {

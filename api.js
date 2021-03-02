@@ -26,12 +26,16 @@ apiRouter.get('/users/sessioninfo', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
-apiRouter.post('/test', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?withThumbnails=false`, req, res);
-});
 
+
+// This works!!
 apiRouter.get('/documents', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/${req.query.documentId}`, req, res);
+});
+
+// This works!!
+apiRouter.get('/documents/d', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements`, req, res);
 });
 
 
