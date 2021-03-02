@@ -130,7 +130,8 @@ function getFeatureStudioContents(fSId) {
   console.log(`/api/featurestudios${window.location.search}&${fSId}`)
   */
   console.log(fSId)
-
+  console.log(`/api/featurestudios${window.location.search}&${fSId}`)
+  
   fetch(`/api/featurestudios${window.location.search}&${fSId}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
   .then(async (json) => console.log(json))
