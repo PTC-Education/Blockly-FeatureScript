@@ -129,6 +129,7 @@ function getFeatureStudioContents(fSId) {
 
   console.log(`/api/featurestudios${window.location.search}&${fSId}`)
   */
+  console.log(fSId)
 
   fetch(`/api/featurestudios${window.location.search}&${fSId}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
@@ -138,7 +139,7 @@ function getFeatureStudioContents(fSId) {
 function getFeatureStudio(){
   fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => console.log(json[0].id))
+  .then(async (json) => getFeatureStudioContents(json[0].id))
 }
 
 
