@@ -124,11 +124,15 @@ function copyToClipboard(text) {
 function testApi() {
   console.log(`/api/documents/d${window.location.search}`)
 
-  
+  // Gets the FeatureStudio in the Document
+
   fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
+  .then(async (json) => elements)
+    console.log(elements)
+    console.log(elements[0].id)
 
+  
   // /api/documents/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/elements?withThumbnails=false
 
 
