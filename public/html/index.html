@@ -147,7 +147,7 @@ function getFeatureStudioContents(fSId) {
   
   fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
-  .then(async (json) => updateFeatureStudioContents(fSId, json.serializationVersion, json.sourceMicroversion))
+  .then(async (json) => console.log(json.sourceMicroversion))
 }
 
 // Get FeatureStudio ID
