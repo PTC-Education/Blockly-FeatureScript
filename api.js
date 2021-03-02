@@ -35,7 +35,7 @@ apiRouter.get('/documents', (req, res) => {
 
 // This works!!
 apiRouter.get('/documents/d', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?withThumbnails=false`, req, res);
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=FEATURESTUDIO&withThumbnails=false`, req, res);
 });
 
 
