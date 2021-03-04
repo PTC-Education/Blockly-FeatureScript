@@ -130,15 +130,15 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   requested = {"contents": "testing from onshape", "serializationVersion":"1.1.20", "sourceMicroversion": `${sourceMicroversion}`, "rejectMicroversionSkew": true}
   console.log('New Request Body:')
   console.log(requested)
- 
+
   try {
-        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, { method: 'POST', body: JSON.stringify(requested), headers: { "Accept": "application/vnd.onshape.v1+json", "Content-Type": "application/json"}})
+        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, { method: 'POST', body: JSON.stringify(requested), headers: { "Accept": "application/vnd.onshape.v1+json", "Content-Type": "application/json"}});
         const result = await response.json();
         return result;
     } catch (error) {
         console.error(error);
     }
-}
+};
 
 
 
@@ -148,13 +148,6 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 
 async function getFeatureStudioContents(fSId) {
   // Gets the FeatureStudio in the Document
-
-  /*
-  fSId = `blockly=50029bb62ea890b577be3177`
-
-  console.log(`/api/featurestudios${window.location.search}&${fSId}`)
-  */
-
   try {
         const response = await fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
         const featurestudioContents = await response.json();
@@ -162,7 +155,7 @@ async function getFeatureStudioContents(fSId) {
     } catch (error) {
         console.error(error);
     }
-}
+};
 
 
 
@@ -180,16 +173,20 @@ async function getFeatureStudio() {
 
 
 async function copyToBlockly(fsCode) {
-  console.log('Making sure fscode came in right inside blockly:');
+  console.log('');
+  console.log('Block Generated FS CODE:');
   console.log(fsCode);
+  console.log('');
   const featureStudioID = await getFeatureStudio();
-  console.log('FeatureStudio ID from inside copyToBlocky:');
+  console.log('FeatureStudio ID:');
   console.log(featureStudioID);
+  console.log('');
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
-  console.log('Contents of the FeatureStudio:');
+  console.log('FeatureStudio Contents:');
   console.log(featurestudioContents);
-  //const result = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
-  //console.log(result)
+  console.log('');
+  const result = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
+  console.log(result)
 }
 
 
