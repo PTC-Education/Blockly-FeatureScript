@@ -81,7 +81,7 @@ function runCode(highlighting) {
 
   fsCode =  fsPrefix + fsCodeNoVar;
   console.log(fsCode);
-  getFeatureStudio(fsCode);
+  copyToBlockly(fsCode);
   copyToClipboard(fsCode);
   
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
@@ -137,7 +137,7 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   .then(async (json) => console.log(json))
 }
 
-function copyToBlockly() {
+function copyToBlockly(fsCode) {
   const featureStudioID = getFeatureStudio()
   console.log('FeatureStudio ID from inside copyToBlocky:')
   console.log(featureStudioID) 
