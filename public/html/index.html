@@ -122,8 +122,8 @@ function copyToClipboard(text) {
 }
 
 //updated
-function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
-
+async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
+  /*
   console.log('FeatureScript ID:')
   console.log(fSId)
   console.log('SourceMicroversion:')
@@ -131,10 +131,14 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   requested = { body: {'contents': `${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } }
   console.log('New Request Body:')
   console.log(requested)
-
-  fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {'contents':`${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
+ */ 
+  try {
+        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {'contents':`${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
@@ -162,10 +166,6 @@ async function getFeatureStudioContents(fSId) {
     } catch (error) {
         console.error(error);
     }
-  /*
-  .then((resp) => resp.json())
-  .then(async (json) => updateFeatureStudioContents(fSId, json.sourceMicroversion, fsCode))
-  */
 }
 
 // Get FeatureStudio ID
@@ -187,6 +187,7 @@ async function copyToBlockly(fsCode) {
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   console.log('Contents of the FeatureStudio:');
   console.log(featurestudioContents);
+  const result = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
 }
 
 
