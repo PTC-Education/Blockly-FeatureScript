@@ -83,7 +83,6 @@ function runCode(highlighting) {
   console.log(fsCode);
   copyToBlockly(fsCode);
   copyToClipboard(fsCode);
-  tst();
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
   //   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -133,7 +132,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(requested)
  
   try {
-        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: JSON.stringify(requested), headers: { "Accept": "application/vnd.onshape.v1+json", "Content-Type": "application/json"}})
+        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, { method: 'POST', body: JSON.stringify(requested), headers: { "Accept": "application/vnd.onshape.v1+json", "Content-Type": "application/json"}})
         const result = await response.json();
         return result;
     } catch (error) {
@@ -141,11 +140,6 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
     }
 }
 
-function tst(){
-  fetch(`/api/featurestudiosThree${window.location.search}&blockly=50029bb62ea890b577be3177`, { method: 'POST', body: {'contents':'This was sent through Blockly', 'serializationVersion':'1.1.20', 'sourceMicroversion': `7c3746d1f8a8b5c62721493c`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
-}
 
 
 
