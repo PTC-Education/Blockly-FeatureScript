@@ -163,13 +163,10 @@ function getFeatureStudioContents(fSId, fsCode) {
 async function getFeatureStudio(){
   const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
   const featureStudios = await response.json()
-  return featureStudios[0].id;
+  return Promise.resolve(featureStudios[0].id);
 }
-/*
-  .then((resp) => resp.json())
-  .then(async (json) => json)
-getFeatureStudioContents(json[0].id))
-*/
+
+
 function testApid() {
 
   // Gets the FeatureStudio in the Document
