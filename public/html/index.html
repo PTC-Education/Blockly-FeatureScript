@@ -128,12 +128,12 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(fSId)
   console.log('SourceMicroversion:')
   console.log(sourceMicroversion)
-  requested = { body: {'contents': `${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } }
+  requested = {'contents': `${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}
   console.log('New Request Body:')
   console.log(requested)
  
   try {
-        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {'contents':`${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
+        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: requested, headers: { 'Accept': 'application/json' } })
         const result = await response.json();
         return result;
     } catch (error) {
