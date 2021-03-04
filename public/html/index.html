@@ -137,7 +137,13 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   .then(async (json) => console.log(json))
 }
 
-function copyToBlockly(fsCode) {
+async copyToBlockly(fsCode) {
+        const featureStudioID = await getFeatureStudio();
+        console.log('FeatureStudio ID from inside copyToBlocky:');
+        console.log(featureStudioID);
+}
+
+function cofffpyToBlockly(fsCode) {
   const featureStudioID = getFeatureStudio()
   console.log('FeatureStudio ID from inside copyToBlocky:')
   console.log(featureStudioID) 
@@ -161,13 +167,27 @@ function getFeatureStudioContents(fSId, fsCode) {
 // Get FeatureStudio ID
 
 
-function getFeatureStudio(){
+function getFeatutttreStudio(){
   //const response = await tch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
   fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json());
   .then(data => obj = data)
   return obj[0].id;
-}
+};
+
+
+
+async getFeatureStudio() {
+        try {
+            const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+            const featurestudios = await response.json();
+            return featurestudios[0].id;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
 
 
 function testApid() {
