@@ -137,7 +137,7 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   .then(async (json) => console.log(json))
 }
 
-async copyToBlockly(fsCode) {
+async function copyToBlockly(fsCode) {
         const featureStudioID = await getFeatureStudio();
         console.log('FeatureStudio ID from inside copyToBlocky:');
         console.log(featureStudioID);
@@ -177,7 +177,7 @@ function getFeatutttreStudio(){
 
 
 
-async getFeatureStudio() {
+async function getFeatureStudio() {
         try {
             const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
             const featurestudios = await response.json();
