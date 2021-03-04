@@ -133,7 +133,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(requested)
  
   try {
-        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {"contents": `hello`, "serializationVersion":'1.1.20', "sourceMicroversion": `${sourceMicroversion}`, "rejectMicroversionSkew":'True'}, headers: { 'Accept': 'application/json', 'Content-Type':'application/json' } })
+        const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {'contents': `hello`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/vnd.onshape.v1+json', 'Content-Type':'application/json' } })
         const result = await response.json();
         return result;
     } catch (error) {
