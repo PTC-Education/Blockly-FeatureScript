@@ -128,7 +128,7 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(fSId)
   console.log('SourceMicroversion:')
   console.log(sourceMicroversion)
-  requested = { body: {'contents':'This was sent through Blockly', 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } }
+  requested = { body: {'contents': `${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } }
   console.log('New Request Body:')
   console.log(requested)
 
