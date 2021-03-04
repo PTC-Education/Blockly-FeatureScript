@@ -184,7 +184,7 @@ async function copyToBlockly(fsCode) {
   const featureStudioID = await getFeatureStudio();
   console.log('FeatureStudio ID from inside copyToBlocky:');
   console.log(featureStudioID);
-  const featurestudioContents = await getFeatureStudioContents();
+  const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   console.log('Contents of the FeatureStudio:');
   console.log(featurestudioContents);
 }
