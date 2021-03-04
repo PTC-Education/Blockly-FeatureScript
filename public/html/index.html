@@ -160,9 +160,9 @@ function getFeatureStudioContents(fSId, fsCode) {
 
 // Get FeatureStudio ID
 
-async function getFeatureStudio(){
-  //const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
-  const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } }).then((resp) => resp.json());
+function getFeatureStudio(){
+  //const response = await tch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
+  const response = fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } }).then((resp) => resp.json());
   return response[0].id;
 }
 
