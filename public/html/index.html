@@ -146,7 +146,7 @@ function cofffpyToBlockly(fsCode) {
 
 // Get FeatureStudio Contents
 
-function getFeatureStudioContents(fSId, fsCode) {
+async function getFeatureStudioContents(fSId) {
   // Gets the FeatureStudio in the Document
 
   /*
@@ -154,22 +154,21 @@ function getFeatureStudioContents(fSId, fsCode) {
 
   console.log(`/api/featurestudios${window.location.search}&${fSId}`)
   */
-  fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
+
+  try {
+        const response = await fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudioContents = await response.json();
+        return featurestudioContents;
+    } catch (error) {
+        console.error(error);
+    }
+  /*
   .then((resp) => resp.json())
   .then(async (json) => updateFeatureStudioContents(fSId, json.sourceMicroversion, fsCode))
+  */
 }
 
 // Get FeatureStudio ID
-
-/*
-function getFeatutttreStudio(){
-  //const response = await tch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
-  fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json());
-  .then(data => obj = data)
-  return obj[0].id;
-};
-*/
 
 async function getFeatureStudio() {
     try {
@@ -185,6 +184,10 @@ async function copyToBlockly(fsCode) {
   const featureStudioID = await getFeatureStudio();
   console.log('FeatureStudio ID from inside copyToBlocky:');
   console.log(featureStudioID);
+  const featurestudioContents = await getFeatureStudioContents();
+  console.log('Contents of the FeatureStudio:');
+  console.log(featurestudioContents);
+  )
 }
 
 
