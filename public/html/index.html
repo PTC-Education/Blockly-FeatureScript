@@ -160,10 +160,13 @@ function getFeatureStudioContents(fSId, fsCode) {
 
 // Get FeatureStudio ID
 
+
 function getFeatureStudio(){
   //const response = await tch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
-  const response = fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } }).then((resp) => resp.json());
-  return response[0].id;
+  fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+  .then((resp) => resp.json());
+  .then(data => obj = data)
+  return obj[0].id;
 }
 
 
