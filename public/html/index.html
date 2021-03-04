@@ -181,6 +181,8 @@ async function getFeatureStudio() {
 };
 
 async function copyToBlockly(fsCode) {
+  console.log('Making sure fscode came in right:');
+  console.log(fsCode);
   const featureStudioID = await getFeatureStudio();
   console.log('FeatureStudio ID from inside copyToBlocky:');
   console.log(featureStudioID);
@@ -188,6 +190,7 @@ async function copyToBlockly(fsCode) {
   console.log('Contents of the FeatureStudio:');
   console.log(featurestudioContents);
   const result = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
+  console.log(result)
 }
 
 
