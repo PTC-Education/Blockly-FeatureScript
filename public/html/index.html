@@ -123,7 +123,7 @@ function copyToClipboard(text) {
 
 //updated
 async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
-  /*
+  
   console.log('FeatureScript ID:')
   console.log(fSId)
   console.log('SourceMicroversion:')
@@ -131,7 +131,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   requested = { body: {'contents': `${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } }
   console.log('New Request Body:')
   console.log(requested)
- */ 
+ 
   try {
         const response = await fetch(`/api/featurestudiosThree${window.location.search}&blockly=${fSId}`, { method: 'POST', body: {'contents':`${fsCode}`, 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
         const result = await response.json();
@@ -142,11 +142,6 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 }
 
 
-function cofffpyToBlockly(fsCode) {
-  const featureStudioID = getFeatureStudio()
-  console.log('FeatureStudio ID from inside copyToBlocky:')
-  console.log(featureStudioID) 
-}
 
 // Get FeatureStudio Contents
 
@@ -168,8 +163,9 @@ async function getFeatureStudioContents(fSId) {
     }
 }
 
-// Get FeatureStudio ID
 
+
+// Get FeatureStudio ID
 async function getFeatureStudio() {
     try {
         const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
@@ -180,8 +176,10 @@ async function getFeatureStudio() {
     }
 };
 
+
+
 async function copyToBlockly(fsCode) {
-  console.log('Making sure fscode came in right:');
+  console.log('Making sure fscode came in right inside blockly:');
   console.log(fsCode);
   const featureStudioID = await getFeatureStudio();
   console.log('FeatureStudio ID from inside copyToBlocky:');
@@ -193,45 +191,6 @@ async function copyToBlockly(fsCode) {
   console.log(result)
 }
 
-
-
-function testApid() {
-
-  // Gets the FeatureStudio in the Document
-
-  fsID = `blockly=50029bb62ea890b577be3177`
-
-  console.log(`/api/featurestudios${window.location.search}&${fsID}`)
-
-  fetch(`/api/featurestudios${window.location.search}&${fsID}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
-
-  // Get elements of Featurestudio type
-  /*
-  fetch(`/api/documents/d${window.location.search}&${fsID}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json[0].id))
-  */
-
-  
-  // /api/documents/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/elements?withThumbnails=false
-
-
-  /*
-  console.log(`/api/documents${window.location.search}`)
-  fetch(`/api/documents${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
-  */
-
-}
-
-function testApis() {
-  fetch(`/api/documents${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => console.log(json))
-}
 
 
 </script>
