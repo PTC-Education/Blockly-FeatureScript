@@ -134,7 +134,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   requested = {
     contents: "testing", 
     serializationVersion:"1.1.20", 
-    sourceMicroversion: `${sourceMicroversion}`, 
+    sourceMicroversion: ${sourceMicroversion}, 
     rejectMicroversionSkew: "True"}
   console.log('Request Body for POST:')
   console.log(requested)
