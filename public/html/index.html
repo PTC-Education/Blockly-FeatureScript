@@ -144,10 +144,10 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 //myHeaders.append("Authorization", "Bearer p5/W4E4i9JyUj8DwR4eHgQ==");
 myHeaders.append("Content-Type", "text/plain");
 
-var raw = "{\r\n    \"contents\": \"hello\",\r\n    \"serializationVersion\": \"1.1.20\",\r\n    \"sourceMicroversion\": \"7c2d223c3fbb6b22d01fb55c\",\r\n    \"rejectMicroversionSkew\": false\r\n}";
+var raw = "{\r\n    \"contents\": \"hello\",\r\n    \"serializationVersion\": \"1.1.20\",\r\n    \"sourceMicroversion\": \"080c7068646036ba2a423830\",\r\n    \"rejectMicroversionSkew\": false\r\n}";
 
 var requestOptions = {
-  method: 'GET',
+  method: 'POST',
   headers: myHeaders,
   body: raw,
   redirect: 'follow'
