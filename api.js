@@ -46,7 +46,7 @@ apiRouter.get('/featurestudios', (req, res) => {
 });
 
 
-apiRouter.post('/updateFS', (req, res) => {
+apiRouter.get('/updateFS', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
 });
 
