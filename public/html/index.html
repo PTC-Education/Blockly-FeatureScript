@@ -155,14 +155,15 @@ function getFeatureStudioContents(fSId, fsCode) {
 
 // Get FeatureStudio ID
 
-function getFeatureStudio(fsCode){
-  fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-  .then((resp) => resp.json())
-  .then(async (json) => json)
-  console.log(json[0].id)
-  return json[0].id;
+async function getFeatureStudio(){
+  const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
+  const featureStudios = await response.json()
+  console.log(featureStudios[0].id)
+  return featureStudios[0].id;
 }
 /*
+  .then((resp) => resp.json())
+  .then(async (json) => json)
 getFeatureStudioContents(json[0].id))
 */
 function testApid() {
