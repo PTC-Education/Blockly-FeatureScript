@@ -132,10 +132,10 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log('SourceMicroversion:')
   console.log(sourceMicroversion) 
   requested = {
-    "contents": "testing", 
-    "serializationVersion":"1.1.20", 
-    "sourceMicroversion": `${sourceMicroversion}`, 
-    "rejectMicroversionSkew": "True"}
+    contents: "testing", 
+    serializationVersion:"1.1.20", 
+    sourceMicroversion: `${sourceMicroversion}`, 
+    rejectMicroversionSkew: "True"}
   console.log('Request Body for POST:')
   console.log(requested)
 
@@ -150,9 +150,25 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
         console.error(error);
     }
 };
+/*
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer p5/W4E4i9JyUj8DwR4eHgQ==");
+myHeaders.append("Content-Type", "text/plain");
 
+var raw = "{\r\n    \"contents\": \"hello\",\r\n    \"serializationVersion\": \"1.1.20\",\r\n    \"sourceMicroversion\": \"\",\r\n    \"rejectMicroversionSkew\": false\r\n}";
 
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
 
+fetch("https://cad.onshape.com/api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/e/50029bb62ea890b577be3177", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+*/
 
 
 // Get FeatureStudio Contents
