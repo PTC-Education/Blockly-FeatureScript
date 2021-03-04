@@ -128,7 +128,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(fSId)
   console.log('SourceMicroversion:')
   console.log(sourceMicroversion)
-  requested = {"contents": "testing from onshape", "serializationVersion":"1.1.20", "sourceMicroversion": `${sourceMicroversion}`, "rejectMicroversionSkew": "True"}
+  requested = {"contents": "testing from onshape", "serializationVersion":"1.1.20", "sourceMicroversion": `${sourceMicroversion}`, "rejectMicroversionSkew": true}
   console.log('New Request Body:')
   console.log(requested)
  
