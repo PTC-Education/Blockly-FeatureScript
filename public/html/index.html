@@ -137,6 +137,11 @@ function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   .then(async (json) => console.log(json))
 }
 
+function copyToBlockly() {
+  const featureStudioID = getFeatureStudio()
+  console.log('FeatureStudio ID from inside copyToBlocky:')
+  console.log(featureStudioID) 
+}
 
 // Get FeatureStudio Contents
 
@@ -158,7 +163,6 @@ function getFeatureStudioContents(fSId, fsCode) {
 async function getFeatureStudio(){
   const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } });
   const featureStudios = await response.json()
-  console.log(featureStudios[0].id)
   return featureStudios[0].id;
 }
 /*
