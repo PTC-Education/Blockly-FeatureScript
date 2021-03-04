@@ -142,8 +142,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 }
 
 function tst(){
-
-  fetch(`/api/featurestudiosThree${window.location.search}&blockly=50029bb62ea890b577be3177`, { method: 'POST', body: {'contents':'This was sent through Blockly', 'serializationVersion':'1.1.20', 'sourceMicroversion': `${sourceMicroversion}`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
+  fetch(`/api/featurestudiosThree${window.location.search}&blockly=50029bb62ea890b577be3177`, { method: 'POST', body: {'contents':'This was sent through Blockly', 'serializationVersion':'1.1.20', 'sourceMicroversion': `7c3746d1f8a8b5c62721493c`, 'rejectMicroversionSkew':'True'}, headers: { 'Accept': 'application/json' } })
   .then((resp) => resp.json())
   .then(async (json) => console.log(json))
 }
