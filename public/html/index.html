@@ -156,6 +156,9 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
     redirect: 'follow'
 };
 
+  console.log('Request:')
+  console.log(requestOptions)
+
   try {
         const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, requestOptions);
         const testFour = await response.text();
