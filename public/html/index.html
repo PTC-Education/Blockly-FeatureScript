@@ -151,7 +151,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   // Combining all of the request options for the asynch fetch call
   var requestOptions = {
     method: 'POST',
-    headers: myHeaders,
+    headers: {"Content-Type": "application/json"},
     body: raw,
     redirect: 'follow'
 };
