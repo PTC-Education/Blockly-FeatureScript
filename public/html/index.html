@@ -142,10 +142,10 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 
   // Create new headers object - using Content-Type
   var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "text/plain");
+  myHeaders.append("Content-Type", "application/json");
 
   // Body of the Request in RAW Text
-  var raw = "{\r\n    \"contents\": \"hello\",\r\n    \"serializationVersion\": \"1.1.20\",\r\n    \"sourceMicroversion\": \"080c7068646036ba2a423830\",\r\n    \"rejectMicroversionSkew\": false\r\n}";
+  var raw = JSON.stringify({"contents":"FeatureScript 1247;\nimport(path : \"onshape/std/geometry.fs\", version : \"1247.0\");\n\nannotation { \"Feature Type Name\" : \"LabVIEW Feature\" }\nexport const myFeature = defineFeature(function(context is Context, id is Id, definition is map)\n    precondition\n    {\n        // Define the parameters of the feature type\n    }\n    {\n                var sketch1 = newSketch(context, id + \"sketch1\", {\n                \"sketchPlane\" : qCreatedBy(makeId(\"Top\"), EntityType.FACE)\n        });\n        // Create sketch entities here\n        skText(sketch1, \"text1\", {\n                \"text\" : \"hello\",\n                \"fontName\" : \"OpenSans-Regular.ttf\",\n                \"firstCorner\" : vector(42.000000, 85.000000) * inch,\n                \"secondCorner\" : vector(221.000000, 193.000000) * inch\n        });\n        skSolve(sketch1);\n// Define the function's action\n","serializationVersion":"1.1.20","sourceMicroversion":"17559250694f34687d88a243"});
 
   // Combining all of the request options for the asynch fetch call
   var requestOptions = {
@@ -153,12 +153,12 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
     headers: myHeaders,
     body: raw,
     redirect: 'follow'
-  };
+};
 
   try {
         const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, requestOptions);
-        const result = await response.json();
-        return result;
+        const testFour = await response.text();
+        return testFour;
     } catch (error) {
         console.error(error);
     }
@@ -217,8 +217,8 @@ async function copyToBlockly(fsCode) {
   console.log('FeatureStudio Contents:');
   console.log(featurestudioContents);
   console.log('');
-  const result = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
-  console.log(result)
+  const testf = await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode)
+  console.log(testf)
 }
 
 
