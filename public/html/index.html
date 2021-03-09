@@ -106,6 +106,8 @@ function runCode(highlighting) {
   // workspace.highlightBlock(null);
 
 }
+
+
 function copyToClipboard(text) {
     var dummy = document.createElement("textarea");
     // to avoid breaking orgain page when copying more words
@@ -120,15 +122,18 @@ function copyToClipboard(text) {
 }
 
 
-// Updates the FeatureStudio contents with the generated Blockly Code
-// Input: 
-//
-// fsId: Element id of the target FeatureStudio for exporting Blockly code
-// 
-// sourceMicroversion: Microversion of the target Feature Studio document in order to
-//      wipe on each code export. 
-// 
-// fsCode: FeatureScript code exported from Blockly
+/*
+  Updates the FeatureStudio contents with the generated Blockly Code
+
+  Input: 
+
+    fsId: Element id of the target FeatureStudio for exporting Blockly code
+ 
+    sourceMicroversion: Microversion of the target Feature Studio document in order to
+                        wipe on each code export. 
+ 
+    fsCode: FeatureScript code exported from Blockly
+*/
 
 async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 
@@ -152,16 +157,13 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 };
 
 
-
-
-
-// Gets the current FeatureStudio Contents and Specs
-
-// Input:
-// 
-// fsID: Element id of the target FeatureStudio for exporting Blockly code. 
-//       Stored in blockly query parameter in order to be correctly parsed to Onshape
-
+/*
+   Gets the current FeatureStudio Contents and Specs
+   Input:
+ 
+   fsID: Element id of the target FeatureStudio for exporting Blockly code. 
+         Stored in blockly query parameter in order to be correctly parsed to Onshape
+*/
 
 async function getFeatureStudioContents(fSId) {
   try {
@@ -174,12 +176,13 @@ async function getFeatureStudioContents(fSId) {
 };
 
 
-
-// Gets the FeatureStudio ID of the FS in development document
+/*
+ Gets the FeatureStudio ID of the FS in development document
+*/
 
 async function getFeatureStudio() {
     try {
-        const response = await fetch(`/api/documents/d${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
         return featurestudios;
     } catch (error) {
@@ -188,14 +191,20 @@ async function getFeatureStudio() {
 };
 
 
+/*
+   Combines all helper functions above to export Blockly code to FeatureStudio
+   
+   Input:
+ 
+   fsCode: FeatureScript code exported from Blockly
+
+*/
 
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
-
-
 
 </script>
 </html>
