@@ -80,48 +80,7 @@ apiRouter.get('/parts', (req, res) => {
  *      -or-
  *      -> 500, { error: '...' }
  */
-apiRouter.get('/gltf', async (req, res) => {
-    // Extract the necessary IDs from the querystring
-    const did = req.query.documentId,
-        wid = req.query.workspaceId,
-        gltfElemId = req.query.gltfElementId,
-        partId = req.query.partId;
-    
-    WebhookService.registerWebhook(req.user.accessToken, req.session.passport.user.id, did)
-        .catch((err) => console.error(`Failed to register webhook: ${err}`));
-    
-    const translationParams = {
-        documentId: did,
-        workspaceId: wid,
-        resolution: 'medium',
-        distanceTolerance: 0.00012,
-        angularTolerance: 0.1090830782496456,
-        maximumChordLength: 10
-    };
-    try {
-        const resp = await (partId ? TranslationService.translatePart(req.user.accessToken, gltfElemId, partId, translationParams)
-            : TranslationService.translateElement(req.user.accessToken, gltfElemId, translationParams));
-        // Store the tid in Redis so we know that it's being processed; it will remain 'in-progress' until we
-        // are notified that it is complete, at which point it will be the translation ID.
-        if (resp.contentType.indexOf('json') >= 0) {
-            redisClient.set(JSON.parse(resp.data).id, 'in-progress');
-        }
-        res.status(200).contentType(resp.contentType).send(resp.data);
-    } catch (err) {
-        res.status(500).json({ error: err });
-    }
-});
 
-/**
- * Retrieve the translated GLTF data.
- * 
- * GET /api/gltf/:tid
- *      -> 200, { ...gltf_data }
- *      -or-
- *      -> 500, { error: '...' }
- *      -or-
- *      -> 404 (which may mean that the translation is still being processed)
- */
 
 
 /**
