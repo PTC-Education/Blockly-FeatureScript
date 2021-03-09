@@ -14,7 +14,7 @@ module.exports = {
         try {
             const normalizedUrl = apiPath.indexOf(onshapeApiUrl) === 0 ? apiPath : `${onshapeApiUrl}/${apiPath}`;
             if (req.method == 'POST') {
-                const resp = await fetch(normalizedUrl, { method: 'POST', body: req.body, headers: { Authorization: `Bearer ${req.user.accessToken}`, 'Content-Type': 'application/json' }});
+                const resp = await fetch(normalizedUrl, { method: 'POST', body: req.body, headers: { Authorization: `Bearer ${req.user.accessToken}`, "Content-Type": "application/json" }});
                 const data = await resp.text();
                 const contentType = resp.headers.get('Content-Type');
                 res.status(resp.status).contentType(contentType).send(data);
