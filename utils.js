@@ -13,16 +13,8 @@ module.exports = {
     forwardRequestToOnshape: async (apiPath, req, res) => {
         try {
             const normalizedUrl = apiPath.indexOf(onshapeApiUrl) === 0 ? apiPath : `${onshapeApiUrl}/${apiPath}`;
-            if (typeof req.body !== 'undefined') {
-                const resp = await fetch(normalizedUrl, { body: req.body, headers: { Authorization: `Bearer ${req.user.accessToken}` }});
-                const data = await resp.text();
-            } else {
-                const resp = await fetch(normalizedUrl, { headers: { Authorization: `Bearer ${req.user.accessToken}` }});
-                const data = await resp.text();
-            }
-
-            //const resp = await fetch(normalizedUrl, { headers: { Authorization: `Bearer ${req.user.accessToken}` }});
-            //const data = await resp.text();
+            const resp = await fetch(normalizedUrl, { headers: { Authorization: `Bearer ${req.user.accessToken}` }});
+            const data = await resp.text();
             const contentType = resp.headers.get('Content-Type');
             res.status(resp.status).contentType(contentType).send(data);
         } catch (err) {
