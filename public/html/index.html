@@ -167,9 +167,9 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log('')
 
   console.log(`/api/updateFS${window.location.search}&blockly=${fSId}`)
-
+  //${window.location.search}&blockly=${fSId}
   try {
-        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, requestOptions);
+        const response = await fetch(`/api/updateFS`, requestOptions);
         const testFour = await response.text();
         return testFour;
     } catch (error) {
