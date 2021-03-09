@@ -137,7 +137,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log('')
 
   requested = JSON.stringify({
-    "contents": "TESTINGGGGGG", 
+    "contents": `${fsCode}`, 
     "serializationVersion": "1.1.20", 
     "sourceMicroversion": `${sourceMicroversion}`
   })
