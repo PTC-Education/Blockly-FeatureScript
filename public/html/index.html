@@ -136,11 +136,11 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log(sourceMicroversion)
   console.log('')
 
-  requested = {
+  requested = JSON.stringify({
     "contents": "testing", 
-    "serializationVersion":"1.1.20", 
-    "sourceMicroversion": `${sourceMicroversion}`
-  }
+    "serializationVersion": "1.1.20", 
+    "sourceMicroversion": "122aff3a667adf9cc9d17548"
+  })
 
 
   console.log('Request Body for POST:')

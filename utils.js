@@ -15,6 +15,7 @@ module.exports = {
             const normalizedUrl = apiPath.indexOf(onshapeApiUrl) === 0 ? apiPath : `${onshapeApiUrl}/${apiPath}`;
             if (req.method == 'POST') {
                 console.log('This is the forwarded request body in ONSHAPE')
+                console.log(req.method)
                 console.log(req.body)
                 const resp = await fetch(normalizedUrl, { method: 'POST', body: JSON.stringify(req.body), headers: { Authorization: `Bearer ${req.user.accessToken}`, 'Content-Type':'application/json', Accept: 'application/vnd.onshape.v1+json'}});
                 const data = await resp.text();
