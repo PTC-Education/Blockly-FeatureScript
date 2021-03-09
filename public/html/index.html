@@ -123,8 +123,7 @@ function copyToClipboard(text) {
 
 
 
-
-//updated
+// updates the FeatureStudio contents with the generated Blockly Code
 async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 
   raw = JSON.stringify({
@@ -146,22 +145,11 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 
 
 
-/*
-  Stringified JSON Body:
-
-          method: 'POST', 
-          body: JSON.stringify(requested), 
-          headers: { "Accept": "application/vnd.onshape.v1+json", "Content-Type": "application/json"}}
-*/
-
-
 
 // Get FeatureStudio Contents
-
 async function getFeatureStudioContents(fSId) {
-  // Gets the FeatureStudio in the Document
   try {
-        const response = await fetch(`/api/featurestudios${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
+        const response = await fetch(`/api/fsContents${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
         const featurestudioContents = await response.json();
         return featurestudioContents;
     } catch (error) {
