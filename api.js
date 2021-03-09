@@ -47,7 +47,7 @@ apiRouter.get('/featurestudios', (req, res) => {
 });
 
 
-apiRouter.post('/updateFS', (req, res) => {
+apiRouter.post('/updateFS', function (req, res) => {
     console.log('I got to the handoff')
     console.log('This is the request body!')
     console.log(req.body)
