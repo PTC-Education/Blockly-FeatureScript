@@ -139,8 +139,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   requested = {
     contents: "testing", 
     serializationVersion:"1.1.20", 
-    sourceMicroversion: `${sourceMicroversion}`, 
-    rejectMicroversionSkew: "True"
+    sourceMicroversion: `${sourceMicroversion}`
   }
 
 
@@ -149,15 +148,10 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log('')
 
 
-  // Body of the Request in RAW Text
-  var raw = JSON.stringify({"contents":"FeatureScript 1247;\nimport(path : \"onshape/std/geometry.fs\", version : \"1247.0\");\n\nannotation { \"Feature Type Name\" : \"LabVIEW Feature\" }\nexport const myFeature = defineFeature(function(context is Context, id is Id, definition is map)\n    precondition\n    {\n        // Define the parameters of the feature type\n    }\n    {\n                var sketch1 = newSketch(context, id + \"sketch1\", {\n                \"sketchPlane\" : qCreatedBy(makeId(\"Top\"), EntityType.FACE)\n        });\n        // Create sketch entities here\n        skText(sketch1, \"text1\", {\n                \"text\" : \"hello\",\n                \"fontName\" : \"OpenSans-Regular.ttf\",\n                \"firstCorner\" : vector(42.000000, 85.000000) * inch,\n                \"secondCorner\" : vector(221.000000, 193.000000) * inch\n        });\n        skSolve(sketch1);\n// Define the function's action\n","serializationVersion":"1.1.20","sourceMicroversion":`${sourceMicroversion}`});
-  console.log(raw)
-  console.log('')
-
   // Combining all of the request options for the asynch fetch call
   var requestOptions = {
     method: 'POST',
-    body: raw
+    body: JSON.stringify(requested)
 };
 
   console.log('Request:')

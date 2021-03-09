@@ -14,14 +14,16 @@ module.exports = {
         try {
             const normalizedUrl = apiPath.indexOf(onshapeApiUrl) === 0 ? apiPath : `${onshapeApiUrl}/${apiPath}`;
             if (req.method == 'POST') {
-                const resp = await fetch(normalizedUrl, { method: 'POST', body: 'did it work?', headers: { Authorization: `Bearer ${req.user.accessToken}` }});
+                const resp = await fetch(normalizedUrl, { method: 'POST', body: req.body, headers: { Authorization: `Bearer ${req.user.accessToken}` }});
                 const data = await resp.text();
+                const contentType = resp.headers.get('Content-Type');
+                res.status(resp.status).contentType(contentType).send(data);
             } else {
                 const resp = await fetch(normalizedUrl, { headers: { Authorization: `Bearer ${req.user.accessToken}` }});
                 const data = await resp.text();
+                const contentType = resp.headers.get('Content-Type');
+                res.status(resp.status).contentType(contentType).send(data);
             }
-            const contentType = resp.headers.get('Content-Type');
-            res.status(resp.status).contentType(contentType).send(data);
         } catch (err) {
             res.status(500).json({ error: err });
         }
