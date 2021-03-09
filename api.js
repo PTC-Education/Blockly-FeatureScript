@@ -42,6 +42,7 @@ apiRouter.get('/documents/d', (req, res) => {
 
 // This works!!
 apiRouter.get('/featurestudios', (req, res) => {
+    console.log('I can print in the GET')
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
 });
 
