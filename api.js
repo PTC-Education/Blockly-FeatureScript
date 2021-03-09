@@ -122,34 +122,7 @@ apiRouter.get('/gltf', async (req, res) => {
  *      -or-
  *      -> 404 (which may mean that the translation is still being processed)
  */
-apiRouter.get('/gltf/:tid', async (req, res) => {
-    redisClient.get(req.params.tid, async (redisErr, results) => {
-        if (redisErr) {
-            res.status(500).json({ error: redisErr });
-        } else if (results === null || results === undefined) {
-            // No record in Redis => not a valid ID
-            res.status(404).end();
-        } else {
-            if ('in-progress' === results) {
-                // Valid ID, but results are not ready yet.
-                res.status(202).end();
-            } else {
-                // GLTF data is ready.
-                const transResp = await fetch(`${onshapeApiUrl}/translations/${req.params.tid}`, { headers: { 'Authorization': `Bearer ${req.user.accessToken}` } });
-                const transJson = await transResp.json();
-                if (transJson.requestState === 'FAILED') {
-                    res.status(500).json({ error: transJson.failureReason });
-                } else {
-                    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${transJson.documentId}/externaldata/${transJson.resultExternalDataIds[0]}`, req, res);
-                }
-                const webhookID = results;
-                WebhookService.unregisterWebhook(webhookID, req.user.accessToken)
-                    .then(() => console.log(`Webhook ${webhookID} unregistered successfully`))
-                    .catch((err) => console.error(`Failed to unregister webhook ${webhookID}: ${JSON.stringify(err)}`));
-            }
-        }
-    });
-});
+
 
 /**
  * Receive a webhook event.
