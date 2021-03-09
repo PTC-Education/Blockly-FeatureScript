@@ -47,10 +47,7 @@ apiRouter.get('/fsContents', (req, res) => {
 });
 
 
-apiRouter.post('/updateFS', (req, res) => {
-    console.log('I got to the handoff')
-    console.log('This is the request body!')
-    console.log(req.body)
+apiRouter.post('/updateFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
 });
 
