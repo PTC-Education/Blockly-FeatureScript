@@ -33,12 +33,27 @@ apiRouter.get('/getFStudio', (req, res) => {
 });
 
 
+/**
+ * Get the Parts of the current document/workspace.
+ * 
+ * GET /api/parts
+ *      -> 200, [ ...parts ]
+ *      -or-
+ *      -> 500, { error: '...' }
+ */
 
-// This works!!
 apiRouter.get('/fsContents', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
 });
 
+/**
+ * Get the Specs of 
+ * 
+ * GET /api/updateFStudio
+ *      -> 200
+ *      -or-
+ *      -> 500, { error: '...' }
+ */
 
 apiRouter.post('/updateFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
@@ -71,17 +86,6 @@ apiRouter.get('/elements/:eid/parts', (req, res) => {
 apiRouter.get('/parts', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/parts/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
 });
-
-/**
- * Trigger translation to GLTF from the given element.
- * 
- * GET /api/gltf?documentId=...&workspaceId=...&gltfElementId=...
- *      -> 200, { ..., id: '...' }
- *      -or-
- *      -> 500, { error: '...' }
- */
-
-
 
 /**
  * Receive a webhook event.
