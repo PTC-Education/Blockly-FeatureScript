@@ -183,7 +183,7 @@ async function getFeatureStudioContents(fSId) {
 
 async function getFeatureStudio() {
     console.log('This is the first one that fails')
-    console.log(location)
+    console.log(window)
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
