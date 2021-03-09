@@ -82,7 +82,7 @@ function runCode(highlighting) {
   fsCode =  fsPrefix + fsCodeNoVar;
   console.log(fsCode);
   copyToBlockly(fsCode);
-  copyToClipboard(fsCode);
+  //copyToClipboard(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
   //   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -126,33 +126,17 @@ function copyToClipboard(text) {
 
 //updated
 async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
-  
-  // Logging all of th
-  console.log('FeatureScript ID:')
-  console.log(fSId)
-  console.log('')
 
-  console.log('SourceMicroversion:')
-  console.log(sourceMicroversion)
-  console.log('')
-
-  requested = JSON.stringify({
+  raw = JSON.stringify({
     "contents": `${fsCode}`, 
     "serializationVersion": "1.1.20", 
     "sourceMicroversion": `${sourceMicroversion}`
   })
-
-
-  console.log('Request Body for POST:')
-  console.log(requested)
-  console.log('')
-
-
-  // Combining all of the request options for the asynch fetch call
  
-  //${window.location.search}&blockly=${fSId}
+  header =  {'Content-Type':'application/json'}
+
   try {
-        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, {method: 'POST', body: requested, headers: {'Content-Type':'application/json'}});
+        const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, {method: 'POST', body: raw, headers: header});
         const testFour = await response.json();
         return testFour;
     } catch (error) {
