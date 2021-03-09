@@ -157,7 +157,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   // Combining all of the request options for the asynch fetch call
   var requestOptions = {
     method: 'POST',
-    headers: {"Content-Type": "application/json"},
+    headers: {'Content-Type': 'application/json'},
     body: raw,
     redirect: 'follow'
 };
@@ -165,6 +165,8 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   console.log('Request:')
   console.log(requestOptions)
   console.log('')
+
+  console.log(`/api/updateFS${window.location.search}&blockly=${fSId}`)
 
   try {
         const response = await fetch(`/api/updateFS${window.location.search}&blockly=${fSId}`, requestOptions);
