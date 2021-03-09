@@ -34,7 +34,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        name: 'app-gltf-viewer',
+        name: 'app-blockly-onshape',
         sameSite: 'none',
         secure: true,
         httpOnly: true,
