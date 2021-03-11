@@ -81,6 +81,7 @@ function runCode(highlighting) {
 
   fsCode =  fsPrefix + fsCodeNoVar;
   console.log(fsCode);
+  createFeatureStudio();
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -176,6 +177,10 @@ async function getFeatureStudioContents(fSId) {
 };
 
 
+
+
+
+
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
@@ -183,6 +188,27 @@ async function getFeatureStudioContents(fSId) {
 async function getFeatureStudio() {
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+async function createFeatureStudio() {
+  ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
+
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "name": `blockly`
+  })
+ 
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/createFStudio${window.location.search}`, {method: 'POST', body: raw, headers: header})
         const featurestudios = await response.json();
         return featurestudios;
     } catch (error) {
