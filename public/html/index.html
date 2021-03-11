@@ -183,7 +183,7 @@ async function getFeatureStudioContents(fSId) {
 
 async function getFeatureStudio() {
     console.log('is this location correct?')
-    console.log(window.parent)
+    console.log(window)
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
