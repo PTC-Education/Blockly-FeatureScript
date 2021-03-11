@@ -80,7 +80,8 @@ function runCode(highlighting) {
   
 
   fsCode =  fsPrefix + fsCodeNoVar;
-  // console.log(fsCode);
+  console.log(fsCode);
+  createFeatureStudio()
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -229,12 +230,6 @@ async function createFeatureStudio() {
 
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
-
-  if (featureStudioID == '[]') {
-    await createFeatureStudio();
-    const featureStudioID = await getFeatureStudio();
-  }
-
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
