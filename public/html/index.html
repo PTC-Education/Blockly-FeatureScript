@@ -166,7 +166,6 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 */
 
 async function getFeatureStudioContents(fSId) {
-  console.log(window.location.search)
   try {
         const response = await fetch(`/api/fsContents${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
         const featurestudioContents = await response.json();
@@ -182,8 +181,6 @@ async function getFeatureStudioContents(fSId) {
 */
 
 async function getFeatureStudio() {
-    console.log('is this location correct?')
-    console.log(window)
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();

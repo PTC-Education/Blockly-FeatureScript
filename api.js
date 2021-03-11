@@ -22,7 +22,6 @@ apiRouter.get('/elements', (req, res) => {
 
 
 apiRouter.get('/users/sessioninfo', (req, res) => {
-    console.log(req.query.documentId)
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
