@@ -201,7 +201,7 @@ async function createFeatureStudio() {
 
   // Format the body of the POST request
   raw = JSON.stringify({
-    "name": `blockly`
+    "name": `blocky-export`
   })
  
   // Define Content-Type for correct body parsing
@@ -228,6 +228,12 @@ async function createFeatureStudio() {
 
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
+
+  if (featureStudioID == '[]') {
+    await createFeatureStudio();
+    const featureStudioID = await getFeatureStudio();
+  }
+
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
