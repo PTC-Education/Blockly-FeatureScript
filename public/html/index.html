@@ -184,26 +184,11 @@ async function getFeatureStudioContents(fSId) {
  Gets the FeatureStudio ID of the FS in development document
 */
 
-async function getDevFeatureStudio() {
+async function getFeatureStudio() {
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json()
-
-        // Catch the case if there are no featureStudios
-        if (featurestudios == '[]') {
-          const featureStudioId = null
-          return featureStudioID;
-        }
-
-        // Search all of the featureStudios in the document to find 
-        for (var i = 0; i < featurestudios.length; i++) {
-          console.log(featurestudios[i].name)
-          if (featurestudios[i].name == 'blockly-export') {
-            const featureStudioId = featurestudios[i].id;
-            return featureStudioId;
-          }
-        }
-
+        const featurestudios = await response.json();
+        return featurestudios;
     } catch (error) {
         console.error(error);
     }
@@ -215,7 +200,7 @@ async function createFeatureStudio() {
 
   // Format the body of the POST request
   raw = JSON.stringify({
-    "name": `blockly-export`
+    "name": `blocky-export`
   })
  
   // Define Content-Type for correct body parsing
@@ -240,21 +225,16 @@ async function createFeatureStudio() {
 
 */
 
-function hasDevFStudio(featureStudios) {
-  if (featureStudios == '[]') {
-    return false;
-  }
-  for (var i = 0; i < featureStudios.length; i++) {
-    console.log(featureStudios[i].name)
-    if (featureStudios[i].name == 'blockly-export')
-      return false;
-  }
-  return true;
-}
 
 
 async function copyToFeatureStudio(fsCode) {
-  const featureStudioID = await getDevFeatureStudio();
+  const featureStudioID = await getFeatureStudio();
+
+  if (featureStudioID == '[]') {
+    await createFeatureStudio();
+    const featureStudioID = await getFeatureStudio();
+  }
+
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
