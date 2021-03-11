@@ -22,7 +22,6 @@ apiRouter.get('/elements', (req, res) => {
 
 
 apiRouter.get('/users/sessioninfo', (req, res) => {
-    console.log(req.query.documentId)
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
@@ -60,6 +59,10 @@ apiRouter.post('/updateFStudio', (req, res) => {
 });
 
 
+
+apiRouter.post('/createFStudio', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
+});
 
 
 /**

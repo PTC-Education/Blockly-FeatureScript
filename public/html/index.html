@@ -38,7 +38,7 @@
 </head>
 <body>
   <div id="blocklyDiv"></div>
-  <button id="runButton" onclick="runCode(true); return">Copy FS Code to Clipboard</button>
+  <button id="runButton" onclick="runCode(true); return">Send FS Code</button>
 </body>
 <!-- Define your custom blocks -->
 <script src="../client/myBlocksInit.js" charset="utf-8"></script>
@@ -81,6 +81,7 @@ function runCode(highlighting) {
 
   fsCode =  fsPrefix + fsCodeNoVar;
   console.log(fsCode);
+  //createFeatureStudio()
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -166,7 +167,6 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
 */
 
 async function getFeatureStudioContents(fSId) {
-  console.log(window.location.search)
   try {
         const response = await fetch(`/api/fsContents${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
         const featurestudioContents = await response.json();
@@ -175,6 +175,10 @@ async function getFeatureStudioContents(fSId) {
         console.error(error);
     }
 };
+
+
+
+
 
 
 /*
@@ -192,6 +196,27 @@ async function getFeatureStudio() {
 };
 
 
+async function createFeatureStudio() {
+  ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
+
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "name": `blocky-export`
+  })
+ 
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/createFStudio${window.location.search}`, {method: 'POST', body: raw, headers: header})
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 /*
    Combines all helper functions above to export Blockly code to FeatureStudio
    
@@ -200,6 +225,8 @@ async function getFeatureStudio() {
    fsCode: FeatureScript code exported from Blockly
 
 */
+
+
 
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
