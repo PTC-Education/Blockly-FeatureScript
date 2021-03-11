@@ -184,11 +184,26 @@ async function getFeatureStudioContents(fSId) {
  Gets the FeatureStudio ID of the FS in development document
 */
 
-async function getFeatureStudio() {
+async function getDevFeatureStudio() {
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json();
-        return featurestudios;
+        const featurestudios = await response.json()
+
+        // Catch the case if there are no featureStudios
+        if (featurestudios == '[]') {
+          const featureStudioId = null
+          return featureStudioID;
+        }
+
+        // Search all of the featureStudios in the document to find 
+        for (var i = 0; i < featurestudios.length; i++) {
+          console.log(featurestudios[i].name)
+          if (featurestudios[i].name == 'blockly-export') {
+            const featureStudioId = featurestudios[i].id;
+            return featureSudioId;
+          }
+        }
+
     } catch (error) {
         console.error(error);
     }
@@ -230,6 +245,7 @@ function hasDevFStudio(featureStudios) {
     return false;
   }
   for (var i = 0; i < featureStudios.length; i++) {
+    console.log(featureStudios[i].name)
     if (featureStudios[i].name == 'blockly-export')
       return false;
   }
@@ -238,13 +254,7 @@ function hasDevFStudio(featureStudios) {
 
 
 async function copyToFeatureStudio(fsCode) {
-  const featureStudioID = await getFeatureStudio();
-
-  if (hasDevFStudio(featureStudioID)) {
-    await createFeatureStudio();
-    const featureStudioID = await getFeatureStudio();
-  }
-
+  const featureStudioID = await getDevFeatureStudio();
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
