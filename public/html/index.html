@@ -230,9 +230,7 @@ async function createFeatureStudio() {
 
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
-  if (featureStudioID == '[]') {
-    console.log('there is no featurestudio')
-  }
+  console.log(featureStudioID)
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
