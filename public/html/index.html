@@ -201,7 +201,7 @@ async function createFeatureStudio() {
 
   // Format the body of the POST request
   raw = JSON.stringify({
-    "name": `blocky-export`
+    "name": `blockly-export`
   })
  
   // Define Content-Type for correct body parsing
@@ -229,9 +229,19 @@ async function createFeatureStudio() {
 async function hasExportStudio(featureStudioID){
   for (var i = 0; i < featureStudioID.length; i++) {
     if (featureStudioID[i].name == 'blockly-export') {
-      return true;
+      var hasStudio = true
+      var index = i
+      return {
+        hasStudio,
+        index
+      }
     } else {
-      return false;
+      var hasStudio = false
+      var index = null
+      return {
+        hasStudio,
+        index
+      }
     }
   }
 }
@@ -241,10 +251,11 @@ async function copyToFeatureStudio(fsCode) {
   var featureStudioID = await getFeatureStudio();
   console.log(featureStudioID)
   
-  var hasStudio = await hasExportStudio(featureStudioID)
-  console.log(hasStudio)
+  var results = await hasExportStudio(featureStudioID)
+  console.log(results.hasStudio)
+  console.log(results.index)
 
-  if (featureStudioID.length === 0 || hasStudio) { 
+  if (featureStudioID.length === 0 || results.hasStudio) { 
     console.log("No export FS!")
     await createFeatureStudio()
     featureStudioID = await getFeatureStudio();
