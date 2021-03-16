@@ -231,6 +231,7 @@ async function createFeatureStudio() {
 async function copyToFeatureStudio(fsCode) {
   const featureStudioID = await getFeatureStudio();
   console.log(featureStudioID)
+  if (featureStudioID.length === 0) { console.log("Array is empty!") }
   const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
   await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
 }
