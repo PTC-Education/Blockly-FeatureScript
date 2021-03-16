@@ -69,6 +69,13 @@ apiRouter.get('/specsFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}/featurespecs`, req, res);
 });
 
+
+apiRouter.post('/addFeatureToList', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}/features`, req, res);
+});
+
+// /partstudios/d/:did/w/:wid/e/:eid/features
+
 /**
  * Get the Parts of the given Element in the current document/workspace.
  * 

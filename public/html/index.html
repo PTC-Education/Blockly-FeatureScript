@@ -178,7 +178,7 @@ async function getFeatureStudioContents(fSId) {
 
 
 /*
- Gets the FeatureStudio ID of the FS in development document
+ Gets the FeatureStudio Specs of the FS in development document
 */
 
 async function getFeatureStudioSpecs(fSId) {
@@ -227,6 +227,44 @@ async function createFeatureStudio() {
         console.error(error);
     }
 };
+
+
+async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
+  ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
+
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "feature": {
+      "type" : 134,
+      "typeName": "BTMFeature",
+      "message" : {
+        "featureType" : "myFeature",
+        "name" : "Blockly Created Feature",
+        "parameters" : [],
+        "namespace" : `${namespace}`
+      }
+  },
+    "serializationVersion": "1.1.20",
+    "sourceMicroversion": `${sourceMicroversion}`,
+    "rejectMicroversionSkew": "true"
+})
+ 
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/addFeatureToList${window.location.search}&blockly=${fSId}`, {method: 'POST', body: raw, headers: header})
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+
+
 
 
 /*
@@ -286,6 +324,8 @@ async function copyToFeatureStudio(fsCode) {
   console.log('FEATURESTUDIO SPECS:')
   console.log(testing)
   console.log(testing.featureSpecs[0].message.namespace);
+  console.log(testing.featureStudioID);
+  await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, exportStudioID)
 }
 
 </script>
