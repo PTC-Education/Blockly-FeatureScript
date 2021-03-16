@@ -249,7 +249,7 @@ async function hasExportStudio(featureStudioID){
 
 async function copyToFeatureStudio(fsCode) {
   var featureStudios = await getFeatureStudio();
-  console.log(featureStudioID)
+  console.log(featureStudios)
   if (featureStudios.length === 0) {
     console.log("No FS found in document, Creating a new fS")
     var exportStudio = await createFeatureStudio()
