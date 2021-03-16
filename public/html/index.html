@@ -181,7 +181,7 @@ async function getFeatureStudioContents(fSId) {
  Gets the FeatureStudio ID of the FS in development document
 */
 
-async function getFeatureStudioSpecs() {
+async function getFeatureStudioSpecs(fSId) {
     try {
         const response = await fetch(`/api/specsFStudio${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
