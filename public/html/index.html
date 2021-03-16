@@ -240,7 +240,6 @@ async function hasExportStudio(featureStudioID){
 async function copyToFeatureStudio(fsCode) {
   var featureStudioID = await getFeatureStudio();
   console.log(featureStudioID)
-  console.log(featureStudioID[0].name)
   
   var hasStudio = await hasExportStudio(featureStudioID)
   console.log(hasStudio)
