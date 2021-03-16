@@ -177,7 +177,19 @@ async function getFeatureStudioContents(fSId) {
 };
 
 
+/*
+ Gets the FeatureStudio ID of the FS in development document
+*/
 
+async function getFeatureStudioSpecs() {
+    try {
+        const response = await fetch(`/api/specsFStudio${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 
 
@@ -238,7 +250,7 @@ async function hasExportStudio(featureStudioID){
         index
       }
     }
-    }
+  }
   var hasStudio = false
   var index = null
   return {
@@ -268,6 +280,8 @@ async function copyToFeatureStudio(fsCode) {
       var exportStudioID = featureStudios[results.index].id
     }
   }
+  testing = await getFeatureStudioSpecs(exportStudioID);
+  console.log(testing);
   const featurestudioContents = await getFeatureStudioContents(exportStudioID);
   await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
 }
