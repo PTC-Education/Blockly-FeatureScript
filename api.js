@@ -65,7 +65,7 @@ apiRouter.post('/createFStudio', (req, res) => {
 });
 
 
-apiRouter.post('/specsFStudio', (req, res) => {
+apiRouter.get('/specsFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}/featurespecs`, req, res);
 });
 
