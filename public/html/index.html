@@ -281,6 +281,8 @@ async function copyToFeatureStudio(fsCode) {
     }
   }
   testing = await getFeatureStudioSpecs(exportStudioID);
+  console.log('FEATURESTUDIO SPECS:')
+  console.log(testing)
   console.log(testing[0]);
   const featurestudioContents = await getFeatureStudioContents(exportStudioID);
   await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
