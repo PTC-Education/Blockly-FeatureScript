@@ -280,12 +280,12 @@ async function copyToFeatureStudio(fsCode) {
       var exportStudioID = featureStudios[results.index].id
     }
   }
+  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
+  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
   testing = await getFeatureStudioSpecs(exportStudioID);
   console.log('FEATURESTUDIO SPECS:')
   console.log(testing)
-  console.log(testing[0]);
-  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
-  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
+  console.log(testing.featureSpecs[0].message.namespace);
 }
 
 </script>
