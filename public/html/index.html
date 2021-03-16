@@ -226,17 +226,26 @@ async function createFeatureStudio() {
 
 */
 
+async function hasExportStudio(featureStudioID){
+  for (var i = 0; i < featureStudioID.length; i++) {
+    if (featureStudioID[i].name == 'blockly-export') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
 
 async function copyToFeatureStudio(fsCode) {
   var featureStudioID = await getFeatureStudio();
   console.log(featureStudioID)
   console.log(featureStudioID[0].name)
-  //for (var i = 0; i < featureStudioID.length; i++) {
-  //  if (featureStudioID[i].
-  //}
+  
+  var hasStudio = await hasExportStudio(featureStudioID)
+  console.log(hasStudio)
 
-  if (featureStudioID.length === 0) { 
+  if (featureStudioID.length === 0 || hasStudio) { 
     console.log("No export FS!")
     await createFeatureStudio()
     featureStudioID = await getFeatureStudio();
