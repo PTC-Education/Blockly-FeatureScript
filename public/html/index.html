@@ -228,7 +228,7 @@ async function createFeatureStudio() {
 
 async function hasExportStudio(featureStudioID){
   for (var i = 0; i < featureStudioID.length; i++) {
-    if (featureStudioID[i].name == 'blockly-export') {
+    if (featureStudioID[i].name == "blockly-export") {
       var hasStudio = true
       var index = i
       return {
@@ -254,11 +254,13 @@ async function copyToFeatureStudio(fsCode) {
   var results = await hasExportStudio(featureStudioID)
   console.log(results.hasStudio)
   console.log(results.index)
+  var exportStudioID = results.index
 
   if (featureStudioID.length === 0 || (!(results.hasStudio))) { 
     console.log("No export FS!")
     var exportStudio = await createFeatureStudio()
-    console.log(exportStudio)
+    console.log(exportStudio.id)
+    exportStudioID = exportStudio.id
     /*featureStudioID = await getFeatureStudio();
     var results = await hasExportStudio(); 
     console.log('NEW FS!')
@@ -267,8 +269,8 @@ async function copyToFeatureStudio(fsCode) {
     console.log(results.index)
     */
   }
-  const featurestudioContents = await getFeatureStudioContents(featureStudioID[results.index].id);
-  await updateFeatureStudioContents(featureStudioID[results.index].id, featurestudioContents.sourceMicroversion, fsCode);
+  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
+  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
 }
 
 </script>
