@@ -229,7 +229,7 @@ async function createFeatureStudio() {
 
 
 async function copyToFeatureStudio(fsCode) {
-  const featureStudioID = await getFeatureStudio();
+  var featureStudioID = await getFeatureStudio();
   console.log(featureStudioID)
   if (featureStudioID.length === 0) { 
     console.log("No export FS!")
