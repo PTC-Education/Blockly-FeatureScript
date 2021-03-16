@@ -255,7 +255,7 @@ async function copyToFeatureStudio(fsCode) {
   console.log(results.hasStudio)
   console.log(results.index)
 
-  if (featureStudioID.length === 0 || results.hasStudio) { 
+  if (featureStudioID.length === 0 || (!(results.hasStudio))) { 
     console.log("No export FS!")
     await createFeatureStudio()
     featureStudioID = await getFeatureStudio();
