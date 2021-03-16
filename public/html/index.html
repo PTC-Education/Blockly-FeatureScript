@@ -248,26 +248,23 @@ async function hasExportStudio(featureStudioID){
 
 
 async function copyToFeatureStudio(fsCode) {
-  var featureStudioID = await getFeatureStudio();
+  var featureStudios = await getFeatureStudio();
   console.log(featureStudioID)
-  
-  var results = await hasExportStudio(featureStudioID)
-  //console.log(results.hasStudio)
-  //console.log(results.index)
-  var exportStudioID = results.index
-
-  if (featureStudioID.length === 0 || (!(results.hasStudio))) { 
-    console.log("No export FS!")
+  if (featureStudios.length === 0) {
+    console.log("No FS found in document, Creating a new fS")
     var exportStudio = await createFeatureStudio()
     console.log(exportStudio.id)
     exportStudioID = exportStudio.id
-    /*featureStudioID = await getFeatureStudio();
-    var results = await hasExportStudio(); 
-    console.log('NEW FS!')
-    console.log(featureStudioID)
-    console.log(results.hasStudio)
-    console.log(results.index)
-    */
+  } else {
+    results = await hasExportStudio(featureStudios)
+    if (!(results.hasStudio)) { 
+      console.log("No export FS!")
+      var exportStudio = await createFeatureStudio()
+      console.log(exportStudio.id)
+      exportStudioID = exportStudio.id
+    } else {
+      var exportStudioID = featureStudios[results.index].id
+    }
   }
   const featurestudioContents = await getFeatureStudioContents(exportStudioID);
   await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
