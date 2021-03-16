@@ -228,6 +228,8 @@ async function createFeatureStudio() {
 
 async function hasExportStudio(featureStudioID){
   for (var i = 0; i < featureStudioID.length; i++) {
+    console.log(featureStudioID[i].name)
+    console.log(featureStudioID[i.name === "blockly-export"])
     if (featureStudioID[i].name === "blockly-export") {
       var hasStudio = true
       var index = i
