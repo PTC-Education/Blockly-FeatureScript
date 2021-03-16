@@ -201,7 +201,7 @@ async function createFeatureStudio() {
 
   // Format the body of the POST request
   raw = JSON.stringify({
-    "name": `blocky-export`
+    "name": `blockly-export`
   })
  
   // Define Content-Type for correct body parsing
@@ -226,12 +226,50 @@ async function createFeatureStudio() {
 
 */
 
+async function hasExportStudio(featureStudioID){
+  for (var i = 0; i < featureStudioID.length; i++) {
+    console.log(featureStudioID[i].name)
+    console.log(featureStudioID[i].name == "blockly-export")
+    if (featureStudioID[i].name == "blockly-export") {
+      var hasStudio = true
+      var index = i
+      return {
+        hasStudio,
+        index
+      }
+    }
+    }
+  var hasStudio = false
+  var index = null
+  return {
+        hasStudio,
+        index
+      }
+}
+
 
 
 async function copyToFeatureStudio(fsCode) {
-  const featureStudioID = await getFeatureStudio();
-  const featurestudioContents = await getFeatureStudioContents(featureStudioID[0].id);
-  await updateFeatureStudioContents(featureStudioID[0].id, featurestudioContents.sourceMicroversion, fsCode);
+  var featureStudios = await getFeatureStudio();
+  console.log(featureStudios)
+  if (featureStudios.length === 0) {
+    console.log("No FS found in document, Creating a new fS")
+    var exportStudio = await createFeatureStudio()
+    console.log(exportStudio.id)
+    exportStudioID = exportStudio.id
+  } else {
+    results = await hasExportStudio(featureStudios)
+    if (!(results.hasStudio)) { 
+      console.log("No export FS!")
+      var exportStudio = await createFeatureStudio()
+      console.log(exportStudio.id)
+      exportStudioID = exportStudio.id
+    } else {
+      var exportStudioID = featureStudios[results.index].id
+    }
+  }
+  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
+  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
 }
 
 </script>
