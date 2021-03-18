@@ -309,10 +309,17 @@ async function hasExportFeature(){
   var featureList = await getFeatureList();
   console.log('testing checking the export feature name')
   for (var i = 0; i < featureList.features.length; i++) {
-    console.log(featureList.features[i].message)
-  }
+    console.log(featureList.features[i].message.name)
   
+  if (featureList.features[i].message.name == "Blockly Created Feature") {
+      var hasStudio = true
+      return hasStudio
+    }
+  }
+  var hasStudio = false
+  return hasStudio
 }
+
 
 
 
@@ -356,19 +363,15 @@ async function copyToFeatureStudio(fsCode) {
   // update the export Feature Studio with Blockly code 
   await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
 
-  var featureList = await getFeatureList();
+  var hasFeature = await hasExportFeature()
 
-  console.log('featureList')
-  console.log(featureList)
+  if (!(hasFeature)) {
+    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
 
-  var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
-
-  await hasExportFeature()
-  console.log(updatedFsSpecs)
+    console.log(updatedFsSpecs)
   
-  await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID)
-
-
+    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID)
+  }
 }
 
 </script>
