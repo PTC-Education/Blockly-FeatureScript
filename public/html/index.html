@@ -324,7 +324,7 @@ async function hasExportFeature(){
 
 
 async function copyToFeatureStudio(fsCode) {
-
+  console.log('Starting test')
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
   console.log(featureStudios)
@@ -341,12 +341,16 @@ async function copyToFeatureStudio(fsCode) {
 
     // If there are FeatureStudios is there already an export FeatureStudio
     results = await hasExportStudio(featureStudios)
+    console.log('test1:')
+    console.log(results)
+    console.log('-------------')
 
     // If there is no export Feature Studio then create one
     if (!(results.hasStudio)) { 
 
       console.log("No export FS!")
       var exportStudio = await createFeatureStudio()
+      console.log(exportStudio)
       console.log(exportStudio.id)
       exportStudioID = exportStudio.id
 
