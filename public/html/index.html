@@ -177,7 +177,19 @@ async function getFeatureStudioContents(fSId) {
 };
 
 
+/*
+ Gets the FeatureStudio Specs of the FS in development document
+*/
 
+async function getFeatureStudioSpecs(fSId) {
+    try {
+        const response = await fetch(`/api/specsFStudio${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 
 
@@ -188,6 +200,17 @@ async function getFeatureStudioContents(fSId) {
 async function getFeatureStudio() {
     try {
         const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+async function getFeatureList() {
+    try {
+        const response = await fetch(`/api/getFeatureList${window.location.search}`, { headers: { 'Accept': 'application/json' } })
         const featurestudios = await response.json();
         return featurestudios;
     } catch (error) {
@@ -215,6 +238,41 @@ async function createFeatureStudio() {
         console.error(error);
     }
 };
+///"typeName": "BTMFeature",
+
+async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
+
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "feature": {
+      "type" : 134,
+      "typeName": "BTMFeature",
+      "message" : {
+        "featureType" : "myFeature",
+        "name" : "Blockly Created Feature",
+        "parameters" : [],
+        "namespace" : `${namespace}`
+      }
+  },
+    "serializationVersion": "1.1.20",
+    "sourceMicroversion": `${sourceMicroversion}`
+})
+ 
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/addFeatureToList${window.location.search}&blockly=${fSId}`, {method: 'POST', body: raw, headers: header})
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+
 
 
 /*
@@ -238,7 +296,7 @@ async function hasExportStudio(featureStudioID){
         index
       }
     }
-    }
+  }
   var hasStudio = false
   var index = null
   return {
@@ -247,29 +305,73 @@ async function hasExportStudio(featureStudioID){
       }
 }
 
+async function hasExportFeature(){
+  var featureList = await getFeatureList();
+  console.log('testing checking the export feature name')
+  for (var i = 0; i < featureList.features.length; i++) {
+    console.log(featureList.features[i].message.name)
+  
+  if (featureList.features[i].message.name == "Blockly Created Feature") {
+      var hasStudio = true
+      return hasStudio
+    }
+  }
+  var hasStudio = false
+  return hasStudio
+}
+
+
 
 
 async function copyToFeatureStudio(fsCode) {
+
+  // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
   console.log(featureStudios)
+
+  // Check if there are none and if so create the export FeatureStudio
   if (featureStudios.length === 0) {
+
     console.log("No FS found in document, Creating a new fS")
     var exportStudio = await createFeatureStudio()
     console.log(exportStudio.id)
     exportStudioID = exportStudio.id
+
   } else {
+
+    // If there are FeatureStudios is there already an export FeatureStudio
     results = await hasExportStudio(featureStudios)
+
+    // If there is no export Feature Studio then create one
     if (!(results.hasStudio)) { 
+
       console.log("No export FS!")
       var exportStudio = await createFeatureStudio()
       console.log(exportStudio.id)
       exportStudioID = exportStudio.id
+
     } else {
+
       var exportStudioID = featureStudios[results.index].id
+
     }
   }
-  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
-  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
+
+  // Get the contents of the export Feature Studio
+  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
+
+  // update the export Feature Studio with Blockly code 
+  await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
+
+  var hasFeature = await hasExportFeature()
+
+  if (!(hasFeature)) {
+    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
+
+    console.log(updatedFsSpecs)
+  
+    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID)
+  }
 }
 
 </script>
