@@ -305,6 +305,15 @@ async function hasExportStudio(featureStudioID){
       }
 }
 
+async function hasExportFeature(){
+  var featureList = await getFeatureList();
+
+  for (var i = 0; i < featureList.length; i++) {
+    console.log(featureList.features[i].message.name)
+  }
+  
+}
+
 
 
 async function copyToFeatureStudio(fsCode) {
