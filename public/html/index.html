@@ -208,6 +208,17 @@ async function getFeatureStudio() {
 };
 
 
+async function getFeatureList() {
+    try {
+        const response = await fetch(`/api/getFeatureList${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 async function createFeatureStudio() {
   ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
 
@@ -230,7 +241,6 @@ async function createFeatureStudio() {
 ///"typeName": "BTMFeature",
 
 async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
-  ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
 
   // Format the body of the POST request
   raw = JSON.stringify({
@@ -259,7 +269,6 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
         console.error(error);
     }
 };
-
 
 
 
@@ -335,7 +344,13 @@ async function copyToFeatureStudio(fsCode) {
   // Get the contents of the export Feature Studio
   var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
 
+  // update the export Feature Studio with Blockly code 
   await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
+
+  var featureList = await getFeatureList();
+
+  console.log('featureList')
+  console.log(featureList)
 
   var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
 

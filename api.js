@@ -74,6 +74,10 @@ apiRouter.post('/addFeatureToList', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/features`, req, res);
 });
 
+apiRouter.get('/getFeatureList', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/features`, req, res);
+});
+
 // /partstudios/d/:did/w/:wid/e/:eid/features
 
 /**
