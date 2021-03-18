@@ -300,9 +300,11 @@ async function hasExportStudio(featureStudioID){
 
 async function copyToFeatureStudio(fsCode) {
 
+  // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
   console.log(featureStudios)
 
+  // Check if there are none and if so create the export FeatureStudio
   if (featureStudios.length === 0) {
 
     console.log("No FS found in document, Creating a new fS")
@@ -312,8 +314,10 @@ async function copyToFeatureStudio(fsCode) {
 
   } else {
 
+    // If there are FeatureStudios is there already an export FeatureStudio
     results = await hasExportStudio(featureStudios)
 
+    // If there is no export Feature Studio then create one
     if (!(results.hasStudio)) { 
 
       console.log("No export FS!")
@@ -328,13 +332,12 @@ async function copyToFeatureStudio(fsCode) {
     }
   }
 
-  var featurestudioContents = await getFeatureStudioContents(exportStudioID);
-  await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
-  var testing = await getFeatureStudioSpecs(exportStudioID);
+  // Get the contents of the export Feature Studio
+  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
 
-  console.log('FEATURESTUDIO SPECS:')
-  console.log(testing)
-  console.log(testing.featureSpecs[0].message.namespace);
+  await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
+
+  var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
 
   await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, exportStudioID)
 }
