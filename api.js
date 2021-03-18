@@ -71,7 +71,7 @@ apiRouter.get('/specsFStudio', (req, res) => {
 
 
 apiRouter.post('/addFeatureToList', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}/features`, req, res);
+    forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/features`, req, res);
 });
 
 // /partstudios/d/:did/w/:wid/e/:eid/features
