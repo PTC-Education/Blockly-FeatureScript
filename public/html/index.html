@@ -227,7 +227,7 @@ async function createFeatureStudio() {
         console.error(error);
     }
 };
-
+///"typeName": "BTMFeature",
 
 async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
   ///api/featurestudios/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1
@@ -236,7 +236,6 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
   raw = JSON.stringify({
     "feature": {
       "type" : 134,
-      "typeName": "BTMFeature",
       "message" : {
         "featureType" : "myFeature",
         "name" : "Blockly Created Feature 1",
@@ -299,32 +298,45 @@ async function hasExportStudio(featureStudioID){
 
 
 async function copyToFeatureStudio(fsCode) {
+
   var featureStudios = await getFeatureStudio();
   console.log(featureStudios)
+
   if (featureStudios.length === 0) {
+
     console.log("No FS found in document, Creating a new fS")
     var exportStudio = await createFeatureStudio()
     console.log(exportStudio.id)
     exportStudioID = exportStudio.id
+
   } else {
+
     results = await hasExportStudio(featureStudios)
+
     if (!(results.hasStudio)) { 
+
       console.log("No export FS!")
       var exportStudio = await createFeatureStudio()
       console.log(exportStudio.id)
       exportStudioID = exportStudio.id
+
     } else {
+
       var exportStudioID = featureStudios[results.index].id
+
     }
   }
-  const featurestudioContents = await getFeatureStudioContents(exportStudioID);
+
+  var featurestudioContents = await getFeatureStudioContents(exportStudioID);
   await updateFeatureStudioContents(exportStudioID, featurestudioContents.sourceMicroversion, fsCode);
-  testing = await getFeatureStudioSpecs(exportStudioID);
+  var testing = await getFeatureStudioSpecs(exportStudioID);
+
   console.log('FEATURESTUDIO SPECS:')
   console.log(testing)
   console.log(testing.featureSpecs[0].message.namespace);
   console.log(testing.featureStudioID);
-  await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, exportStudioID)
+
+  await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, testing.feature)
 }
 
 </script>
