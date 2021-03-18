@@ -335,9 +335,8 @@ async function copyToFeatureStudio(fsCode) {
   console.log('FEATURESTUDIO SPECS:')
   console.log(testing)
   console.log(testing.featureSpecs[0].message.namespace);
-  console.log(testing.featureStudioID);
 
-  await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, testing.feature)
+  await createBlocklyFeature(testing.featureSpecs[0].message.namespace, testing.sourceMicroversion, exportStudioID)
 }
 
 </script>
