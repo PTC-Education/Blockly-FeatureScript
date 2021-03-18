@@ -307,9 +307,9 @@ async function hasExportStudio(featureStudioID){
 
 async function hasExportFeature(){
   var featureList = await getFeatureList();
-
+  console.log('testing checking the export feature name')
   for (var i = 0; i < featureList.length; i++) {
-    console.log(featureList.features[i].message.name)
+    console.log(featureList.features[i].message)
   }
   
 }
