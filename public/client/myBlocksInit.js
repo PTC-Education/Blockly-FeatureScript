@@ -640,7 +640,8 @@ Blockly.Blocks['points'] = {
     },
     
     updateConnections: function(newValue) {
-        for (var i = 0; i < 3; i++) {
+        
+        for (var i = 0; i < toString(newValue); i++) {
             this.appendValueInput('endDepth'+i)
         }
       this.setPreviousStatement(true, null);
