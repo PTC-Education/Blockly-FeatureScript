@@ -451,6 +451,28 @@ Blockly.Blocks['sklinesegment'] = {
 
 
 
+/*
+SKLINESEGMENT:
+----------------------------------------
+Draw a new line on surrounding sketch, defined by vector start
+and endpoint in [x,y,z]
+*/
+Blockly.Blocks['skpolyline'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Draw polyline        ")
+            .setAlign(Blockly.ALIGN_LEFT);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(360);
+        this.setTooltip("Draw a line following the vector [x1,y1,z1] to [x2,y2,z2]");
+        this.setHelpUrl("");
+    }
+};
+
+
+
+
 
 /*
 SKTEXT:
