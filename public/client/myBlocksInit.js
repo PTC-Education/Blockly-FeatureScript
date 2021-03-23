@@ -633,7 +633,7 @@ Blockly.Blocks['points'] = {
     init: function() {
       this.appendDummyInput()
       // Pass the field constructor the options list, the validator, and the name.
-          .appendField(new Blockly.FieldTextInput(this.validate), 'POINTS');
+          .appendField(new Blockly.FieldTextInput("Enter number of points", this.validate), 'POINTS');
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(270);
