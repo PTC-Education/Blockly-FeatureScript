@@ -451,6 +451,28 @@ Blockly.Blocks['sklinesegment'] = {
 
 
 
+/*
+SKLINESEGMENT:
+----------------------------------------
+Draw a new line on surrounding sketch, defined by vector start
+and endpoint in [x,y,z]
+*/
+Blockly.Blocks['skpolyline'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Draw polyline        ")
+            .setAlign(Blockly.ALIGN_LEFT);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(360);
+        this.setTooltip("Draw a line following the vector [x1,y1,z1] to [x2,y2,z2]");
+        this.setHelpUrl("");
+    }
+};
+
+
+
+
 
 /*
 SKTEXT:
@@ -590,6 +612,41 @@ Blockly.Blocks['skellipse'] = {
         this.setColour(360);
         this.setTooltip("Make sure to supply all required points");
         this.setHelpUrl("");
+    }
+};
+
+
+
+
+/*
+EXTRUDE_STANDARD:
+----------------------------------------
+Extrude all sketches on sketch plane
+*/
+
+Blockly.Blocks['points'] = {
+    validate: function(newValue) {
+      this.getSourceBlock().updateConnections(newValue);
+      return newValue;
+    },
+    
+    init: function() {
+      this.appendDummyInput()
+      // Pass the field constructor the options list, the validator, and the name.
+          .appendField(new Blockly.FieldTextInput("Enter number of points", this.validate), 'POINTS');
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(270);
+    },
+    
+    updateConnections: function(newValue) {
+        
+        for (var i = 0; i < toString(newValue); i++) {
+            this.appendValueInput('endDepth'+i)
+        }
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(270);
     }
 };
 

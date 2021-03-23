@@ -20,25 +20,23 @@ apiRouter.get('/elements', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements`, req, res);
 });
 
-
+/**
+ * Get the Session info from Onshape to get User ID information
+ */
 apiRouter.get('/users/sessioninfo', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
-
-// This works!!
+/**
+ * Get all Feature Studio elements from the document 
+ */
 apiRouter.get('/getFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=FEATURESTUDIO&withThumbnails=false`, req, res);
 });
 
 
 /**
- * Get the Parts of the current document/workspace.
- * 
- * GET /api/parts
- *      -> 200, [ ...parts ]
- *      -or-
- *      -> 500, { error: '...' }
+ * Get the Feature Studio contents from the onshape document
  */
 
 apiRouter.get('/fsContents', (req, res) => {
@@ -46,39 +44,46 @@ apiRouter.get('/fsContents', (req, res) => {
 });
 
 /**
- * Get the Specs of 
- * 
- * GET /api/updateFStudio
- *      -> 200
- *      -or-
- *      -> 500, { error: '...' }
+ * Update the contents of the target Feature Studio
  */
 
 apiRouter.post('/updateFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}`, req, res);
 });
 
-
+/**
+ * Create a new Feature Studio
+ */
 
 apiRouter.post('/createFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
 });
+
+/**
+ * Get the Feature Studio Specs
+ */
 
 
 apiRouter.get('/specsFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.blockly}/featurespecs`, req, res);
 });
 
+/**
+ * Add Custom Feature to the Feature List 
+ */
 
 apiRouter.post('/addFeatureToList', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/features`, req, res);
 });
 
+/**
+ * Get the Feature List of the target Part Studio
+ */
+
 apiRouter.get('/getFeatureList', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/partstudios/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.elementId}/features`, req, res);
 });
 
-// /partstudios/d/:did/w/:wid/e/:eid/features
 
 /**
  * Get the Parts of the given Element in the current document/workspace.
