@@ -423,6 +423,7 @@
       <field name="start_xy">Infinity</field>
       <field name="end_xy">Infinity</field>
     </block>
+    <block type="skpolyline"></block>
     <block type="sktext">
       <field name="text">Example</field>
     </block>
