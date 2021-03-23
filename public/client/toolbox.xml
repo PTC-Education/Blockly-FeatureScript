@@ -379,6 +379,7 @@
       <field name="y">Infinity</field>
       <field name="z">Infinity</field>
     </block>
+    <block type="points"></block>
   </category>
 
 
