@@ -729,6 +729,31 @@ Blockly.JavaScript['skpolyline'] = function(block) {
 
 
 
+/*
+POINTS:
+--------------------------------------------------------------------------------------
+Draw a polyline by inputting an array of points
+-------------------------------------------------------------------------------------
+*/
+
+Blockly.JavaScript['points'] = function(block) {
+  var text_skname = getParentSketchName(block);
+  var blockID = getID(block);
+
+  var code = `
+    "points" : [
+        vector( 0,  0) * inch,
+        vector( 0, -1) * inch,
+        vector( 1,  1) * inch,
+        vector(-1,  0) * inch,
+        vector( 0,  0) * inch
+    ]
+  `;
+  return code;
+}
+
+
+
 
 
 

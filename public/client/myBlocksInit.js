@@ -618,6 +618,64 @@ Blockly.Blocks['skellipse'] = {
 
 
 
+/*
+EXTRUDE_STANDARD:
+----------------------------------------
+Extrude all sketches on sketch plane
+*/
+
+Blockly.Blocks['points'] = {
+    validate: function(newValue) {
+      this.getSourceBlock().updateConnections(newValue);
+      return newValue;
+    },
+    
+    init: function() {
+      var options = [
+       ['-- Extrude Type --', 'TYPE'],
+       ['Blind', 'BLIND'],
+       ['Symmetric', 'SYMMETRIC'],
+      ];
+    
+      this.appendDummyInput()
+      // Pass the field constructor the options list, the validator, and the name.
+          .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
+      this.appendStatementInput("SkEntities")
+          .setCheck(null);
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(270);
+    },
+    
+    updateConnections: function(newValue) {
+      this.removeInput('skname', true);
+      this.removeInput('endDepth', true);
+      if (newValue == 'BLIND') {
+          this.removeInput('SkEntities');
+          for (var i = 0; i < 3; i++) {
+            this.appendValueInput('endDepth'+i)
+          }
+      } else if (newValue == 'SYMMETRIC') {
+          this.removeInput('SkEntities');
+          this.appendDummyInput('skname')
+              .appendField('extrude')
+              .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
+          this.appendValueInput('endDepth')
+              .appendField('by');
+          this.appendStatementInput("SkEntities")
+              .setCheck(null);
+      }
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(270);
+    }
+};
+
+
+
+
 
 /*
 OPEXTRUDE:
