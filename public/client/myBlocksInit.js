@@ -642,7 +642,6 @@ Blockly.Blocks['points'] = {
           .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
       this.appendStatementInput("SkEntities")
           .setCheck(null);
-      this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(270);
@@ -666,7 +665,6 @@ Blockly.Blocks['points'] = {
           this.appendStatementInput("SkEntities")
               .setCheck(null);
       }
-      this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour(270);
