@@ -48,7 +48,7 @@
 <!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
-
+<script src="./convert.js" charset="utf-8"></script>
 
 <script>
 
@@ -85,7 +85,7 @@ function runCode(highlighting) {
   //console.log(fsCode);
   //createFeatureStudio()
   copyToClipboard(fsCode);
-  parseWorkspace();
+  await parseWorkspace();
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -111,9 +111,10 @@ function runCode(highlighting) {
   // workspace.highlightBlock(null);
 
 }
-
+/*
 async function parseWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  console.log(xml)
   
   // Format the body of the POST request
   raw = JSON.stringify({
@@ -132,7 +133,7 @@ async function parseWorkspace() {
     }
 }
 
-
+*/
 
 
 function copyToClipboard(text) {
