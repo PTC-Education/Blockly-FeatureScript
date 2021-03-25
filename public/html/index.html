@@ -48,8 +48,6 @@
 <!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
-<script src="../../node_modules/xml2js/lib/xml2js.js"></script>
-<script src="../../node_modules/xml2js/lib/parser.js"></script>
 
 
 <script>
@@ -114,32 +112,27 @@ function runCode(highlighting) {
 
 }
 
-function parseWorkspace() {
+async function parseWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  console.log(xml)
-  var parser = new xml2js.Parser();
-  parser.parseStringPromise(xml).then(function (result) {
-    console.dir(result);
-    console.log('Done');
+  
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "contents": `hello`, 
   })
-  .catch(function (err) {
-  // Failed
-}); 
+ 
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+
+  try {
+        const response = await fetch(`/api/convertToJSON`, {method: 'POST', body: raw, headers: header});
+        const testFour = await response.json();
+        return testFour;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 
-function parseWorkspace() {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  console.log(xml)
-  var parser = new xml2js.Parser();
-  parser.parseStringPromise(xml).then(function (result) {
-    console.dir(result);
-    console.log('Done');
-  })
-  .catch(function (err) {
-  // Failed
-}); 
-}
 
 
 function copyToClipboard(text) {
