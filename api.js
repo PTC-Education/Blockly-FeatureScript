@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-var xml2js = require('xml2js');
-var parser = new xml2js.Parser(/* options */);
+const xml2js = require('xml2js');
+const parser = new xml2js.Parser(/* options */);
 
 const WebhookService = require('./services/webhook-service');
 const TranslationService = require('./services/translation-service');
