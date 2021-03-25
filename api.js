@@ -16,7 +16,7 @@ apiRouter.post('/convertToJSON', (req, res) => {
     console.log(req.body.contents)
     parser.parseStringPromise(req.body.contents).then(function (result) {
         console.dir(result);
-        console.log(util.inspect(result, false, null))
+        res.send(result)
         console.log('Done');
       })
       .catch(function (err) {
