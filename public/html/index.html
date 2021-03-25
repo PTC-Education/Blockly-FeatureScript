@@ -50,7 +50,7 @@
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
 <script>
-var xml2js = require('xml2js');
+
 
 
 function runCode(highlighting) {
@@ -113,6 +113,8 @@ function runCode(highlighting) {
 
 
 function parseWorkspace() {
+  var xml2js = require('xml2js');
+
   xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   var parser = new xml2js.Parser(/* options */);
   parser.parseStringPromise(xml).then(function (result) {
