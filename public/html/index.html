@@ -136,7 +136,19 @@ async function convertWorkspaceToJSON() {
         const response = await fetch(`/api/convertToJSON`, {method: 'POST', body: raw, headers: header});
         const testFour = await response.json();
         console.log(testFour)
-        return testFour;
+    } catch (error) {
+        console.error(error);
+    }
+
+  raw = JSON.stringify({
+    "contents": `${testFour}` 
+  })
+ 
+    try {
+        const response = await fetch(`/api/convertToXML`, {method: 'POST', body: raw, headers: header});
+        const testFive = await response.json();
+        console.log(testFive)
+        return testFive;
     } catch (error) {
         console.error(error);
     }
