@@ -1,7 +1,3 @@
-var fs = require('fs');
-var xml2js = require('xml2js');
-var parser = new xml2js.Parser();
-
 
 // Helper Functions for Fetching ID data of the Blocks on the workspace
 // ---------------------------------------------------------------------------------------------------------------------------------------------
