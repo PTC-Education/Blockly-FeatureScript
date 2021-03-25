@@ -84,6 +84,7 @@ function runCode(highlighting) {
   //console.log(fsCode);
   //createFeatureStudio()
   copyToClipboard(fsCode);
+  parseWorkspace();
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -108,6 +109,19 @@ function runCode(highlighting) {
   // }
   // workspace.highlightBlock(null);
 
+}
+
+
+function parseWorkspace() {
+  xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  var parser = new xml2js.Parser(/* options */);
+  parser.parseStringPromise(xml).then(function (result) {
+    console.dir(result);
+    console.log('Done');
+  })
+  .catch(function (err) {
+  // Failed
+}); 
 }
 
 
