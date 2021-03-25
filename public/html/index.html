@@ -86,7 +86,7 @@ function runCode(highlighting) {
   //console.log(fsCode);
   //createFeatureStudio()
   copyToClipboard(fsCode);
-  var testF = await convertWorkspaceToJSON();
+  var testF = convertWorkspaceToJSON();
   convertWorkspaceToXML(testF)
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
