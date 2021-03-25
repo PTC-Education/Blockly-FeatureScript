@@ -15,7 +15,7 @@ const apiRouter = require('express').Router();
 apiRouter.post('/convertToJSON', (req, res) => {
     console.log(req.body.contents)
     parser.parseStringPromise(req.body.contents).then(function (result) {
-        console.dir(util.inspect(result, false, null));
+        console.dir(result);
         console.log('Done');
       })
       .catch(function (err) {
