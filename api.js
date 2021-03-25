@@ -13,8 +13,8 @@ const redisClient = require('./redis-client');
 const apiRouter = require('express').Router();
 
 apiRouter.post('/convertToJSON', (req, res) => {
-    console.log(req)
-})
+    console.log(req.body)
+});
 
 
 /**
