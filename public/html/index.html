@@ -122,6 +122,8 @@ function runCode(highlighting) {
 
 async function convertWorkspaceToJSON() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  console.log('XML from Blockly:')
+  console.log(xml)
   var s = new XMLSerializer();
   var str = s.serializeToString(xml);
   // Format the body of the POST request
@@ -135,18 +137,30 @@ async function convertWorkspaceToJSON() {
   try {
         const response = await fetch(`/api/convertToJSON`, {method: 'POST', body: raw, headers: header});
         const testFour = await response.json();
+        console.log('Conversion to json:')
         console.log(testFour)
+        return testFour;
     } catch (error) {
         console.error(error);
-    }
+    };
 
+};
+ 
+
+async function convertWorkspaceToXML(workspaceJSON) {
+
+  // Format the body of the POST request
   raw = JSON.stringify({
-    "contents": `${testFour}` 
+    "contents": `${workspaceJSON}` 
   })
  
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+
     try {
         const response = await fetch(`/api/convertToXML`, {method: 'POST', body: raw, headers: header});
         const testFive = await response.json();
+        console.log('Conversion to xml:')
         console.log(testFive)
         return testFive;
     } catch (error) {
