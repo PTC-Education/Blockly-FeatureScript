@@ -114,6 +114,8 @@ function runCode(highlighting) {
 
 function parseWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  console.log(xml)
+  var parser = new xml2js.Parser();
   parser.parseStringPromise(xml).then(function (result) {
     console.dir(result);
     console.log('Done');
