@@ -40,7 +40,6 @@
   <div id="blocklyDiv"></div>
   <button id="runButton" onclick="runCode(true); return">Send FS Code</button>
 </body>
-<script src="/storage.js"></script>
 <!-- Define your custom blocks -->
 <script src="../client/myBlocksInit.js" charset="utf-8"></script>
 <!-- Define your custom blocks generated code -->
@@ -49,12 +48,14 @@
 <!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
-<script src="../../node_modules/xml2js/"></script>
+<script src="../../node_modules/xml2js"></script>
+
+
 <script>
 
-
-
 function runCode(highlighting) {
+
+  
 
   var fsPrefix = `
     FeatureScript 1389;
@@ -111,6 +112,20 @@ function runCode(highlighting) {
   // workspace.highlightBlock(null);
 
 }
+
+function parseWorkspace() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  console.log(xml)
+  var parser = new xml2js.Parser();
+  parser.parseStringPromise(xml).then(function (result) {
+    console.dir(result);
+    console.log('Done');
+  })
+  .catch(function (err) {
+  // Failed
+}); 
+}
+
 
 function parseWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
