@@ -116,6 +116,10 @@ async function parseWorkspace() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   console.log(xml)
   
+  var s = new XMLSerializer();
+  var str = s.serializeToString(xml);
+  console.log(str)
+
   // Format the body of the POST request
   raw = JSON.stringify({
     "contents": xml, 
