@@ -26,7 +26,7 @@ apiRouter.post('/convertToJSON', (req, res) => {
 apiRouter.post('/convertToXML', (req, res) => {
     console.log(req.body.contents)
     var builder = new xml2js.Builder();
-    var xml = builder.buildObject(obj);
+    var xml = builder.buildObject(req.body.contents);
     res.send(xml)
 });
 
