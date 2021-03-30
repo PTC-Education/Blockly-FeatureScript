@@ -445,7 +445,6 @@ async function getApplicationID() {
 };
 
 
-// /appelements/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/e/1f04edcc213a11e71b04f131/content/json?transactionId=&changeId=
 
 /*
  Gets the FeatureStudio ID of the FS in development document
@@ -505,6 +504,13 @@ async function hasExportFeature(){
   return hasStudio
 }
 
+
+
+/*
+   Boolean function that indicates if there is a Blockly app element for 
+   persistent storage of the current blockly workspace.
+*/
+
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
     if (featureStudios[i].name == "blockly-storage") {
@@ -536,34 +542,7 @@ async function hasApplicationStorage(featureStudios){
 
 async function copyToFeatureStudio(fsCode) {
 
-  /*
-  // Get all FeatureStudios in the document
-  var featureStudios = await getFeatureStudio();
-
-  // Check if there are none and if so, create the export FeatureStudio
-  if (featureStudios.length == 0) {
-    var exportStudio = await createFeatureStudio()
-    exportStudioID = exportStudio.id
-  } else {
-
-    // If there are FeatureStudios is there already an export FeatureStudio
-    results = await hasExportStudio(featureStudios)
-
-    // If there is no export Feature Studio then create one
-    if (!(results.hasStudio)) { 
-      var exportStudio = await createFeatureStudio()
-      exportStudioID = exportStudio.id
-    } else {
-      var exportStudio = featureStudios[results.index]
-      var exportStudioID = featureStudios[results.index].id
-    }
-
-    return {
-      "exportStudio" : `${exportStudio}`,
-      "exportStudioID" : `${exportStudioID}`
-    }
-  }
-  */
+  // Get the info of the export Feature Studio 
   var exportStudioInfo = await getExportStudioInfo();
 
   // Get the contents of the export Feature Studio
@@ -581,14 +560,16 @@ async function copyToFeatureStudio(fsCode) {
     await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioInfo.ID);
   }
 
+  // Get the info of the app element used for persistent storage
   var appElementInfo = await getAppElementInfo();
 
+  // Get the xml and stringified xml representation of the current Blockly main workspace
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   var xml_text = Blockly.Xml.domToText(xml);
 
+  // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
-
 
 
 async function getAppElementInfo() {
@@ -622,6 +603,7 @@ async function getAppElementInfo() {
   }
 }
 
+
 async function getExportStudioInfo() {
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
@@ -651,8 +633,10 @@ async function getExportStudioInfo() {
 }
 }
 
-var test = getAppElementInfo().then((value) => getChangeID(value.applicationID).then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
-
+// Update the workspace with the last
+getAppElementInfo()
+  .then((value) => getChangeID(value.applicationID)
+  .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
 
 </script>
