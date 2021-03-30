@@ -536,6 +536,7 @@ async function hasApplicationStorage(featureStudios){
 
 async function copyToFeatureStudio(fsCode) {
 
+  /*
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
 
@@ -553,62 +554,37 @@ async function copyToFeatureStudio(fsCode) {
       var exportStudio = await createFeatureStudio()
       exportStudioID = exportStudio.id
     } else {
+      var exportStudio = featureStudios[results.index]
       var exportStudioID = featureStudios[results.index].id
     }
+
+    return {
+      "exportStudio" : `${exportStudio}`,
+      "exportStudioID" : `${exportStudioID}`
+    }
   }
-
-
+  */
+  var exportStudioInfo = await getExportStudioInfo();
 
   // Get the contents of the export Feature Studio
-  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
+  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioInfo.ID);
 
   // Update the Export Feature Studio with Blockly code 
-  await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
+  await updateFeatureStudioContents(exportStudioInfo.ID, currentFsSpecs.sourceMicroversion, fsCode);
 
   // Check if there is a Blockly feature in the Part Studio feature list
   var hasFeature = await hasExportFeature()
 
   // Add the custom feature to the Feature List, get the source microversion in order to correctly place
   if (!(hasFeature)) {
-    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
-    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID);
+    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioInfo.ID);
+    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioInfo.ID);
   }
 
-  /*
-  var applications = await getApplicationID();
-
-  // Check if there are none and if so, create the export FeatureStudio
-  if (applications.length == 0) {
-    var application = await createNewAppElement()
-    var applicationID = application.elementId
-    var changeID = application.changeId
-  } else {
-
-    // If there are FeatureStudios is there already an export FeatureStudio
-    results = await hasApplicationStorage(applications)
-
-    // If there is no export Feature Studio then create one
-    if (!(results.hasStudio)) { 
-      var application = await createNewAppElement()
-      var applicationID = application.elementId
-      var changeID = application.changeId
-    } else {
-      var applicationID = applications[results.index].id
-      var changeID = (await getChangeID(applicationID)).changeId
-    }
-  }
-  */
-  
   var appElementInfo = await getAppElementInfo();
 
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  console.log('XML from Blockly:')
-  console.log(xml)
-  /*
-  var s = new XMLSerializer();
-  var str = s.serializeToString(xml);
- */
-  var xml_text = Blockly.Xml.domToText(xml);
+
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
 
@@ -643,6 +619,35 @@ async function getAppElementInfo() {
     "applicationID" : applicationID,
     "changeID" : changeID
   }
+}
+
+async function getExportStudioInfo() {
+  // Get all FeatureStudios in the document
+  var featureStudios = await getFeatureStudio();
+
+  // Check if there are none and if so, create the export FeatureStudio
+  if (featureStudios.length == 0) {
+    var exportStudio = await createFeatureStudio()
+    exportStudioID = exportStudio.id
+  } else {
+
+    // If there are FeatureStudios is there already an export FeatureStudio
+    results = await hasExportStudio(featureStudios)
+
+    // If there is no export Feature Studio then create one
+    if (!(results.hasStudio)) { 
+      var exportStudio = await createFeatureStudio()
+      exportStudioID = exportStudio.id
+    } else {
+      var exportStudio = featureStudios[results.index]
+      var exportStudioID = featureStudios[results.index].id
+    }
+
+  return {
+    "element" : `${exportStudio}`,
+    "ID" : `${exportStudioID}`
+  }
+}
 }
 
 var test = getAppElementInfo().then((value) => getChangeID(value.applicationID).then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
