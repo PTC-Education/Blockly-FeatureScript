@@ -525,7 +525,7 @@ async function copyToFeatureStudio(fsCode) {
       var changeID = application.changeId
     } else {
       var applicationID = applications[results.index].id
-      var changeID = await getChangeID(applicationID)
+      var changeID = (await getChangeID(applicationID)).changeId
     }
   }
 
