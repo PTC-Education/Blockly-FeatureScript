@@ -647,7 +647,7 @@ async function getAppElementInfo() {
   }
 }
 
-var test = getAppElementInfo().then((value) => getChangeID(value.applicationID).then((value) => console.log(value.tree.blockly)));
+var test = getAppElementInfo().then((value) => getChangeID(value.applicationID).then((value) => console.log(Blockly.Xml.textToDom(value.tree.blockly))));
 
 
 
