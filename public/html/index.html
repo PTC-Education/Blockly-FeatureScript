@@ -40,13 +40,6 @@
   <div id="blocklyDiv"></div>
   <button id="runButton" onclick="runCode(true); return">Send FS Code</button>
 </body>
-<script>
-  var toolbox = '<xml>';
-  toolbox += '  <block type="controls_if"></block>';
-  toolbox += '  <block type="controls_whileUntil"></block>';
-  toolbox += '</xml>';
-  var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
-</script>
 <!-- Define your custom blocks -->
 <script src="../client/myBlocksInit.js" charset="utf-8"></script>
 <!-- Define your custom blocks generated code -->
