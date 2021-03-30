@@ -647,9 +647,8 @@ async function getAppElementInfo() {
   }
 }
 
-var test = getAppElementInfo().then((value) => getChangeID(value.applicationID));
-console.log('this is what is stored')
-console.log(test)
+var test = getAppElementInfo().then((value) => getChangeID(value.applicationID).then((value) => console.log(value)));
+
 
 
 </script>
