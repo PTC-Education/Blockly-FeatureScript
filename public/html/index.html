@@ -496,7 +496,7 @@ async function copyToFeatureStudio(fsCode) {
   // Check if there are none and if so, create the export FeatureStudio
   if (applications.length == 0) {
     var application = await createNewAppElement()
-    var applicationID = application.id
+    var applicationID = application.elementId
   } else {
 
     // If there are FeatureStudios is there already an export FeatureStudio
@@ -507,7 +507,7 @@ async function copyToFeatureStudio(fsCode) {
       var application = await createNewAppElement()
       console.log('inside the no studio case')
       console.log(application)
-      var applicationID = application.id
+      var applicationID = application.elementId
     } else {
       var applicationID = applications[results.index].id
     }
