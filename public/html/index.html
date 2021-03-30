@@ -205,7 +205,9 @@ raw = JSON.stringify({
   "formatId": "com.owens-gltf-viewer",
   "name": "blockly-storage",
   "description": "String",
-  "jsonTree": {}
+  "jsonTree": {
+    "blockly":"empty"
+  }
 })
 
 // Define Content-Type for correct body parsing
@@ -432,8 +434,6 @@ async function getChangeID(elementId) {
 
 async function hasExportStudio(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
-    console.log(featureStudios[i].name)
-    console.log(featureStudios[i].name == "blockly-export")
     if (featureStudios[i].name == "blockly-export") {
       var hasStudio = true
       var index = i
@@ -472,8 +472,6 @@ async function hasExportFeature(){
 
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
-    console.log(featureStudios[i].name)
-    console.log(featureStudios[i].name == "blockly-storage")
     if (featureStudios[i].name == "blockly-storage") {
       var hasStudio = true
       var index = i
@@ -543,8 +541,6 @@ async function copyToFeatureStudio(fsCode) {
 
 
   var applications = await getApplicationID();
-  console.log('test:')
-  console.log(applications)
 
   // Check if there are none and if so, create the export FeatureStudio
   if (applications.length == 0) {
