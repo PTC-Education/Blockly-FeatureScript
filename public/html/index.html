@@ -574,7 +574,7 @@ async function copyToFeatureStudio(fsCode) {
     await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID);
   }
 
-
+  /*
   var applications = await getApplicationID();
 
   // Check if there are none and if so, create the export FeatureStudio
@@ -597,11 +597,9 @@ async function copyToFeatureStudio(fsCode) {
       var changeID = (await getChangeID(applicationID)).changeId
     }
   }
-
-  console.log('blocky-storage id:')
-  console.log(applicationID)
-  console.log('blockly-storage changeId:')
-  console.log(changeID)
+  */
+  
+  var appElementInfo = await getAppElementInfo();
 
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   console.log('XML from Blockly:')
@@ -611,7 +609,7 @@ async function copyToFeatureStudio(fsCode) {
   var str = s.serializeToString(xml);
  */
   var xml_text = Blockly.Xml.domToText(xml);
-  await updateJSONTree(applicationID, changeID, xml_text)
+  await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
 
 
