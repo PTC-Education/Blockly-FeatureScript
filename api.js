@@ -31,6 +31,19 @@ apiRouter.get('/elements', (req, res) => {
 });
 
 /**
+ * Get the Elements of the current document/workspace.
+ * 
+ * GET /api/elements
+ *      -> 200, [ ...elements ]
+ *      -or-
+ *      -> 500, { error: '...' }
+ */
+ apiRouter.get('/getElementChangeId', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content/json?transactionId=&changeId=`, req, res);
+});
+
+
+/**
  * Get the Session info from Onshape to get User ID information
  */
 apiRouter.get('/users/sessioninfo', (req, res) => {

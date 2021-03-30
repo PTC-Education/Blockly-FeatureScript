@@ -408,6 +408,21 @@ async function getApplicationID() {
 };
 
 
+// /appelements/d/79b6a1f263466a880710311c/w/039b2a2fd42a038078b4e3a1/e/1f04edcc213a11e71b04f131/content/json?transactionId=&changeId=
+
+/*
+ Gets the FeatureStudio ID of the FS in development document
+*/
+
+async function getChangeID(elementId) {
+    try {
+        const response = await fetch(`/api/getElementChangeId${window.location.search}&storageId=${elementId}`, { headers: { 'Accept': 'application/json' } })
+        const jsonTree = await response.json();
+        return jsonTree;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 
 /*
@@ -497,6 +512,7 @@ async function copyToFeatureStudio(fsCode) {
   if (applications.length == 0) {
     var application = await createNewAppElement()
     var applicationID = application.elementId
+    var changeID = application.changeId
   } else {
 
     // If there are FeatureStudios is there already an export FeatureStudio
@@ -505,16 +521,18 @@ async function copyToFeatureStudio(fsCode) {
     // If there is no export Feature Studio then create one
     if (!(results.hasStudio)) { 
       var application = await createNewAppElement()
-      console.log('inside the no studio case')
-      console.log(application)
       var applicationID = application.elementId
+      var changeID = application.changeId
     } else {
       var applicationID = applications[results.index].id
+      var changeID = await getChangeID(applicationID)
     }
   }
 
   console.log('blocky-storage id:')
   console.log(applicationID)
+  console.log('blockly-storage changeId:')
+  console.log(changeID)
 
 
 
