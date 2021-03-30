@@ -1,8 +1,5 @@
 const fetch = require('node-fetch');
 
-const xml2js = require('xml2js');
-const parser = new xml2js.Parser(/* options */);
-
 const WebhookService = require('./services/webhook-service');
 const TranslationService = require('./services/translation-service');
 const { onshapeApiUrl } = require('./config');
