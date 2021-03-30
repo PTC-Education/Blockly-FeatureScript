@@ -9,24 +9,6 @@ const redisClient = require('./redis-client');
 
 const apiRouter = require('express').Router();
 
-apiRouter.post('/convertToJSON', (req, res) => {
-    console.log(req.body.contents)
-    parser.parseStringPromise(req.body.contents).then(function (result) {
-        res.send(result)
-      })
-      .catch(function (err) {
-        // Failed
-      });
-});
-
-
-apiRouter.post('/convertToXML', (req, res) => {
-    console.log(req.body.contents)
-    var builder = new xml2js.Builder();
-    var xml = builder.buildObject(req.body.contents);
-    res.send(xml)
-});
-
 
 /**
  * Add Custom Feature to the Feature List 
