@@ -29,6 +29,14 @@ apiRouter.post('/convertToXML', (req, res) => {
 
 
 /**
+ * Add Custom Feature to the Feature List 
+ */
+
+ apiRouter.post('/createAppElement', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
+});
+
+/**
  * Get the Elements of the current document/workspace.
  * 
  * GET /api/elements
