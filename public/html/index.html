@@ -496,7 +496,7 @@ async function copyToFeatureStudio(fsCode) {
   // Check if there are none and if so, create the export FeatureStudio
   if (applications.length == 0) {
     var application = await createNewAppElement()
-    applicationID = application.id
+    var applicationID = application.id
   } else {
 
     // If there are FeatureStudios is there already an export FeatureStudio
@@ -505,7 +505,7 @@ async function copyToFeatureStudio(fsCode) {
     // If there is no export Feature Studio then create one
     if (!(results.hasStudio)) { 
       var application = await createNewAppElement()
-      applicationID = application.id
+      var applicationID = application.id
     } else {
       var applicationID = applications[results.index].id
     }
@@ -513,6 +513,9 @@ async function copyToFeatureStudio(fsCode) {
 
   console.log('blocky-storage id:')
   console.log(applicationID)
+
+
+
 
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
@@ -534,6 +537,8 @@ async function copyToFeatureStudio(fsCode) {
       var exportStudioID = featureStudios[results.index].id
     }
   }
+
+
 
   // Get the contents of the export Feature Studio
   var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
