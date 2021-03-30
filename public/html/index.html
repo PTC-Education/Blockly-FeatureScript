@@ -584,6 +584,7 @@ async function copyToFeatureStudio(fsCode) {
   var appElementInfo = await getAppElementInfo();
 
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  var xml_text = Blockly.Xml.domToText(xml);
 
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
