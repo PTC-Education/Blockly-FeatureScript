@@ -606,11 +606,51 @@ async function copyToFeatureStudio(fsCode) {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   console.log('XML from Blockly:')
   console.log(xml)
+  /*
   var s = new XMLSerializer();
   var str = s.serializeToString(xml);
-
-  await updateJSONTree(applicationID, changeID, str)
-
+ */
+  var xml_text = Blockly.Xml.domToText(xml);
+  await updateJSONTree(applicationID, changeID, xml_text)
 }
+
+
+
+async function getAppElementInfo() {
+  var applications = await getApplicationID();
+
+  // Check if there are none and if so, create the export FeatureStudio
+  if (applications.length == 0) {
+    var application = await createNewAppElement()
+    var applicationID = application.elementId
+    var changeID = application.changeId
+  } else {
+
+    // If there are FeatureStudios is there already an export FeatureStudio
+    results = await hasApplicationStorage(applications)
+
+    // If there is no export Feature Studio then create one
+    if (!(results.hasStudio)) { 
+      var application = await createNewAppElement()
+      var applicationID = application.elementId
+      var changeID = application.changeId
+    } else {
+      var application = applications[results.index]
+      var applicationID = applications[results.index].id
+      var changeID = (await getChangeID(applicationID)).changeId
+    }
+  }
+  return {
+    "application" : application,
+    "applicationID" : applicationID,
+    "changeID" : changeID
+  }
+}
+
+var test = await getAppElementInfo();
+console.log('this is what is stored')
+console.log(test)
+
+
 </script>
 </html>
