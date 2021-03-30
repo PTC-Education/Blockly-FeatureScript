@@ -93,6 +93,14 @@ apiRouter.post('/createFStudio', (req, res) => {
 });
 
 /**
+ * Create a new Feature Studio
+ */
+
+ apiRouter.post('/updateAppElement', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content`, req, res);
+});
+
+/**
  * Get the Feature Studio Specs
  */
 
