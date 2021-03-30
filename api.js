@@ -55,6 +55,16 @@ apiRouter.get('/users/sessioninfo', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
 
+
+/**
+ * Get all Feature Studio elements from the document 
+ */
+ apiRouter.get('/getApplcationStorage', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=APPLICATION&withThumbnails=false`, req, res);
+});
+
+
+
 /**
  * Get all Feature Studio elements from the document 
  */

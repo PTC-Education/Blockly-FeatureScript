@@ -395,6 +395,22 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
 };
 
 
+/*
+ Gets the FeatureStudio ID of the FS in development document
+*/
+
+async function getApplicationID() {
+    try {
+        const response = await fetch(`/api/getApplicationStorage${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
 
 /*
    Boolean function that indicates if there is an export Feature Studio in the document. Returns the index of this 
@@ -441,6 +457,26 @@ async function hasExportFeature(){
   return hasStudio
 }
 
+async function hasApplicationStorage(featureStudios){
+  for (var i = 0; i < featureStudios.length; i++) {
+    console.log(featureStudios[i].name)
+    console.log(featureStudios[i].name == "blockly-storage")
+    if (featureStudios[i].name == "blockly-storage") {
+      var hasStudio = true
+      var index = i
+      return {
+        hasStudio,
+        index
+      }
+    }
+  }
+  var hasStudio = false
+  var index = null
+  return {
+        hasStudio,
+        index
+      }
+}
 
 
 /*
@@ -454,7 +490,10 @@ async function hasExportFeature(){
 
 async function copyToFeatureStudio(fsCode) {
 
-  await createNewAppElement();
+  //await createNewAppElement();
+  var applicationStudio = await getApplicationID();
+  console.log('test:')
+  console.log(applicationStudio)
 
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
