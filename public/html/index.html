@@ -503,40 +503,6 @@ async function hasApplicationStorage(featureStudios){
 
 async function copyToFeatureStudio(fsCode) {
 
-  //await createNewAppElement();
-  var applications = await getApplicationID();
-  console.log('test:')
-  console.log(applications)
-
-  // Check if there are none and if so, create the export FeatureStudio
-  if (applications.length == 0) {
-    var application = await createNewAppElement()
-    var applicationID = application.elementId
-    var changeID = application.changeId
-  } else {
-
-    // If there are FeatureStudios is there already an export FeatureStudio
-    results = await hasApplicationStorage(applications)
-
-    // If there is no export Feature Studio then create one
-    if (!(results.hasStudio)) { 
-      var application = await createNewAppElement()
-      var applicationID = application.elementId
-      var changeID = application.changeId
-    } else {
-      var applicationID = applications[results.index].id
-      var changeID = (await getChangeID(applicationID)).changeId
-    }
-  }
-
-  console.log('blocky-storage id:')
-  console.log(applicationID)
-  console.log('blockly-storage changeId:')
-  console.log(changeID)
-
-
-
-
   // Get all FeatureStudios in the document
   var featureStudios = await getFeatureStudio();
 
@@ -574,6 +540,40 @@ async function copyToFeatureStudio(fsCode) {
     var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
     await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID);
   }
+
+
+  var applications = await getApplicationID();
+  console.log('test:')
+  console.log(applications)
+
+  // Check if there are none and if so, create the export FeatureStudio
+  if (applications.length == 0) {
+    var application = await createNewAppElement()
+    var applicationID = application.elementId
+    var changeID = application.changeId
+  } else {
+
+    // If there are FeatureStudios is there already an export FeatureStudio
+    results = await hasApplicationStorage(applications)
+
+    // If there is no export Feature Studio then create one
+    if (!(results.hasStudio)) { 
+      var application = await createNewAppElement()
+      var applicationID = application.elementId
+      var changeID = application.changeId
+    } else {
+      var applicationID = applications[results.index].id
+      var changeID = (await getChangeID(applicationID)).changeId
+    }
+  }
+
+  console.log('blocky-storage id:')
+  console.log(applicationID)
+  console.log('blockly-storage changeId:')
+  console.log(changeID)
+
+
+
 }
 </script>
 </html>
