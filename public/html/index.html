@@ -127,7 +127,14 @@ async function convertWorkspaceToJSON() {
   console.log(xml)
   var s = new XMLSerializer();
   var str = s.serializeToString(xml);
+  console.log('Serialized XML:')
   console.log(str)
+
+  var parser = new DOMParser();
+  var xmlDoc = parser.parseFromString(str,"text/xml");
+  console.log('Reparsed xml:')
+  console.log(xmlDoc)
+
   // Format the body of the POST request
   raw = JSON.stringify({
     "contents": `${str}` 
