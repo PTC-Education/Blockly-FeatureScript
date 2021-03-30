@@ -229,14 +229,14 @@ try {
 */
 
 
-async function updateJSONTree(applicationID, changeID) {
+async function updateJSONTree(applicationID, changeID, blocklyXML) {
 
 // Format the body of the POST request
 raw = JSON.stringify({
   "parentChangeId": `${changeID}`,
   "jsonTreeEdit":{"btType": "BTJEditChange-2636",
     "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": "blockly"}]},
-    "value": "hello"}
+    "value": `${blockyXML}`}
   }
 )
 
@@ -603,7 +603,13 @@ async function copyToFeatureStudio(fsCode) {
   console.log('blockly-storage changeId:')
   console.log(changeID)
 
-  await updateJSONTree(applicationID, changeID)
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  console.log('XML from Blockly:')
+  console.log(xml)
+  var s = new XMLSerializer();
+  var str = s.serializeToString(xml);
+
+  await updateJSONTree(applicationID, changeID, str)
 
 }
 </script>
