@@ -125,16 +125,6 @@ function copyToClipboard(text) {
 }
 
 /*
-{
-    "formatId": "com.owens-gltf-viewer",
-    "name": "blockly-storage",
-    "description": "String",
-    "jsonTree": {}
-}
-*/
-
-
-/*
 async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
 // Format the body of the POST request
@@ -160,13 +150,14 @@ try {
 };
 */
 
+
 /*
 {"btType": "BTJEditChange-2636",
     "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": "blockly"}]},
     "value": "test"}
 */
 
-/*
+
 async function updateJSONTree(applicationID, changeID, blocklyXML) {
 
 // Format the body of the POST request
@@ -189,7 +180,7 @@ try {
       console.error(error);
   }
 };
-*/
+
 
 
 
@@ -371,7 +362,7 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
-/*
+
 async function getApplicationID() {
     try {
         const response = await fetch(`/api/getApplicationStorage${window.location.search}`, { headers: { 'Accept': 'application/json' } })
@@ -382,12 +373,12 @@ async function getApplicationID() {
     }
 };
 
-*/
+
 
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
-/*
+
 async function getChangeID(elementId) {
     try {
         const response = await fetch(`/api/getElementChangeId${window.location.search}&storageId=${elementId}`, { headers: { 'Accept': 'application/json' } })
@@ -397,7 +388,7 @@ async function getChangeID(elementId) {
         console.error(error);
     }
 };
-*/
+
 
 /*
    Boolean function that indicates if there is an export Feature Studio in the document. Returns the index of this 
@@ -448,7 +439,7 @@ async function hasExportFeature(){
    Boolean function that indicates if there is a Blockly app element for 
    persistent storage of the current blockly workspace.
 */
-/*
+
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
     if (featureStudios[i].name == "blockly-storage") {
@@ -467,7 +458,7 @@ async function hasApplicationStorage(featureStudios){
         index
       }
 }
-*/
+
 
 /*
    Copies all of the Blockly code to the Onshape workspace
@@ -509,7 +500,7 @@ async function copyToFeatureStudio(fsCode) {
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
 
-/*
+
 async function getAppElementInfo() {
   var applications = await getApplicationID();
 
@@ -540,7 +531,7 @@ async function getAppElementInfo() {
     "changeID" : changeID
   }
 }
-*/
+
 
 async function getExportStudioInfo() {
   // Get all FeatureStudios in the document

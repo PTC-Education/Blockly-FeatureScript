@@ -30,7 +30,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
    Boolean function that indicates if there is a Blockly app element for 
    persistent storage of the current blockly workspace.
 */
-
+/*
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
     if (featureStudios[i].name == "blockly-storage") {
@@ -49,12 +49,13 @@ async function hasApplicationStorage(featureStudios){
         index
       }
 }
-
+*/
 
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
 
+/*
 async function getApplicationID() {
   try {
       const response = await fetch(`/api/getApplicationStorage${window.location.search}`, { headers: { 'Accept': 'application/json' } })
@@ -64,12 +65,13 @@ async function getApplicationID() {
       console.error(error);
   }
 };
-
+*/
 
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
 
+/*
 async function getChangeID(elementId) {
   try {
       const response = await fetch(`/api/getElementChangeId${window.location.search}&storageId=${elementId}`, { headers: { 'Accept': 'application/json' } })
@@ -79,9 +81,9 @@ async function getChangeID(elementId) {
       console.error(error);
   }
 };
+*/
 
-
-
+/*
 async function getAppElementInfo() {
   var applications = await getApplicationID();
 
@@ -112,3 +114,4 @@ async function getAppElementInfo() {
     "changeID" : changeID
   }
 }
+*/
