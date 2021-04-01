@@ -75,7 +75,7 @@ async function getApplicationID() {
  Gets the FeatureStudio ID of the FS in development document
 */
 
-/*
+
 async function getChangeID(elementId) {
   try {
       const response = await fetch(`/api/getElementChangeId${window.location.search}&storageId=${elementId}`, { headers: { 'Accept': 'application/json' } })
@@ -85,7 +85,7 @@ async function getChangeID(elementId) {
       console.error(error);
   }
 };
-*/
+
 
 /*
 async function getAppElementInfo() {
