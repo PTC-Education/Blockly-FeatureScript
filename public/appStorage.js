@@ -1,8 +1,30 @@
-function testing() {
-  console.log('testing this may not work')
-}
+/*
+
+  appStorage.js
+
+  This file holds all of the utility functions that control the state of the application
+  in Onshape.
+
+  createNewAppElement(): Creates a new app element in order to store the state of the
+                         Blockly main workspace.
+
+  hasApplicationStorage(): Checks to see if in an array of applications if there is a 
+                         Blockly storage application element and then return { bool, index of app in array}
+
+  getApplicationID(): Gets the application id of the storage element
+
+  getChangeID(): Gets the current change id for use in updating the JSON tree element
+
+  getApplicationInfo(): Combines all utility functions in order to create a single utility function
+
+  updateJSONTree(): Updates the blockly storage app's JSON tree element with the current blockly main workspace
+
+*/
 
 
+/*
+Creates a new app element in order to store the state of the Blockly main workspace
+*/
 
 async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
@@ -29,7 +51,6 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
     };
 
 
-  
 /*
    Boolean function that indicates if there is a Blockly app element for 
    persistent storage of the current blockly workspace.
@@ -56,9 +77,8 @@ async function hasApplicationStorage(featureStudios){
 
 
 /*
- Gets the FeatureStudio ID of the FS in development document
+ Gets the application element ID of the storage application element
 */
-
 
 async function getApplicationID() {
   try {
@@ -72,9 +92,8 @@ async function getApplicationID() {
 
 
 /*
- Gets the FeatureStudio ID of the FS in development document
+ Gets the change Id of the storage application element
 */
-
 
 async function getChangeID(elementId) {
   try {
@@ -87,6 +106,10 @@ async function getChangeID(elementId) {
 };
 
 
+/*
+ Combines all utility functions into one function that deals with creation and upkeep of the
+ app element 
+*/
 
 async function getAppElementInfo() {
   var applications = await getApplicationID();
@@ -119,6 +142,10 @@ async function getAppElementInfo() {
   }
 }
 
+
+/*
+  Updates the JSON tree element of the application storage element 
+*/
 
 async function updateJSONTree(applicationID, changeID, blocklyXML) {
 
