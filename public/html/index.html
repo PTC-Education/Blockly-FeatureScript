@@ -55,6 +55,13 @@
 
 <script>
 
+
+// Update the workspace with the last
+getAppElementInfo()
+  .then((value) => getChangeID(value.applicationID)
+  .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
+
+
 async function runCode(highlighting) {
 
   var fsPrefix = `
@@ -83,9 +90,7 @@ async function runCode(highlighting) {
   
 
   fsCode =  fsPrefix + fsCodeNoVar;
-  //console.log(fsCode);
-  //createFeatureStudio()
-  copyToClipboard(fsCode);
+  //copyToClipboard(fsCode);
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -167,12 +172,6 @@ async function copyToFeatureStudio(fsCode) {
   // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
-
-
-// Update the workspace with the last
-getAppElementInfo()
-  .then((value) => getChangeID(value.applicationID)
-  .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
 
 </script>
