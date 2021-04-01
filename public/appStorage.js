@@ -59,7 +59,7 @@ async function hasApplicationStorage(featureStudios){
  Gets the FeatureStudio ID of the FS in development document
 */
 
-/*
+
 async function getApplicationID() {
   try {
       const response = await fetch(`/api/getApplicationStorage${window.location.search}`, { headers: { 'Accept': 'application/json' } })
@@ -69,7 +69,7 @@ async function getApplicationID() {
       console.error(error);
   }
 };
-*/
+
 
 /*
  Gets the FeatureStudio ID of the FS in development document
