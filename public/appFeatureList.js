@@ -17,6 +17,22 @@ async function hasExportFeature(){
 
 
 /*
+   Gets the Feature List for the Part Studio in which the user is Blockly coding 
+*/
+
+async function getFeatureList() {
+    try {
+        const response = await fetch(`/api/getFeatureList${window.location.search}`, { headers: { 'Accept': 'application/json' } })
+        const featurestudios = await response.json();
+        return featurestudios;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+/*
    Adds the Blocky custom feature to the Part Studio Feature List 
 
    Input:
