@@ -3,7 +3,7 @@ function testing() {
 }
 
 
-/*
+
 async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
     // Format the body of the POST request
@@ -27,7 +27,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
           console.error(error);
       }
     };
-*/
+
 
   
 /*
