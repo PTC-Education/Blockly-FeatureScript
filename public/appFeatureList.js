@@ -1,4 +1,17 @@
 /*
+
+    appFeatureList.js
+
+    hasExportFeature() : Checks to see if there is already a Blockly feature
+                         in the Part Studio Feature List
+
+    getFeatureList(): gets the contents of the feature list in the Part Studio
+
+    createBlocklyFeature(): Adds a new blockly feature to the feature list
+
+*/
+
+/*
    Boolean function that indicates if there is a feature for the Blockly code
    in the Feature List of the Part Studio workspace.
 */
