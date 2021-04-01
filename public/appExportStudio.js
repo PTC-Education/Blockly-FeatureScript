@@ -161,10 +161,9 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
         var exportStudio = featureStudios[results.index]
         var exportStudioID = featureStudios[results.index].id
       }
-  
-    return {
-      "element" : `${exportStudio}`,
-      "ID" : `${exportStudioID}`
-    }
+  }
+  return {
+    "element" : `${exportStudio}`,
+    "ID" : `${exportStudioID}`
   }
 };
