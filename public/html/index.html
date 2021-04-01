@@ -128,13 +128,8 @@ function copyToClipboard(text) {
 
 
 
+
 /*
-{"btType": "BTJEditChange-2636",
-    "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": "blockly"}]},
-    "value": "test"}
-*/
-
-
 async function updateJSONTree(applicationID, changeID, blocklyXML) {
 
 // Format the body of the POST request
@@ -157,7 +152,7 @@ try {
       console.error(error);
   }
 };
-
+*/
 
 
 
@@ -421,38 +416,6 @@ async function copyToFeatureStudio(fsCode) {
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
 
-/*
-async function getAppElementInfo() {
-  var applications = await getApplicationID();
-
-  // Check if there are none and if so, create the export a new application storage
-  if (applications.length == 0) {
-    var application = await createNewAppElement()
-    var applicationID = application.elementId
-    var changeID = application.changeId
-  } else {
-
-    // If there are FeatureStudios is there already an export FeatureStudio
-    results = await hasApplicationStorage(applications)
-
-    // If there is no export Feature Studio then create one
-    if (!(results.hasStudio)) { 
-      var application = await createNewAppElement()
-      var applicationID = application.elementId
-      var changeID = application.changeId
-    } else {
-      var application = applications[results.index]
-      var applicationID = applications[results.index].id
-      var changeID = (await getChangeID(applicationID)).changeId
-    }
-  }
-  return {
-    "application" : application,
-    "applicationID" : applicationID,
-    "changeID" : changeID
-  }
-}
-*/
 
 
 async function getExportStudioInfo() {

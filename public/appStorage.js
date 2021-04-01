@@ -118,3 +118,27 @@ async function getAppElementInfo() {
     "changeID" : changeID
   }
 }
+
+
+async function updateJSONTree(applicationID, changeID, blocklyXML) {
+
+  // Format the body of the POST request
+  raw = JSON.stringify({
+    "parentChangeId": `${changeID}`,
+    "jsonTreeEdit":{"btType": "BTJEditChange-2636",
+      "path": {"btType": "BTJPath-3073", "startNode": "", "path": [{"btType": "BTJPathKey-3221", "key": "blockly"}]},
+      "value": `${blocklyXML}`}
+    }
+  )
+  
+  // Define Content-Type for correct body parsing
+  header =  {'Content-Type':'application/json'}
+  
+  try {
+        const response = await fetch(`/api/updateAppElement${window.location.search}&storageId=${applicationID}`, {method: 'POST', body: raw, headers: header});
+        const testFour = await response.json();
+        return testFour;
+    } catch (error) {
+        console.error(error);
+    }
+  };
