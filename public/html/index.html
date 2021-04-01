@@ -48,13 +48,12 @@
 <!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
-<script src="../convert.js" charset="utf-8"></script>
+
+<script src="../appStorage.js" charset="utf-8"></script>
 
 <script>
 
 async function runCode(highlighting) {
-
-  
 
   var fsPrefix = `
     FeatureScript 1389;
@@ -112,70 +111,6 @@ async function runCode(highlighting) {
 }
 
 
-
-/*
-  Converts the Blockly XML DOM to JSON using the xml2js package
-*/
-
-/*
-async function convertWorkspaceToJSON() {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
-  console.log('XML from Blockly:')
-  console.log(xml)
-  var s = new XMLSerializer();
-  var str = s.serializeToString(xml);
-  console.log('Serialized XML:')
-  console.log(str)
-
-  var parser = new DOMParser();
-  var xmlDoc = parser.parseFromString(str,"text/xml");
-  console.log('Reparsed xml:')
-  console.log(xmlDoc)
-
-  // Format the body of the POST request
-  raw = JSON.stringify({
-    "contents": `${str}` 
-  })
- 
-  // Define Content-Type for correct body parsing
-  header =  {'Content-Type':'application/json'}
-
-  try {
-        const response = await fetch(`/api/convertToJSON`, {method: 'POST', body: raw, headers: header});
-        const testFour = await response.json();
-        console.log('Conversion to json:')
-        console.log(testFour)
-        return testFour;
-    } catch (error) {
-        console.error(error);
-    };
-
-};
-*/
-/*
-async function convertWorkspaceToXML(workspaceJSON) {
-
-  // Format the body of the POST request
-  raw = JSON.stringify({
-    "contents": `${workspaceJSON}` 
-  })
- 
-  // Define Content-Type for correct body parsing
-  header =  {'Content-Type':'application/json'}
-
-    try {
-        const response = await fetch(`/api/convertToXML`, {method: 'POST', body: raw, headers: header});
-        const testFive = await response.json();
-        console.log('Conversion to xml:')
-        console.log(testFive)
-        return testFive;
-    } catch (error) {
-        console.error(error);
-    }
-}
-*/
-
-
 function copyToClipboard(text) {
     var dummy = document.createElement("textarea");
     // to avoid breaking orgain page when copying more words
@@ -198,6 +133,8 @@ function copyToClipboard(text) {
 }
 */
 
+
+/*
 async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
 // Format the body of the POST request
@@ -221,6 +158,7 @@ try {
       console.error(error);
   }
 };
+*/
 
 /*
 {"btType": "BTJEditChange-2636",
@@ -228,7 +166,7 @@ try {
     "value": "test"}
 */
 
-
+/*
 async function updateJSONTree(applicationID, changeID, blocklyXML) {
 
 // Format the body of the POST request
@@ -251,7 +189,7 @@ try {
       console.error(error);
   }
 };
-
+*/
 
 
 
@@ -433,7 +371,7 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
-
+/*
 async function getApplicationID() {
     try {
         const response = await fetch(`/api/getApplicationStorage${window.location.search}`, { headers: { 'Accept': 'application/json' } })
@@ -444,12 +382,12 @@ async function getApplicationID() {
     }
 };
 
-
+*/
 
 /*
  Gets the FeatureStudio ID of the FS in development document
 */
-
+/*
 async function getChangeID(elementId) {
     try {
         const response = await fetch(`/api/getElementChangeId${window.location.search}&storageId=${elementId}`, { headers: { 'Accept': 'application/json' } })
@@ -459,7 +397,7 @@ async function getChangeID(elementId) {
         console.error(error);
     }
 };
-
+*/
 
 /*
    Boolean function that indicates if there is an export Feature Studio in the document. Returns the index of this 
@@ -510,7 +448,7 @@ async function hasExportFeature(){
    Boolean function that indicates if there is a Blockly app element for 
    persistent storage of the current blockly workspace.
 */
-
+/*
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
     if (featureStudios[i].name == "blockly-storage") {
@@ -529,7 +467,7 @@ async function hasApplicationStorage(featureStudios){
         index
       }
 }
-
+*/
 
 /*
    Copies all of the Blockly code to the Onshape workspace
@@ -571,11 +509,11 @@ async function copyToFeatureStudio(fsCode) {
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
 
-
+/*
 async function getAppElementInfo() {
   var applications = await getApplicationID();
 
-  // Check if there are none and if so, create the export FeatureStudio
+  // Check if there are none and if so, create the export a new application storage
   if (applications.length == 0) {
     var application = await createNewAppElement()
     var applicationID = application.elementId
@@ -602,7 +540,7 @@ async function getAppElementInfo() {
     "changeID" : changeID
   }
 }
-
+*/
 
 async function getExportStudioInfo() {
   // Get all FeatureStudios in the document
