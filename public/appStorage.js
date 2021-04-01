@@ -87,7 +87,7 @@ async function getChangeID(elementId) {
 };
 
 
-/*
+
 async function getAppElementInfo() {
   var applications = await getApplicationID();
 
@@ -118,4 +118,3 @@ async function getAppElementInfo() {
     "changeID" : changeID
   }
 }
-*/
