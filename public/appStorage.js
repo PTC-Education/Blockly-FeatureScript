@@ -34,7 +34,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
    Boolean function that indicates if there is a Blockly app element for 
    persistent storage of the current blockly workspace.
 */
-/*
+
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
     if (featureStudios[i].name == "blockly-storage") {
@@ -52,8 +52,8 @@ async function hasApplicationStorage(featureStudios){
         hasStudio,
         index
       }
-}
-*/
+};
+
 
 /*
  Gets the FeatureStudio ID of the FS in development document
