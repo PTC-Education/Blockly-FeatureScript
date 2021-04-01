@@ -40,7 +40,6 @@
   <div id="blocklyDiv"></div>
   <button id="runButton" onclick="runCode(true); return">Send FS Code</button>
 </body>
-<script src="/storage.js"></script>
 <!-- Define your custom blocks -->
 <script src="../client/myBlocksInit.js" charset="utf-8"></script>
 <!-- Define your custom blocks generated code -->
@@ -49,11 +48,21 @@
 <!-- <script src="myInterpreter.js" charset="utf-8"></script> -->
 <!-- Inject your workspace with categories and blocks -->
 <script src="../client/workspace.js" charset="utf-8"></script>
+
+<script src="../appStorage.js" charset="utf-8"></script>
+<script src="../appFeatureList.js" charset="utf-8"></script>
+<script src="../appExportStudio.js" charset="utf-8"></script>
+
 <script>
 
 
+// Update the workspace with the last saved workspace
+getAppElementInfo()
+  .then((value) => getChangeID(value.applicationID)
+  .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
-function runCode(highlighting) {
+
+async function runCode(highlighting) {
 
   var fsPrefix = `
     FeatureScript 1389;
@@ -67,13 +76,13 @@ function runCode(highlighting) {
     // break the textblock into an array of lines
   var lines = fsCode.split('\n');
   var firstLine = lines[0];
-  console.log("First line: " + firstLine)
+  //console.log("First line: " + firstLine)
   if (firstLine.includes("var"))
   {
     // remove one line, starting at the first position
     lines.splice(0,1);
   }else if(!firstLine.includes("precondition")){
-    console.log(lines);
+    //console.log(lines);
     //lines.splice(0, 0, "precondition{} \n { var i = 0;")
   }
   // join the array back into a single string
@@ -81,9 +90,7 @@ function runCode(highlighting) {
   
 
   fsCode =  fsPrefix + fsCodeNoVar;
-  //console.log(fsCode);
-  //createFeatureStudio()
-  copyToClipboard(fsCode);
+  //copyToClipboard(fsCode);
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
   // if (highlighting)
@@ -122,227 +129,7 @@ function copyToClipboard(text) {
     dummy.select();
     document.execCommand("copy");
     document.body.removeChild(dummy);
-}
-
-
-/*
-  Updates the FeatureStudio contents with the generated Blockly Code
-
-  Input: 
-
-    fsId: Element id of the target FeatureStudio for exporting Blockly code
- 
-    sourceMicroversion: Microversion of the target Feature Studio document in order to
-                        wipe on each code export. 
- 
-    fsCode: FeatureScript code exported from Blockly
-*/
-
-async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
-
-  // Format the body of the POST request
-  raw = JSON.stringify({
-    "contents": `${fsCode}`, 
-    "serializationVersion": "1.1.20", 
-    "sourceMicroversion": `${sourceMicroversion}`
-  })
- 
-  // Define Content-Type for correct body parsing
-  header =  {'Content-Type':'application/json'}
-
-  try {
-        const response = await fetch(`/api/updateFStudio${window.location.search}&blockly=${fSId}`, {method: 'POST', body: raw, headers: header});
-        const testFour = await response.json();
-        return testFour;
-    } catch (error) {
-        console.error(error);
-    }
 };
-
-
-/*
-   Gets the current FeatureStudio Contents and Specs
-   Input:
- 
-   fsID: Element id of the target FeatureStudio for exporting Blockly code. 
-         Stored in blockly query parameter in order to be correctly parsed to Onshape
-*/
-
-async function getFeatureStudioContents(fSId) {
-  try {
-        const response = await fetch(`/api/fsContents${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudioContents = await response.json();
-        return featurestudioContents;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-/*
- Gets the FeatureStudio Specs of the FS in development document
-
- Input:
-    
-      fsID: This is the element id of the blockly export Feature Studio
-
-*/
-
-async function getFeatureStudioSpecs(fSId) {
-    try {
-        const response = await fetch(`/api/specsFStudio${window.location.search}&blockly=${fSId}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-
-/*
- Gets the FeatureStudio ID of the FS in development document
-*/
-
-async function getFeatureStudio() {
-    try {
-        const response = await fetch(`/api/getFStudio${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-/*
-   Gets the Feature List for the Part Studio in which the user is Blockly coding 
-*/
-
-async function getFeatureList() {
-    try {
-        const response = await fetch(`/api/getFeatureList${window.location.search}`, { headers: { 'Accept': 'application/json' } })
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-
-/*
-   Creates a new blockly export feature studio 
-*/
-
-async function createFeatureStudio() {
-
-  raw = JSON.stringify({
-    "name": `blockly-export`
-  })
- 
-  header =  {'Content-Type':'application/json'}
-  
-  try {
-        const response = await fetch(`/api/createFStudio${window.location.search}`, {method: 'POST', body: raw, headers: header})
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-
-
-/*
-   Adds the Blocky custom feature to the Part Studio Feature List 
-
-   Input:
-  
-      namespace: e{elementId}::m{microversionID}, element id and microversion id
-                This is obtained from the GET FeatureStudiosSpecs endpoint 
-
-      sourceMicroversion: The current source microversion of the document
-
-      fsID: This is the element id of the blockly export feature studio
-*/
-
-
-async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
-  
-  raw = JSON.stringify({
-    "feature": {
-      "type" : 134,
-      "typeName": "BTMFeature",
-      "message" : {
-        "featureType" : "myFeature",
-        "name" : "Blockly Created Feature",
-        "parameters" : [],
-        "namespace" : `${namespace}`
-      }
-    },
-    "serializationVersion": "1.1.20",
-    "sourceMicroversion": `${sourceMicroversion}`
-  })
- 
-  header =  {'Content-Type':'application/json'}
-  
-  try {
-        const response = await fetch(`/api/addFeatureToList${window.location.search}&blockly=${fSId}`, {method: 'POST', body: raw, headers: header})
-        const featurestudios = await response.json();
-        return featurestudios;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-
-/*
-   Boolean function that indicates if there is an export Feature Studio in the document. Returns the index of this 
-   in the element list in order for correct data parsing. 
-*/
-
-async function hasExportStudio(featureStudios){
-  for (var i = 0; i < featureStudios.length; i++) {
-    console.log(featureStudios[i].name)
-    console.log(featureStudios[i].name == "blockly-export")
-    if (featureStudios[i].name == "blockly-export") {
-      var hasStudio = true
-      var index = i
-      return {
-        hasStudio,
-        index
-      }
-    }
-  }
-  var hasStudio = false
-  var index = null
-  return {
-        hasStudio,
-        index
-      }
-}
-
-
-
-/*
-   Boolean function that indicates if there is a feature for the Blockly code
-   in the Feature List of the Part Studio workspace.
-*/
-
-async function hasExportFeature(){
-  var featureList = await getFeatureList();
-  for (var i = 0; i < featureList.features.length; i++) {
-    if (featureList.features[i].message.name == "Blockly Created Feature") {
-        var hasStudio = true
-        return hasStudio
-    }
-  }
-  var hasStudio = false
-  return hasStudio
-}
 
 
 
@@ -357,41 +144,35 @@ async function hasExportFeature(){
 
 async function copyToFeatureStudio(fsCode) {
 
-  // Get all FeatureStudios in the document
-  var featureStudios = await getFeatureStudio();
-
-  // Check if there are none and if so, create the export FeatureStudio
-  if (featureStudios.length == 0) {
-    var exportStudio = await createFeatureStudio()
-    exportStudioID = exportStudio.id
-  } else {
-
-    // If there are FeatureStudios is there already an export FeatureStudio
-    results = await hasExportStudio(featureStudios)
-
-    // If there is no export Feature Studio then create one
-    if (!(results.hasStudio)) { 
-      var exportStudio = await createFeatureStudio()
-      exportStudioID = exportStudio.id
-    } else {
-      var exportStudioID = featureStudios[results.index].id
-    }
-  }
+  // Get the info of the export Feature Studio 
+  var exportStudioInfo = await getExportStudioInfo();
 
   // Get the contents of the export Feature Studio
-  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioID);
+  var currentFsSpecs = await getFeatureStudioSpecs(exportStudioInfo.ID);
 
   // Update the Export Feature Studio with Blockly code 
-  await updateFeatureStudioContents(exportStudioID, currentFsSpecs.sourceMicroversion, fsCode);
+  await updateFeatureStudioContents(exportStudioInfo.ID, currentFsSpecs.sourceMicroversion, fsCode);
 
   // Check if there is a Blockly feature in the Part Studio feature list
   var hasFeature = await hasExportFeature()
 
   // Add the custom feature to the Feature List, get the source microversion in order to correctly place
   if (!(hasFeature)) {
-    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioID);
-    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioID);
+    var updatedFsSpecs = await getFeatureStudioSpecs(exportStudioInfo.ID);
+    await createBlocklyFeature(updatedFsSpecs.featureSpecs[0].message.namespace, updatedFsSpecs.sourceMicroversion, exportStudioInfo.ID);
   }
+
+  // Get the info of the app element used for persistent storage
+  var appElementInfo = await getAppElementInfo();
+
+  // Get the xml and stringified xml representation of the current Blockly main workspace
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
+  var xml_text = Blockly.Xml.domToText(xml);
+
+  // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
+  await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 }
+
+
 </script>
 </html>

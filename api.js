@@ -5,8 +5,18 @@ const TranslationService = require('./services/translation-service');
 const { onshapeApiUrl } = require('./config');
 const { forwardRequestToOnshape } = require('./utils');
 const redisClient = require('./redis-client');
-    
+
+
 const apiRouter = require('express').Router();
+
+
+/**
+ * Add Custom Feature to the Feature List 
+ */
+
+ apiRouter.post('/createAppElement', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
+});
 
 /**
  * Get the Elements of the current document/workspace.
@@ -21,11 +31,34 @@ apiRouter.get('/elements', (req, res) => {
 });
 
 /**
+ * Get the Elements of the current document/workspace.
+ * 
+ * GET /api/elements
+ *      -> 200, [ ...elements ]
+ *      -or-
+ *      -> 500, { error: '...' }
+ */
+ apiRouter.get('/getElementChangeId', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content/json?transactionId=&changeId=`, req, res);
+});
+
+
+/**
  * Get the Session info from Onshape to get User ID information
  */
 apiRouter.get('/users/sessioninfo', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
 });
+
+
+/**
+ * Get all Feature Studio elements from the document 
+ */
+ apiRouter.get('/getApplicationStorage', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/documents/d/${req.query.documentId}/w/${req.query.workspaceId}/elements?elementType=APPLICATION&withThumbnails=false`, req, res);
+});
+
+
 
 /**
  * Get all Feature Studio elements from the document 
@@ -57,6 +90,14 @@ apiRouter.post('/updateFStudio', (req, res) => {
 
 apiRouter.post('/createFStudio', (req, res) => {
     forwardRequestToOnshape(`${onshapeApiUrl}/featurestudios/d/${req.query.documentId}/w/${req.query.workspaceId}`, req, res);
+});
+
+/**
+ * Create a new Feature Studio
+ */
+
+ apiRouter.post('/updateAppElement', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/appelements/d/${req.query.documentId}/w/${req.query.workspaceId}/e/${req.query.storageId}/content`, req, res);
 });
 
 /**
