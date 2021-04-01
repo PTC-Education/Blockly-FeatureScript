@@ -56,7 +56,7 @@
 <script>
 
 
-// Update the workspace with the last
+// Update the workspace with the last saved workspace
 getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));

@@ -143,7 +143,9 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
     // Check if there are none and if so, create the export FeatureStudio
     if (featureStudios.length == 0) {
       var exportStudio = await createFeatureStudio()
+      console.log('There is no feature studio at all yet')
       exportStudioID = exportStudio.id
+      console.log(exportStudioID)
     } else {
   
       // If there are FeatureStudios is there already an export FeatureStudio
@@ -152,7 +154,9 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
       // If there is no export Feature Studio then create one
       if (!(results.hasStudio)) { 
         var exportStudio = await createFeatureStudio()
+        console.log('There is a feature studio but there isnt an export library')
         exportStudioID = exportStudio.id
+        console.log(exportStudioID)
       } else {
         var exportStudio = featureStudios[results.index]
         var exportStudioID = featureStudios[results.index].id
