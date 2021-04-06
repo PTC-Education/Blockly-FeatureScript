@@ -252,7 +252,7 @@ Takes in a generalID and iterators array and formats the for loop id
 var applyIterators = function(generalID, iterators) {
   id = `("`+generalID+`"`;
   for (var i = 0; i < iterators.length; i++) {
-      id += ` ~ "`+iterators[i]+`" ~ `+iterators[i]+``;
+      id += ` ~ "`+iterators[i]+`" ~ floor(`+iterators[i]+`)`;
     }
   id += `)`;
   return id;
