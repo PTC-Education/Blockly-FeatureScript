@@ -29,7 +29,7 @@
         </shadow>
       </value>
     </block>
-    <block type="math_constant">
+    <block type="math_constants">
       <field name="CONSTANT">PI</field>
     </block>
     <block type="math_number_property">
