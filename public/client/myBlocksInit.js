@@ -34,7 +34,7 @@ Blockly.Blocks['math_constants'] = {
            ];
         this.appendDummyInput()
            // Pass the field constructor the options list, the validator, and the name.
-            .appendField(new Blockly.FieldDropdown(options), 'MODE');
+            .appendField(new Blockly.FieldDropdown(options), 'CONSTANT');
         this.setOutput(true);
         this.setColour(190);
         this.setTooltip("");

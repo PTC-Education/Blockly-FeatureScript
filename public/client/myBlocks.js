@@ -384,7 +384,7 @@ Blockly.JavaScript['math_constants']= function(block) {
   SQRT1_2:["Math.SQRT1_2",Blockly.JavaScript.ORDER_ATOMIC],
   INFINITY:["Infinity",Blockly.JavaScript.ORDER_ATOMIC]};
 
-  var constant = block.getFieldValue('CONSTANTS');
+  var constant = block.getFieldValue('CONSTANT');
 
   return options[constant][0];
 };
