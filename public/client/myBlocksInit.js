@@ -22,6 +22,40 @@ Blockly.Blocks['wait'] = {
 
 
 
+Blockly.Blocks['math_constants'] = {
+    init: function() {
+        var options = [
+            ["\u03c0","PI"],
+            ["e","E"],
+            ["\u03c6","GOLDEN_RATIO"],
+            ["sqrt(2)","SQRT2"],
+            ["sqrt(\u00bd)","SQRT1_2"],
+            ["\u221e","INFINITY"]
+           ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
+        this.setColour(105);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }, 
+        
+    validate: function(newValue) {
+            this.getSourceBlock().updateConnections(newValue);
+            return newValue;
+    },
+          
+
+          
+    updateConnections: function(newValue) {
+            if (newValue == "PI") {
+                console.log('hello')
+
+    }
+}
+
+
+
 
 
 /*
