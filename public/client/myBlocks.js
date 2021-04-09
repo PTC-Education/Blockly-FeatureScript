@@ -377,13 +377,17 @@ Blockly.JavaScript['feature'] = function(block) {
 
 
 Blockly.JavaScript['math_constants']= function(block) {
-  return {
-  PI:["PI",Blockly.JavaScript.ORDER_MEMBER],
-  E:["Math.E",Blockly.JavaScript.ORDER_MEMBER],
-  GOLDEN_RATIO:["(1 + Math.sqrt(5)) / 2",Blockly.JavaScript.ORDER_DIVISION],
-  SQRT2:["Math.SQRT2",Blockly.JavaScript.ORDER_MEMBER],
-  SQRT1_2:["Math.SQRT1_2",Blockly.JavaScript.ORDER_MEMBER],
-  INFINITY:["Infinity",Blockly.JavaScript.ORDER_ATOMIC]}[block.getFieldValue("CONSTANT")]};
+  options = {PI:["PI",Blockly.JavaScript.ORDER_ATOMIC],
+  E:["Math.E",Blockly.JavaScript.ORDER_ATOMIC],
+  GOLDEN_RATIO:["(1 + Math.sqrt(5)) / 2",Blockly.JavaScript.ORDER_ATOMIC],
+  SQRT2:["Math.SQRT2",Blockly.JavaScript.ORDER_ATOMIC],
+  SQRT1_2:["Math.SQRT1_2",Blockly.JavaScript.ORDER_ATOMIC],
+  INFINITY:["Infinity",Blockly.JavaScript.ORDER_ATOMIC]};
+
+  var constant = block.getFieldValue('CONSTANTS');
+
+  return options[constant][0];
+};
 
 /*
 PRECONDITIONS:
