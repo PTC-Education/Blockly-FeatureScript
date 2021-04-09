@@ -50,10 +50,9 @@ Blockly.Blocks['math_constants'] = {
     updateConnections: function(newValue) {
             if (newValue == "PI") {
                 console.log('hello')
-
     }
 }
-
+}
 
 
 
