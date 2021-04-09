@@ -34,25 +34,13 @@ Blockly.Blocks['math_constants'] = {
            ];
         this.appendDummyInput()
            // Pass the field constructor the options list, the validator, and the name.
-            .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
-        this.setColour(105);
+            .appendField(new Blockly.FieldDropdown(options), 'MODE');
+        this.setOutput(true);
+        this.setColour(190);
         this.setTooltip("");
         this.setHelpUrl("");
-    }, 
-        
-    validate: function(newValue) {
-            this.getSourceBlock().updateConnections(newValue);
-            return newValue;
-    },
-          
-
-          
-    updateConnections: function(newValue) {
-            if (newValue == "PI") {
-                console.log('hello')
     }
-}
-}
+};
 
 
 
