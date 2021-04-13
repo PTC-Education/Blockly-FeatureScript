@@ -377,11 +377,12 @@ Blockly.JavaScript['feature'] = function(block) {
 
 
 Blockly.JavaScript['math_constants']= function(block) {
-  options = {'PI':["PI",Blockly.JavaScript.ORDER_ATOMIC],
-  'E':["exp(1)",Blockly.JavaScript.ORDER_ATOMIC],
-  'GOLDEN_RATIO':["(1 + sqrt(5)) / 2",Blockly.JavaScript.ORDER_ATOMIC],
-  'SQRT2':["sqrt(2)",Blockly.JavaScript.ORDER_ATOMIC],
-  'SQRT1_2':["sqrt(1/2)",Blockly.JavaScript.ORDER_ATOMIC]
+  options = {
+    'PI':["PI",Blockly.JavaScript.ORDER_ATOMIC],
+    'E':["exp(1)",Blockly.JavaScript.ORDER_ATOMIC],
+    'GOLDEN_RATIO':["(1 + sqrt(5)) / 2",Blockly.JavaScript.ORDER_ATOMIC],
+    'SQRT2':["sqrt(2)",Blockly.JavaScript.ORDER_ATOMIC],
+    'SQRT1_2':["sqrt(1/2)",Blockly.JavaScript.ORDER_ATOMIC]
   };
 
   var constant = block.getFieldValue('CONSTANT');
@@ -389,7 +390,21 @@ Blockly.JavaScript['math_constants']= function(block) {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['math_singles']=function(block){
+  options = {
+    'ROOT':['sqrt',Blockly.JavaScript.ORDER_ATOMIC],
+    'ABS':['abs',Blockly.JavaScript.ORDER_ATOMIC],
+    'NEG':['-',Blockly.JavaScript.ORDER_ATOMIC],
+    'LOG10':['log10',Blockly.JavaScript.ORDER_ATOMIC],
+    'EXP':['e^',Blockly.JavaScript.ORDER_ATOMIC],
+    'POW10':['10^',Blockly.JavaScript.ORDER_ATOMIC]
+  }
 
+  var op=block.getFieldValue("OP");
+  var code = ``+options[constant][0]+``;
+  console.log(code);
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
 
 /*
 PRECONDITIONS:

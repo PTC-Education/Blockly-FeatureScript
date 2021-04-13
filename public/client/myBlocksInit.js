@@ -42,6 +42,31 @@ Blockly.Blocks['math_constants'] = {
 };
 
 
+Blockly.Blocks['math_singles'] = {
+    init: function() {
+        var options = [
+            ["square root","ROOT"],
+            ["abs","ABS"],
+            ["-","NEG"],
+            ["ln","LN"],
+            ["log10","LOG10"],
+            ["e^","EXP"],
+            ["10^","POW10"]
+        ]
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(190);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+}
+
+
+
 
 
 /*
