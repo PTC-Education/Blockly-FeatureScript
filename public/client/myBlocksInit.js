@@ -29,8 +29,7 @@ Blockly.Blocks['math_constants'] = {
             ["e","E"],
             ["\u03c6","GOLDEN_RATIO"],
             ["sqrt(2)","SQRT2"],
-            ["sqrt(\u00bd)","SQRT1_2"],
-            ["\u221e","INFINITY"]
+            ["sqrt(\u00bd)","SQRT1_2"]
            ];
         this.appendDummyInput()
            // Pass the field constructor the options list, the validator, and the name.
