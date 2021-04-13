@@ -390,7 +390,7 @@ Blockly.JavaScript['math_constants']= function(block) {
   var code = `
   `+options[constant][0]+`
   `
-  return code;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 /*
