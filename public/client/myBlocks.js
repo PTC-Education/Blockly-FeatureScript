@@ -411,6 +411,19 @@ Blockly.JavaScript['math_singles']=function(block){
 };
 
 
+Blockly.JavaScript['math_rounds']=function(block){
+  options = {
+    'ROUND':['floor',Blockly.JavaScript.ORDER_ATOMIC],
+    'ROUNDDOWN':['floor',Blockly.JavaScript.ORDER_ATOMIC],
+    'ROUNDUP':['ceil',Blockly.JavaScript.ORDER_ATOMIC]
+  }
+
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ``+options[op][0]+`(`+num+`)`;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 
 
 
@@ -436,6 +449,13 @@ Blockly.JavaScript['math_trigs']=function(block){
   }
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+//case "ROUND":c="Math.round("+a+")";break;case "ROUNDUP":c="Math.ceil("+a+")";break;case "ROUNDDOWN":c="Math.floor("+a+")"
+
+
+
+
+
 
 /*
 PRECONDITIONS:

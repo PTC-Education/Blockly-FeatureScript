@@ -91,6 +91,27 @@ Blockly.Blocks['math_trigs'] = {
 
 
 
+Blockly.Blocks['math_rounds'] = {
+    init: function() {
+        var options = [
+            ["round", "ROUND"],
+            ["round down", "ROUNDDOWN"],
+            ["round up", "ROUNDUP"]
+        ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(220);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+
+
 /*
 FEATURE:
 ----------------------------------------
