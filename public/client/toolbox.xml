@@ -74,7 +74,7 @@
   
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
 
-  <category name="Vectors" colour="#5CA68F">
+  <category name="Vectors [x,y,z]" colour="#5CA68F">
     <block type="vector2Field">
       <field name="x">0</field>
       <field name="y">0</field>
