@@ -56,8 +56,8 @@ Blockly.Blocks['math_singles'] = {
         this.appendDummyInput()
            // Pass the field constructor the options list, the validator, and the name.
             .appendField(new Blockly.FieldDropdown(options), "OP");
-        this.appendValueInput('NUM')
-        this.setInputsInline(true);
+        //this.appendValueInput('NUM')
+        //this.setInputsInline(true);
         this.setOutput(true);
         this.setColour(190);
         this.setTooltip("");
