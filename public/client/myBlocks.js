@@ -428,7 +428,7 @@ Blockly.JavaScript['math_trigs']=function(block){
   var op= block.getFieldValue("OP");
   var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
   console.log(op.charAt(0))
-  if (op.charAt(0) == 'a') {
+  if (op.charAt(0) == 'A') {
     var code = ``+options[op][0]+`(`+num+`)`;
   }
   else {
