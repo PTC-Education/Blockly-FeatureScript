@@ -174,20 +174,59 @@
       </value>
     </block>
     <block type="skrectangle">
-      <field name="first_corner_xy">Infinity</field>
-      <field name="second_corner_xy">Infinity</field>
+      <value name="first_corner_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="second_corner_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
     </block>
     <block type="skregularpolygon">
-      <field name="center_xy">Infinity</field>
-      <field name="vertex_xy">Infinity</field>
-      <field name="sides">Infinity</field>
+      <value name="center_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="vertex_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="sides">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
     </block>
     <block type="skpoint">
-      <field name="position_xy">Infinity</field>   
+      <value name="position_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>   
     </block>
     <block type="sklinesegment">
-      <field name="start_xy">Infinity</field>
-      <field name="end_xy">Infinity</field>
+      <value name="start_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="end_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
     </block>
     <block type="skpolyline"></block>
     <block type="sktext">
