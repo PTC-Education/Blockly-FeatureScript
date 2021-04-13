@@ -427,8 +427,12 @@ Blockly.JavaScript['math_trigs']=function(block){
 
   var op= block.getFieldValue("OP");
   var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = ``+options[op][0]+`(`+num+` * degrees)`;
-  console.log(code);
+  if (op.charAt(0) == 'a') {
+    var code = ``+options[op][0]+`(`+num+`)`;
+  }
+  else {
+    var code = ``+options[op][0]+`(`+num+` * degree)`;
+  }
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
