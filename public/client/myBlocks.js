@@ -387,7 +387,10 @@ Blockly.JavaScript['math_constants']= function(block) {
   var constant = block.getFieldValue('CONSTANT');
   console.log(constant)
 
-  return options[constant][0];
+  var code = `
+  `+options[constant][0]+`
+  `
+  return code;
 };
 
 /*
