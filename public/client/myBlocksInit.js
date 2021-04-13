@@ -35,7 +35,7 @@ Blockly.Blocks['math_constants'] = {
            // Pass the field constructor the options list, the validator, and the name.
             .appendField(new Blockly.FieldDropdown(options), 'CONSTANT');
         this.setOutput(true);
-        this.setColour(190);
+        this.setColour(220);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -59,7 +59,7 @@ Blockly.Blocks['math_singles'] = {
         this.appendValueInput('NUM')
         this.setInputsInline(true);
         this.setOutput(true);
-        this.setColour(190);
+        this.setColour(220);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -83,7 +83,7 @@ Blockly.Blocks['math_trigs'] = {
         this.appendValueInput('NUM')
         this.setInputsInline(true);
         this.setOutput(true);
-        this.setColour(205);
+        this.setColour(220);
         this.setTooltip("");
         this.setHelpUrl("");
     }
