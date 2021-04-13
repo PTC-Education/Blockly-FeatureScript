@@ -246,13 +246,39 @@
       </value>
     </block>
     <block type="fcylinder">
-      <field name="top_xyz">Infinity</field>
-      <field name="bottom_xyz">Infinity</field>
-      <field name="radius">Infinity</field>
+      <value name="top_xyz">
+        <shadow type="vector3Field">
+          <field name="x">0</field>
+          <field name="y">0</field>
+          <field name="z">0</field>
+        </shadow>
+      </value>
+      <value name="bottom_xyz">
+        <shadow type="vector3Field">
+          <field name="x">0</field>
+          <field name="y">0</field>
+          <field name="z">0</field>
+        </shadow>
+      </value>
+      <value name="radius">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
     </block>
     <block type="opsphere">
-      <field name="center_xyz">Infinity</field>
-      <field name="diameter">Infinity</field>
+      <value name="center_xyz">
+        <shadow type="vector3Field">
+          <field name="x">0</field>
+          <field name="y">0</field>
+          <field name="z">0</field>
+        </shadow>
+      </value>
+      <value name="diameter">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
     </block>
     <block type="fcone">
       <field name="top_xyz">Infinity</field>
