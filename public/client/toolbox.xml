@@ -142,7 +142,22 @@
       <field name="planename">Top</field>
       <field name="skentities"></field>
     </block>
-    <block type='plane'></block>
+    <block type='plane'>
+      <value name="center_xyz">
+        <shadow type="vector3Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+            <field name="z">5</field>
+        </shadow>
+      </value>
+      <value name="normal_xyz">
+        <shadow type="vector3Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+            <field name="z">1</field>
+        </shadow>
+      </value>
+    </block>
     <sep></sep>
     <sep></sep>
     <block type="skcircle">
