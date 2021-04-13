@@ -401,7 +401,7 @@ Blockly.JavaScript['math_singles']=function(block){
   }
 
   var op=block.getFieldValue("OP");
-  var code = ``+options[constant][0]+``;
+  var code = ``+options[op][0]+``;
   console.log(code);
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
