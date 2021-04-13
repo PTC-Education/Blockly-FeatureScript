@@ -230,7 +230,11 @@
 
   <category name="3D Shapes" colour="002AFF">
     <block type="fcuboid">
-      <field name="corner1_xyz">Infinity</field>
+      <value name="corner1_xyz">
+        <shadow type="math_number">
+            <field name="NUM">0</field>
+        </shadow>
+      </value>
       <field name="corner2_xyz">Infinity</field>
     </block>
     <block type="fcylinder">
