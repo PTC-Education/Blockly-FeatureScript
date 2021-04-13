@@ -20,8 +20,6 @@
           <field name="NUM">9</field>
         </shadow>
       </value>
-    <block type="math_singles">
-    </block>
     <block type="math_trig">
       <field name="OP">SIN</field>
       <value name="NUM">
