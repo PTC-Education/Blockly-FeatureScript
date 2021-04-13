@@ -395,7 +395,7 @@ Blockly.JavaScript['math_singles']=function(block){
     'ROOT':['sqrt',Blockly.JavaScript.ORDER_ATOMIC],
     'ABS':['abs',Blockly.JavaScript.ORDER_ATOMIC],
     'NEG':['-1*',Blockly.JavaScript.ORDER_ATOMIC],
-    'LN':['ln',Blockly.JavaScript.ORDER_ATOMIC],
+    'LN':['log',Blockly.JavaScript.ORDER_ATOMIC],
     'LOG10':['log10',Blockly.JavaScript.ORDER_ATOMIC],
     'EXP':['exp',Blockly.JavaScript.ORDER_ATOMIC],
     'POW10':['10^',Blockly.JavaScript.ORDER_ATOMIC]

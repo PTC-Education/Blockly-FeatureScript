@@ -123,8 +123,11 @@
       <field name="z">0</field>
     </block>
     <block type="vector2">
-      <field name="x">Infinity</field>
-      <field name="y">Infinity</field>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
     </block>
     <block type="vector3">
       <field name="x">Infinity</field>
