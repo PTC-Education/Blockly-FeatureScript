@@ -161,8 +161,17 @@
     <sep></sep>
     <sep></sep>
     <block type="skcircle">
-      <field name="center_xy">Infinity</field>
-      <field name="radius">Infinity</field>
+      <value name="center_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="radius">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
     </block>
     <block type="skrectangle">
       <field name="first_corner_xy">Infinity</field>
