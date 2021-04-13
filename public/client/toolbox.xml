@@ -2,16 +2,11 @@
 
   <sep></sep>
   <category name="Math" colour="#5C68A6">
-    <block type="math_rounds">
-      <field name="OP">ROUND</field>
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">3.1</field>
-        </shadow>
-      </value>
-    </block>
     <block type="math_number">
       <field name="NUM">0</field>
+    </block>
+    <block type="math_constants">
+      <field name="CONSTANT">PI</field>
     </block>
     <block type="math_singles">
       <field name="OP">ROOT</field>
@@ -28,9 +23,6 @@
           <field name="NUM">45</field>
         </shadow>
       </value>
-    </block>
-    <block type="math_constants">
-      <field name="CONSTANT">PI</field>
     </block>
     <block type="math_arithmetic">
       <field name="OP">ADD</field>
@@ -70,6 +62,14 @@
       </value>
     </block>
     <block type="math_random_float"></block>
+    <block type="math_rounds">
+      <field name="OP">ROUND</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
