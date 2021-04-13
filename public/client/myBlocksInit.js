@@ -66,6 +66,28 @@ Blockly.Blocks['math_singles'] = {
 }
 
 
+Blockly.Blocks['math_trigs'] = {
+    init: function() {
+        var options = [
+            ["sin", "SIN"],
+            ["cos", "COS"],
+            ["tan", "TAN"],
+            ["asin", "ASIN"],
+            ["acos", "ACOS"],
+            ["atan", "ATAN"],
+            ["atan2", "ATAN2"]
+        ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(205);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
 
 
 

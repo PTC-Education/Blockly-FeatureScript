@@ -390,6 +390,9 @@ Blockly.JavaScript['math_constants']= function(block) {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+
+
+
 Blockly.JavaScript['math_singles']=function(block){
   options = {
     'ROOT':['sqrt',Blockly.JavaScript.ORDER_ATOMIC],
@@ -399,6 +402,27 @@ Blockly.JavaScript['math_singles']=function(block){
     'LOG10':['log10',Blockly.JavaScript.ORDER_ATOMIC],
     'EXP':['exp',Blockly.JavaScript.ORDER_ATOMIC],
     'POW10':['10^',Blockly.JavaScript.ORDER_ATOMIC]
+  }
+
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ``+options[op][0]+`(`+num+`)`;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+
+
+
+Blockly.JavaScript['math_trigs']=function(block){
+  options = {
+    'SIN':['sin',Blockly.JavaScript.ORDER_ATOMIC],
+    'COS':['cos',Blockly.JavaScript.ORDER_ATOMIC],
+    'TAN':['tan',Blockly.JavaScript.ORDER_ATOMIC],
+    'ASIN':['asin',Blockly.JavaScript.ORDER_ATOMIC],
+    'ACOS':['acos',Blockly.JavaScript.ORDER_ATOMIC],
+    'ATAN':['atan',Blockly.JavaScript.ORDER_ATOMIC],
+    'ATAN2':['atan2',Blockly.JavaScript.ORDER_ATOMIC]
   }
 
   var op= block.getFieldValue("OP");
