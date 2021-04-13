@@ -235,19 +235,19 @@ Blockly.Blocks['fcone'] = {
         this.appendDummyInput()
             .appendField("Create cone        ")
             .setAlign(Blockly.ALIGN_LEFT);
-        this.appendValueInput("bottom_xyz")
-            .appendField("Bottom Center [x,y,z]:")
-            .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("top_xyz")
             .appendField("Top Center [x,y,z]:")
             .setAlign(Blockly.ALIGN_RIGHT);
-        this.appendValueInput("bottomRadius")
-            .setCheck("Number")
-            .appendField("Bottom Radius:")
+        this.appendValueInput("bottom_xyz")
+            .appendField("Bottom Center [x,y,z]:")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("topRadius")
             .setCheck("Number")
             .appendField("Top Radius:")
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.appendValueInput("bottomRadius")
+            .setCheck("Number")
+            .appendField("Bottom Radius:")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
