@@ -271,10 +271,28 @@
       </value>
     </block>
     <block type="skellipticalarc">
-      <field name="center_xy">Infinity</field>
-      <field name="major_xy">Infinity</field>
-      <field name="majorRadius">Infinity</field>
-      <field name="minorRadius">Infinity</field>
+      <value name="center_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="major_xy">
+        <shadow type="vector2Field">
+            <field name="x">0</field>
+            <field name="y">0</field>
+        </shadow>
+      </value>
+      <value name="majorRadius">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="minorRadius">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
       <value name="startParameter">
         <shadow type="math_number">
           <field name="NUM">1</field>
