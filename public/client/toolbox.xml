@@ -239,9 +239,9 @@
       </value>
       <value name="corner2_xyz">
         <shadow type="vector3Field">
-          <field name="x">0</field>
-          <field name="y">0</field>
-          <field name="z">0</field>
+          <field name="x">1</field>
+          <field name="y">2</field>
+          <field name="z">3</field>
         </shadow>
       </value>
     </block>
@@ -250,7 +250,7 @@
         <shadow type="vector3Field">
           <field name="x">0</field>
           <field name="y">0</field>
-          <field name="z">0</field>
+          <field name="z">2</field>
         </shadow>
       </value>
       <value name="bottom_xyz">
@@ -262,7 +262,7 @@
       </value>
       <value name="radius">
         <shadow type="math_number">
-          <field name="NUM">0</field>
+          <field name="NUM">1</field>
         </shadow>
       </value>
     </block>
@@ -276,7 +276,7 @@
       </value>
       <value name="diameter">
         <shadow type="math_number">
-          <field name="NUM">0</field>
+          <field name="NUM">1</field>
         </shadow>
       </value>
     </block>
@@ -285,7 +285,7 @@
         <shadow type="vector3Field">
           <field name="x">0</field>
           <field name="y">0</field>
-          <field name="z">0</field>
+          <field name="z">2</field>
         </shadow>
       </value>
       <value name="bottom_xyz">
@@ -297,18 +297,30 @@
       </value>
       <value name="topRadius">
        <shadow type="math_number">
-          <field name="NUM">0</field>
+          <field name="NUM">1</field>
         </shadow>
       </value>
       <value name="bottomRadius">
        <shadow type="math_number">
-          <field name="NUM">0</field>
+          <field name="NUM">2</field>
         </shadow>
       </value>
     </block>
     <block type="fellipsoid">
-      <field name="center_xyz">Infinity</field>
-      <field name="radial_xyz">Infinity</field>
+      <value name="center_xyz">
+        <shadow type="vector3Field">
+          <field name="x">0</field>
+          <field name="y">0</field>
+          <field name="z">0</field>
+        </shadow>
+      </value>
+      <value name="radial_xyz">
+        <shadow type="vector3Field">
+          <field name="x">1</field>
+          <field name="y">2</field>
+          <field name="z">3</field>
+        </shadow>
+      </value>
     </block>
   </category>
 
