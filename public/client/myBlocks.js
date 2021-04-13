@@ -385,6 +385,7 @@ Blockly.JavaScript['math_constants']= function(block) {
   INFINITY:["Infinity",Blockly.JavaScript.ORDER_ATOMIC]};
 
   var constant = block.getFieldValue('CONSTANT');
+  console.log(constant)
 
   return options[constant][0];
 };
