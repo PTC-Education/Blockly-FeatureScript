@@ -400,8 +400,9 @@ Blockly.JavaScript['math_singles']=function(block){
     'POW10':['10^',Blockly.JavaScript.ORDER_ATOMIC]
   }
 
-  var op=block.getFieldValue("OP");
-  var code = ``+options[op][0]+``;
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ``+options[op][0]+`(`+num+`)`;
   console.log(code);
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
