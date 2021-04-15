@@ -151,6 +151,10 @@ var getOperationID = function(block) {
       generalID = block.type+ID()
       sketchID = block.getFieldValue('skname').toLowerCase()
       descendantIndex = 2;
+    } else if (block.type == 'revolve') {
+      generalID = block.type+ID()
+      sketchID = block.getFieldValue('skname').toLowerCase()
+      descendantIndex = 2;
     }
 
     if (isSurroundingFOR(block, descendantIndex)) {
@@ -1081,15 +1085,15 @@ Blockly.JavaScript['revolve'] = function(block) {
   // Convert a line in the second sketch
   //const [points, unitVector] = getAxisFromLine(block, text_skname2);
   var statements_skentities = Blockly.JavaScript.statementToCode(block, 'SkEntities');
-  var revolveID = `revolve`+ID()+``;
-
+  //var revolveID = `revolve`+ID()+``;
+  var ids = getOperationID(block);
 
 
   var code = `
   `+statements_skentities+`
 
-  opRevolve(context, id + "`+revolveID+`", {
-    "entities" : qSketchRegion(id + "`+text_skname+`"),
+  opRevolve(context, id + "`+ids[0]+`", {
+    "entities" : qSketchRegion(id + "`+ids[1]+`"),
     "axis" : `+options_axis[text_axis]+`,
     "angleForward" : `+value_degrees+` * `+options_units[text_units]+`
 });
