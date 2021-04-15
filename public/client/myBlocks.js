@@ -151,6 +151,10 @@ var getOperationID = function(block) {
       generalID = block.type+ID()
       sketchID = block.getFieldValue('skname').toLowerCase()
       descendantIndex = 2;
+    } else if (block.type == 'revolve') {
+      generalID = block.type+ID()
+      sketchID = block.getFieldValue('skname').toLowerCase()
+      descendantIndex = 2;
     }
 
     if (isSurroundingFOR(block, descendantIndex)) {
@@ -252,7 +256,7 @@ Takes in a generalID and iterators array and formats the for loop id
 var applyIterators = function(generalID, iterators) {
   id = `("`+generalID+`"`;
   for (var i = 0; i < iterators.length; i++) {
-      id += ` ~ "`+iterators[i]+`" ~ `+iterators[i]+``;
+      id += ` ~ "`+iterators[i]+`" ~ floor(`+iterators[i]+`)`;
     }
   id += `)`;
   return id;
@@ -338,7 +342,7 @@ and it required for successful featurescript creation. It is a double C block an
 
 --------------------------------------------------------------------------------------
 */
-
+/*
 Blockly.JavaScript['feature'] = function(block) {
   var text_featurename = block.getFieldValue('featurename');
   var statements_preconditions = Blockly.JavaScript.statementToCode(block, 'preconditions');
@@ -374,6 +378,106 @@ Blockly.JavaScript['feature'] = function(block) {
   }
   return code;
 };
+*/
+
+Blockly.JavaScript['feature'] = function(block) {
+  var text_featurename = block.getFieldValue('featurename');
+  var statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `
+  annotation { "Feature Type Name" : "`+text_featurename+`" }
+  export const myFeature = defineFeature(function(context is Context, id is Id, definition is map)
+    precondition
+    {
+        // Define the parameters of the feature type
+    }
+    {
+        // Define the function's action
+        `+statements_actions+`
+    });
+  `;
+  return code;
+};
+
+
+
+
+Blockly.JavaScript['math_constants']= function(block) {
+  options = {
+    'PI':["PI",Blockly.JavaScript.ORDER_ATOMIC],
+    'E':["exp(1)",Blockly.JavaScript.ORDER_ATOMIC],
+    'GOLDEN_RATIO':["(1 + sqrt(5)) / 2",Blockly.JavaScript.ORDER_ATOMIC],
+    'SQRT2':["sqrt(2)",Blockly.JavaScript.ORDER_ATOMIC],
+    'SQRT1_2':["sqrt(1/2)",Blockly.JavaScript.ORDER_ATOMIC]
+  };
+
+  var constant = block.getFieldValue('CONSTANT');
+  var code = ``+options[constant][0]+``
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+
+
+Blockly.JavaScript['math_singles']=function(block){
+  options = {
+    'ROOT':['sqrt',Blockly.JavaScript.ORDER_ATOMIC],
+    'ABS':['abs',Blockly.JavaScript.ORDER_ATOMIC],
+    'NEG':['-1*',Blockly.JavaScript.ORDER_ATOMIC],
+    'LN':['log',Blockly.JavaScript.ORDER_ATOMIC],
+    'LOG10':['log10',Blockly.JavaScript.ORDER_ATOMIC],
+    'EXP':['exp',Blockly.JavaScript.ORDER_ATOMIC],
+    'POW10':['10^',Blockly.JavaScript.ORDER_ATOMIC]
+  }
+
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ``+options[op][0]+`(`+num+`)`;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+Blockly.JavaScript['math_rounds']=function(block){
+  options = {
+    'ROUND':['floor',Blockly.JavaScript.ORDER_ATOMIC],
+    'ROUNDDOWN':['floor',Blockly.JavaScript.ORDER_ATOMIC],
+    'ROUNDUP':['ceil',Blockly.JavaScript.ORDER_ATOMIC]
+  }
+
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ``+options[op][0]+`(`+num+`)`;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+
+
+Blockly.JavaScript['math_trigs']=function(block){
+  options = {
+    'SIN':['sin',Blockly.JavaScript.ORDER_ATOMIC],
+    'COS':['cos',Blockly.JavaScript.ORDER_ATOMIC],
+    'TAN':['tan',Blockly.JavaScript.ORDER_ATOMIC],
+    'ASIN':['asin',Blockly.JavaScript.ORDER_ATOMIC],
+    'ACOS':['acos',Blockly.JavaScript.ORDER_ATOMIC],
+    'ATAN':['atan',Blockly.JavaScript.ORDER_ATOMIC],
+    'ATAN2':['atan2',Blockly.JavaScript.ORDER_ATOMIC]
+  }
+
+  var op= block.getFieldValue("OP");
+  var num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC);
+  console.log(op.charAt(0))
+  if (op.charAt(0) == 'A') {
+    var code = ``+options[op][0]+`(`+num+`)`;
+  }
+  else {
+    var code = ``+options[op][0]+`(`+num+` * degree)`;
+  }
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+//case "ROUND":c="Math.round("+a+")";break;case "ROUNDUP":c="Math.ceil("+a+")";break;case "ROUNDDOWN":c="Math.floor("+a+")"
+
 
 
 
@@ -934,8 +1038,8 @@ This is a C block and requires the sketches to be inside in order for this block
 identify the child sketch names
 --------------------------------------------------------------------------------------
 */
-
-Blockly.JavaScript['revolve'] = function(block) {
+/*
+Blockly.JavaScript['revolves'] = function(block) {
   
   var text_skname1 = block.getFieldValue('skname1').toLowerCase();
   var text_skname2 = block.getFieldValue('skname2').toLowerCase();
@@ -956,7 +1060,46 @@ Blockly.JavaScript['revolve'] = function(block) {
   `;
   return code;
 };
+*/
 
+
+
+Blockly.JavaScript['revolve'] = function(block) {
+  options_axis = {
+    'XAXIS':'line(vector(0,0,0),vector(1,0,0))',
+    'YAXIS':'line(vector(0,0,0),vector(0,1,0))',
+    'ZAXIS':'line(vector(0,0,0),vector(0,0,1))'
+  }
+
+  options_units = {
+    'DEGREE':'degree',
+    'RADIAN':'radian'
+  }
+
+  
+  var text_skname = block.getFieldValue('skname').toLowerCase();
+  //var text_skname2 = block.getFieldValue('skname2').toLowerCase();
+  var text_axis = block.getFieldValue("AXIS_MODE")
+  var text_units = block.getFieldValue("UNITS_MODE")
+  var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
+  // Convert a line in the second sketch
+  //const [points, unitVector] = getAxisFromLine(block, text_skname2);
+  var statements_skentities = Blockly.JavaScript.statementToCode(block, 'SkEntities');
+  //var revolveID = `revolve`+ID()+``;
+  var ids = getOperationID(block);
+
+
+  var code = `
+  `+statements_skentities+`
+
+  opRevolve(context, `+ids[0]+`, {
+    "entities" : qSketchRegion("`+ids[1]+`"),
+    "axis" : `+options_axis[text_axis]+`,
+    "angleForward" : `+value_degrees+` * `+options_units[text_units]+`
+});
+  `;
+  return code;
+};
 
 
 

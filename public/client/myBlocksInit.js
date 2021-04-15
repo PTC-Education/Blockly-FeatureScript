@@ -22,6 +22,94 @@ Blockly.Blocks['wait'] = {
 
 
 
+Blockly.Blocks['math_constants'] = {
+    init: function() {
+        var options = [
+            ["\u03c0","PI"],
+            ["e","E"],
+            ["\u03c6","GOLDEN_RATIO"],
+            ["sqrt(2)","SQRT2"],
+            ["sqrt(\u00bd)","SQRT1_2"]
+           ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), 'CONSTANT');
+        this.setOutput(true);
+        this.setColour(220);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+
+Blockly.Blocks['math_singles'] = {
+    init: function() {
+        var options = [
+            ["square root","ROOT"],
+            ["abs","ABS"],
+            ["-","NEG"],
+            ["ln","LN"],
+            ["log10","LOG10"],
+            ["e^","EXP"],
+            ["10^","POW10"]
+        ]
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(220);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+}
+
+
+Blockly.Blocks['math_trigs'] = {
+    init: function() {
+        var options = [
+            ["sin", "SIN"],
+            ["cos", "COS"],
+            ["tan", "TAN"],
+            ["asin", "ASIN"],
+            ["acos", "ACOS"],
+            ["atan", "ATAN"],
+            ["atan2", "ATAN2"]
+        ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(220);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+
+
+Blockly.Blocks['math_rounds'] = {
+    init: function() {
+        var options = [
+            ["round", "ROUND"],
+            ["round down", "ROUNDDOWN"],
+            ["round up", "ROUNDUP"]
+        ];
+        this.appendDummyInput()
+           // Pass the field constructor the options list, the validator, and the name.
+            .appendField(new Blockly.FieldDropdown(options), "OP");
+        this.appendValueInput('NUM')
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setColour(220);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
 
 
 /*
@@ -31,7 +119,7 @@ Create a new feature, establishing preconditions and action
 */
 
 
-Blockly.Blocks['feature'] = {
+Blockly.Blocks['features'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Initialize Feature -- Name:")
@@ -53,7 +141,21 @@ Blockly.Blocks['feature'] = {
 };
 
 
-
+Blockly.Blocks['feature'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("New Feature -- Name:")
+          .appendField(new Blockly.FieldTextInput("Blockly Created Feature"), "featurename");
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Define Feature's actions");
+      this.appendStatementInput("actions")
+          .setCheck(null);
+      this.setColour(105);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
 
 
 /*
@@ -695,9 +797,8 @@ Extrude all sketches on sketch plane
     
     init: function() {
       var options = [
-       ['-- Extrude Type --', 'TYPE'],
        ['Blind', 'BLIND'],
-       ['Symmetric', 'SYMMETRIC'],
+       ['Symmetric', 'SYMMETRIC']
       ];
     
       this.appendDummyInput()
@@ -752,15 +853,26 @@ REVOlVE first sketch about second sketch
 
 Blockly.Blocks['revolve'] = {
   init: function() {
+    var options_axis = [
+        ["x axis", "XAXIS"],
+        ["y axis", "YAXIS"],
+        ["z axis", "ZAXIS"]
+    ];
+    var options_units = [
+        ["degree(s)", "DEGREE"],
+        ["radian(s)", "RADIAN"]
+    ];
     this.appendDummyInput()
       .appendField('Revolve')
-      .appendField(new Blockly.FieldTextInput("Sketch1"), "skname1");
+      .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
    this.appendDummyInput()
       .appendField('about')
-      .appendField(new Blockly.FieldTextInput("Sketch2"), "skname2")
+      .appendField(new Blockly.FieldDropdown(options_axis), "AXIS_MODE");
     this.appendValueInput("degrees")
       .appendField('by')
       .setCheck("Number")
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(options_units), "UNITS_MODE");
     this.appendStatementInput("SkEntities")
       .setCheck(null);
     this.setInputsInline(true);
@@ -771,7 +883,6 @@ Blockly.Blocks['revolve'] = {
     this.setHelpUrl("");
   }
 };
-
 
 
 
