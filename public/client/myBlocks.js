@@ -338,7 +338,7 @@ and it required for successful featurescript creation. It is a double C block an
 
 --------------------------------------------------------------------------------------
 */
-
+/*
 Blockly.JavaScript['feature'] = function(block) {
   var text_featurename = block.getFieldValue('featurename');
   var statements_preconditions = Blockly.JavaScript.statementToCode(block, 'preconditions');
@@ -374,6 +374,28 @@ Blockly.JavaScript['feature'] = function(block) {
   }
   return code;
 };
+*/
+
+Blockly.JavaScript['feature'] = function(block) {
+  var text_featurename = block.getFieldValue('featurename');
+  var statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `
+  annotation { "Feature Type Name" : "`+text_featurename+`" }
+  export const myFeature = defineFeature(function(context is Context, id is Id, definition is map)
+    precondition
+    {
+        // Define the parameters of the feature type
+    }
+    {
+        // Define the function's action
+        `+statements_actions+`
+    });
+  `;
+  return code;
+};
+
+
 
 
 Blockly.JavaScript['math_constants']= function(block) {

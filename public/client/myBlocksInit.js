@@ -119,7 +119,7 @@ Create a new feature, establishing preconditions and action
 */
 
 
-Blockly.Blocks['feature'] = {
+Blockly.Blocks['features'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Initialize Feature -- Name:")
@@ -142,6 +142,21 @@ Blockly.Blocks['feature'] = {
 
 
 
+Blockly.Blocks['feature'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("New Feature -- Name:")
+          .appendField(new Blockly.FieldTextInput("Blockly Created Feature"), "featurename");
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Define Feature's actions");
+      this.appendStatementInput("actions")
+          .setCheck(null);
+      this.setColour(105);
+      this.setTooltip("");
+      this.setHelpUrl("");
+    }
+  };
 
 
 /*
@@ -783,9 +798,8 @@ Extrude all sketches on sketch plane
     
     init: function() {
       var options = [
-       ['-- Extrude Type --', 'TYPE'],
        ['Blind', 'BLIND'],
-       ['Symmetric', 'SYMMETRIC'],
+       ['Symmetric', 'SYMMETRIC']
       ];
     
       this.appendDummyInput()
