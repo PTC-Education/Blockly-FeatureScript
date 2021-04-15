@@ -1039,10 +1039,15 @@ Blockly.JavaScript['revolves'] = function(block) {
 
 
 Blockly.JavaScript['revolve'] = function(block) {
-  options = {
-    'XAXIS':'line(vector(0,0,0),vector(1,0,0)',
-    'YAXIS':'line(vector(0,0,0),vector(0,1,0)',
-    'ZAXIS':'line(vector(0,0,0),vector(0,0,1)'
+  options_axis = {
+    'XAXIS':'line(vector(0,0,0),vector(1,0,0))',
+    'YAXIS':'line(vector(0,0,0),vector(0,1,0))',
+    'ZAXIS':'line(vector(0,0,0),vector(0,0,1))'
+  }
+
+  options_units = {
+    'DEGREE':'degree',
+    'RADIAN':'radians'
   }
 
   
