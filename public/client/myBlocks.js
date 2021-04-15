@@ -1047,13 +1047,14 @@ Blockly.JavaScript['revolve'] = function(block) {
 
   options_units = {
     'DEGREE':'degree',
-    'RADIAN':'radians'
+    'RADIAN':'radian'
   }
 
   
   var text_skname = block.getFieldValue('skname').toLowerCase();
   //var text_skname2 = block.getFieldValue('skname2').toLowerCase();
-  var text_axis = block.getFieldValue("MODE")
+  var text_axis = block.getFieldValue("AXIS_MODE")
+  var text_units = block.getFieldValue("UNITS_MODE")
   var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
   // Convert a line in the second sketch
   //const [points, unitVector] = getAxisFromLine(block, text_skname2);
@@ -1067,8 +1068,8 @@ Blockly.JavaScript['revolve'] = function(block) {
 
   opRevolve(context, id + "`+revolveID+`", {
     "entities" : qSketchRegion(id + "`+text_skname+`"),
-    "axis" : `+options[text_axis]+`,
-    "angleForward" : `+value_degrees+` * degree
+    "axis" : `+options_axis[text_axis]+`,
+    "angleForward" : `+value_degrees+` * `+options_units[text_units]+`
 });
   `;
   return code;
