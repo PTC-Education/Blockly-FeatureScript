@@ -1093,7 +1093,7 @@ Blockly.JavaScript['revolve'] = function(block) {
   `+statements_skentities+`
 
   opRevolve(context, `+ids[0]+`, {
-    "entities" : qSketchRegion(`+ids[1]+`),
+    "entities" : qSketchRegion("`+ids[1]+`"),
     "axis" : `+options_axis[text_axis]+`,
     "angleForward" : `+value_degrees+` * `+options_units[text_units]+`
 });
