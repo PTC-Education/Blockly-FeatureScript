@@ -1046,7 +1046,7 @@ Blockly.JavaScript['revolve'] = function(block) {
   }
 
   
-  var text_skname = block.getFieldValue('skname1').toLowerCase();
+  var text_skname = block.getFieldValue('skname').toLowerCase();
   //var text_skname2 = block.getFieldValue('skname2').toLowerCase();
   var text_axis = block.getFieldValue("MODE")
   var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
@@ -1061,7 +1061,7 @@ Blockly.JavaScript['revolve'] = function(block) {
   `+statements_skentities+`
 
   opRevolve(context, id + "`+revolveID+`", {
-    "entities" : qSketchRegion(id + "`+text_skname1+`"),
+    "entities" : qSketchRegion(id + "`+text_skname+`"),
     "axis" : `+options[text_axis]+`,
     "angleForward" : `+value_degrees+` * degree
 });

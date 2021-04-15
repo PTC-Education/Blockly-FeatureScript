@@ -847,7 +847,7 @@ Blockly.Blocks['revolve'] = {
     ];
     this.appendDummyInput()
       .appendField('Revolve')
-      .appendField(new Blockly.FieldTextInput("Sketch1"), "skname1");
+      .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
    this.appendDummyInput()
       .appendField('about')
       .appendField(new Blockly.FieldDropdown(options), "MODE");
