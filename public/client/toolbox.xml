@@ -404,14 +404,14 @@
   </category>
 
   <category name="GeomOperations" colour="#745CA6">
-    <block type='extrude'>
-      <value name="endDepth">
+    <block type='extrude'></block>
+    <block type='revolve'>
+      <value name="degrees">
        <shadow type="math_number">
-          <field name="NUM">2</field>
+          <field name="NUM">30</field>
         </shadow>
       </value>
     </block>
-    <block type='revolve'></block>
     <block type='sweep'></block>
     <block type='loft'></block>
   </category>
