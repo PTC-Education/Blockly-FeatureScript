@@ -141,7 +141,6 @@ Blockly.Blocks['features'] = {
 };
 
 
-
 Blockly.Blocks['feature'] = {
     init: function() {
       this.appendDummyInput()
@@ -791,6 +790,10 @@ Extrude all sketches on sketch plane
 */
 
   Blockly.Blocks['extrude'] = {
+    validate: function(newValue) {
+      this.getSourceBlock().updateConnections(newValue);
+      return newValue;
+    },
     
     init: function() {
       var options = [
@@ -800,14 +803,37 @@ Extrude all sketches on sketch plane
     
       this.appendDummyInput()
       // Pass the field constructor the options list, the validator, and the name.
-          .appendField(new Blockly.FieldDropdown(options), 'MODE');
-      this.appendDummyInput('skname')
-          .appendField('extrude')
-          .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
-      this.appendValueInput('endDepth')
-          .appendField('by');
+          .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
       this.appendStatementInput("SkEntities")
           .setCheck(null);
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(270);
+    },
+    
+    updateConnections: function(newValue) {
+      this.removeInput('skname', true);
+      this.removeInput('endDepth', true);
+      if (newValue == 'BLIND') {
+          this.removeInput('SkEntities');
+          this.appendDummyInput('skname')
+              .appendField('extrude')
+              .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
+          this.appendValueInput('endDepth')
+              .appendField('by');
+          this.appendStatementInput("SkEntities")
+              .setCheck(null);
+      } else if (newValue == 'SYMMETRIC') {
+          this.removeInput('SkEntities');
+          this.appendDummyInput('skname')
+              .appendField('extrude')
+              .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
+          this.appendValueInput('endDepth')
+              .appendField('by');
+          this.appendStatementInput("SkEntities")
+              .setCheck(null);
+      }
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
@@ -815,39 +841,6 @@ Extrude all sketches on sketch plane
     }
 };
 
-/*
-init: function() {
-    var options_axis = [
-        ["x axis", "XAXIS"],
-        ["y axis", "YAXIS"],
-        ["z axis", "ZAXIS"]
-    ];
-    var options_units = [
-        ["degree(s)", "DEGREE"],
-        ["radian(s)", "RADIAN"]
-    ];
-    this.appendDummyInput()
-      .appendField('Revolve')
-      .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
-   this.appendDummyInput()
-      .appendField('about')
-      .appendField(new Blockly.FieldDropdown(options_axis), "AXIS_MODE");
-    this.appendValueInput("degrees")
-      .appendField('by')
-      .setCheck("Number")
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown(options_units), "UNITS_MODE");
-    this.appendStatementInput("SkEntities")
-      .setCheck(null);
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(270);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  }
-};
-*/
 
 
 
