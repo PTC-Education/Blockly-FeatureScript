@@ -1012,8 +1012,8 @@ This is a C block and requires the sketches to be inside in order for this block
 identify the child sketch names
 --------------------------------------------------------------------------------------
 */
-
-Blockly.JavaScript['revolve'] = function(block) {
+/*
+Blockly.JavaScript['revolves'] = function(block) {
   
   var text_skname1 = block.getFieldValue('skname1').toLowerCase();
   var text_skname2 = block.getFieldValue('skname2').toLowerCase();
@@ -1034,7 +1034,40 @@ Blockly.JavaScript['revolve'] = function(block) {
   `;
   return code;
 };
+*/
 
+
+
+Blockly.JavaScript['revolve'] = function(block) {
+  options = {
+    'XAXIS':'line(vector(0,0,0),vector(1,0,0)',
+    'YAXIS':'line(vector(0,0,0),vector(0,1,0)',
+    'ZAXIS':'line(vector(0,0,0),vector(0,0,1)'
+  }
+
+  
+  var text_skname = block.getFieldValue('skname1').toLowerCase();
+  //var text_skname2 = block.getFieldValue('skname2').toLowerCase();
+  var text_axis = block.getFieldValue("MODE")
+  var value_degrees = Blockly.JavaScript.valueToCode(block, 'degrees', Blockly.JavaScript.ORDER_ATOMIC);
+  // Convert a line in the second sketch
+  //const [points, unitVector] = getAxisFromLine(block, text_skname2);
+  var statements_skentities = Blockly.JavaScript.statementToCode(block, 'SkEntities');
+  var revolveID = `revolve`+ID()+``;
+
+
+
+  var code = `
+  `+statements_skentities+`
+
+  opRevolve(context, id + "`+revolveID+`", {
+    "entities" : qSketchRegion(id + "`+text_skname1+`"),
+    "axis" : `+options[text_axis]+`,
+    "angleForward" : `+value_degrees+` * degree
+});
+  `;
+  return code;
+};
 
 
 

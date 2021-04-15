@@ -840,15 +840,22 @@ REVOlVE first sketch about second sketch
 
 Blockly.Blocks['revolve'] = {
   init: function() {
+    var options = [
+        ["x axis", "XAXIS"],
+        ["y axis", "YAXIS"],
+        ["z axis", "ZAXIS"]
+    ];
     this.appendDummyInput()
       .appendField('Revolve')
       .appendField(new Blockly.FieldTextInput("Sketch1"), "skname1");
    this.appendDummyInput()
       .appendField('about')
-      .appendField(new Blockly.FieldTextInput("Sketch2"), "skname2")
+      .appendField(new Blockly.FieldDropdown(options), "MODE");
     this.appendValueInput("degrees")
       .appendField('by')
       .setCheck("Number")
+    this.appendDummyInput()
+        .appendField('degrees')
     this.appendStatementInput("SkEntities")
       .setCheck(null);
     this.setInputsInline(true);
@@ -859,7 +866,6 @@ Blockly.Blocks['revolve'] = {
     this.setHelpUrl("");
   }
 };
-
 
 
 
