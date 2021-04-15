@@ -182,8 +182,8 @@
       </value>
       <value name="second_corner_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
-            <field name="y">0</field>
+            <field name="x">1</field>
+            <field name="y">1</field>
         </shadow>
       </value>
     </block>
@@ -196,21 +196,21 @@
       </value>
       <value name="vertex_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
-            <field name="y">0</field>
+            <field name="x">1</field>
+            <field name="y">1</field>
         </shadow>
       </value>
       <value name="sides">
         <shadow type="math_number">
-          <field name="NUM">1</field>
+          <field name="NUM">3</field>
         </shadow>
       </value>
     </block>
     <block type="skpoint">
       <value name="position_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
-            <field name="y">0</field>
+            <field name="x">1</field>
+            <field name="y">1</field>
         </shadow>
       </value>   
     </block>
@@ -223,8 +223,8 @@
       </value>
       <value name="end_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
-            <field name="y">0</field>
+            <field name="x">1</field>
+            <field name="y">1</field>
         </shadow>
       </value>
     </block>
@@ -259,13 +259,13 @@
       </value>
       <value name="mid_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
-            <field name="y">0</field>
+            <field name="x">1</field>
+            <field name="y">1</field>
         </shadow>
       </value>
       <value name="end_xy">
         <shadow type="vector2Field">
-            <field name="x">0</field>
+            <field name="x">2</field>
             <field name="y">0</field>
         </shadow>
       </value>
