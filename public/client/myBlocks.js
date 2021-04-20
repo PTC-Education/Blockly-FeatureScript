@@ -1359,7 +1359,7 @@ Blockly.JavaScript['forLoop'] = function(block) {
   var statements_skentities = Blockly.JavaScript.statementToCode(block, 'loopEntities');
   if ((Math.sign(value_lowerRange) == -1) && (Math.sign(value_upperRange) == -1)) {
     var code = `
-  for (var `+value_varName+` = `+value_lowerRange+`; `+value_varName+` > `+value_upperRange+`; `+value_varName+` += `+value_Increment+`)
+  for (var `+value_varName+` = `+value_lowerRange+`; `+value_varName+` >= `+value_upperRange+`; `+value_varName+` += `+value_Increment+`)
   {
     `+statements_skentities+`
   }
@@ -1367,7 +1367,7 @@ Blockly.JavaScript['forLoop'] = function(block) {
   } else {
   // TODO: Assemble JavaScript into code variable.
   var code = `
-  for (var `+value_varName+` = `+value_lowerRange+`; `+value_varName+` < `+value_upperRange+`; `+value_varName+` += `+value_Increment+`)
+  for (var `+value_varName+` = `+value_lowerRange+`; `+value_varName+` <= `+value_upperRange+`; `+value_varName+` += `+value_Increment+`)
   {
     `+statements_skentities+`
   }
