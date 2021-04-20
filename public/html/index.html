@@ -11,7 +11,7 @@
   <script src="../client/interpreter.js" charset="utf-8"></script>
   <script src="../client/msg/js/en.js" charset="utf-8"></script>
 
-  <style media="screen">
+  <style id = 'interface' media="screen">
   body {
     padding: 0;
     margin: 0
@@ -63,7 +63,6 @@ getAppElementInfo()
 
 
 async function runCode(highlighting) {
-
   var fsPrefix = `
     FeatureScript 1389;
     import(path : "onshape/std/geometry.fs", version : "1389.0");
