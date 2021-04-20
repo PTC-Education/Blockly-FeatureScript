@@ -64,7 +64,13 @@ getAppElementInfo()
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
-  document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 0, 255, 0.5)"
+  console.log('document')
+  console.log(document)
+  console.log('window')
+  console.log(window)
+  console.log('window.document')
+  console.log(window.document)
+  //document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 0, 255, 0.5)"
   
   var fsPrefix = `
     FeatureScript 1389;
@@ -118,7 +124,7 @@ async function runCode(highlighting) {
   // workspace.highlightBlock(null);
   
   // Change the color back
-  document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+  //document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 255, 255, 0.5)"
 }
 
 
