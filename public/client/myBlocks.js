@@ -1014,7 +1014,7 @@ Blockly.JavaScript['extrude'] = function(block) {
   var text_mode = block.getFieldValue('MODE');
   var statements_skentities = Blockly.JavaScript.statementToCode(block, 'SkEntities');
   var ids = getOperationID(block);
-  console.log(ids)
+  //console.log(ids)
   var code = `
   `+statements_skentities+`
 
