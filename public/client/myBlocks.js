@@ -177,7 +177,7 @@ var getOperationID = function(block) {
       return ids
 
     } else {
-      id = `"`+generalID+`"`;
+      id = ``+generalID+``;
     }
     
     if (!(isSketchEntity(block))) {
