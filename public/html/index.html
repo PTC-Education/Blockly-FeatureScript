@@ -180,6 +180,8 @@ async function copyToFeatureStudio(fsCode) {
 
   // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
+  document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+
 }
 
 
