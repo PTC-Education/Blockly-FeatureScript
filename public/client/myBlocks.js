@@ -974,28 +974,6 @@ Blockly.JavaScript['skellipse'] = function(block) {
 
 
 
-/*
-OPEXTRUDE:
---------------------------------------------------------------------------------------
-Simple extrude function. THis is a series block and asks for user input to target the
-correct sketch block. 
---------------------------------------------------------------------------------------
-*/
-
-Blockly.JavaScript['opextrude'] = function(block) {
-  var text_skname = block.getFieldValue('skname');
-  var value_endDepth = Blockly.JavaScript.valueToCode(block, 'endDepth', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = `
-  opExtrude(context, id + "extrude1", {
-    "entities" : qSketchRegion(id + "`+text_skname+`"),
-    "direction" : evOwnerSketchPlane(context, {"entity" : qSketchRegion(id + "`+text_skname+`")}).normal,
-    "endBound" : BoundingType.BLIND,
-    "endDepth" : `+value_endDepth+` * inch
-});
-  `;
-  return code;
-};
-
 
 
 
@@ -1014,7 +992,7 @@ Blockly.JavaScript['extrude'] = function(block) {
   var text_mode = block.getFieldValue('MODE');
   var statements_skentities = Blockly.JavaScript.statementToCode(block, 'SkEntities');
   var ids = getOperationID(block);
-  console.log(ids)
+  //console.log(ids)
   var code = `
   `+statements_skentities+`
 
@@ -1088,12 +1066,13 @@ Blockly.JavaScript['revolve'] = function(block) {
   //var revolveID = `revolve`+ID()+``;
   var ids = getOperationID(block);
 
+  console.log(ids)
 
   var code = `
   `+statements_skentities+`
 
   opRevolve(context, `+ids[0]+`, {
-    "entities" : qSketchRegion("`+ids[1]+`"),
+    "entities" : qSketchRegion(`+ids[1]+`),
     "axis" : `+options_axis[text_axis]+`,
     "angleForward" : `+value_degrees+` * `+options_units[text_units]+`
 });

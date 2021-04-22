@@ -230,7 +230,7 @@ Blockly.Blocks['fcuboid'] = {
         .appendField("First Corner [x,y,z]:")
         .setAlign(Blockly.ALIGN_RIGHT);
     this.appendValueInput("corner2_xyz")
-        .appendField("First Corner [x,y,z]:")
+        .appendField("Second Corner [x,y,z]:")
         .setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -790,10 +790,6 @@ Extrude all sketches on sketch plane
 */
 
   Blockly.Blocks['extrude'] = {
-    validate: function(newValue) {
-      this.getSourceBlock().updateConnections(newValue);
-      return newValue;
-    },
     
     init: function() {
       var options = [
@@ -803,37 +799,14 @@ Extrude all sketches on sketch plane
     
       this.appendDummyInput()
       // Pass the field constructor the options list, the validator, and the name.
-          .appendField(new Blockly.FieldDropdown(options, this.validate), 'MODE');
+          .appendField(new Blockly.FieldDropdown(options), 'MODE');
+      this.appendDummyInput('skname')
+          .appendField('extrude')
+          .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
+      this.appendValueInput('endDepth')
+          .appendField('by');
       this.appendStatementInput("SkEntities")
           .setCheck(null);
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(270);
-    },
-    
-    updateConnections: function(newValue) {
-      this.removeInput('skname', true);
-      this.removeInput('endDepth', true);
-      if (newValue == 'BLIND') {
-          this.removeInput('SkEntities');
-          this.appendDummyInput('skname')
-              .appendField('extrude')
-              .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
-          this.appendValueInput('endDepth')
-              .appendField('by');
-          this.appendStatementInput("SkEntities")
-              .setCheck(null);
-      } else if (newValue == 'SYMMETRIC') {
-          this.removeInput('SkEntities');
-          this.appendDummyInput('skname')
-              .appendField('extrude')
-              .appendField(new Blockly.FieldTextInput("Sketch1"), "skname");
-          this.appendValueInput('endDepth')
-              .appendField('by');
-          this.appendStatementInput("SkEntities")
-              .setCheck(null);
-      }
       this.setInputsInline(true);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
