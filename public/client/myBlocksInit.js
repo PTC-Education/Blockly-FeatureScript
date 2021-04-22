@@ -230,7 +230,7 @@ Blockly.Blocks['fcuboid'] = {
         .appendField("First Corner [x,y,z]:")
         .setAlign(Blockly.ALIGN_RIGHT);
     this.appendValueInput("corner2_xyz")
-        .appendField("First Corner [x,y,z]:")
+        .appendField("Second Corner [x,y,z]:")
         .setAlign(Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
