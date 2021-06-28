@@ -31,7 +31,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
     // Format the body of the POST request
     raw = JSON.stringify({
       "formatId": "com.owens-gltf-viewer",
-      "name": "blockly-storage",
+      "name": "FeatureBlocks Storage",
       "description": "String",
       "jsonTree": {
         "blockly":"empty"
@@ -58,7 +58,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
-    if (featureStudios[i].name == "blockly-storage") {
+    if (featureStudios[i].name == "FeatureBlocks Storage") {
       var hasStudio = true
       var index = i
       return {
