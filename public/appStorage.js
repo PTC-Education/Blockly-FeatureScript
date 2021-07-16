@@ -31,7 +31,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
     // Format the body of the POST request
     raw = JSON.stringify({
       "formatId": "com.onshape-blockly",
-      "name": "FeatureBlocks Storage",
+      "name": "FeatureBlocks-Storage",
       "description": "String",
       "jsonTree": {
         "blockly":"empty"
@@ -58,7 +58,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
 async function hasApplicationStorage(featureStudios){
   for (var i = 0; i < featureStudios.length; i++) {
-    if (featureStudios[i].name == "FeatureBlocks Storage") {
+    if (featureStudios[i].name == "FeatureBlocks-Storage") {
       var hasStudio = true
       var index = i
       return {
@@ -67,6 +67,8 @@ async function hasApplicationStorage(featureStudios){
       }
     }
   }
+  console.log(index)
+  console.log(index)
   var hasStudio = false
   var index = null
   return {
