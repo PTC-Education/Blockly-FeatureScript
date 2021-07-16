@@ -30,7 +30,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
 
     // Format the body of the POST request
     raw = JSON.stringify({
-      "formatId": "com.owens-gltf-viewer",
+      "formatId": "com.onshape-blockly",
       "name": "FeatureBlocks Storage",
       "description": "String",
       "jsonTree": {
