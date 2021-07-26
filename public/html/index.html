@@ -80,9 +80,9 @@ getAppElementInfo()
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
-  document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(192, 192, 192, 0.5)"
+  document.getElementById('interface').sheet.cssRules[4].style.backgroundColor = "rgba(192, 192, 192, 0.5)"
   document.getElementById('runButton').innerHTML = "Creating CAD..."
-  document.getElementById('interface').sheet.cssRules[2].style.color = "rgb(0, 0, 0)"
+  document.getElementById('interface').sheet.cssRules[4].style.color = "rgb(0, 0, 0)"
   
   var fsPrefix = `
     FeatureScript 1389;
@@ -195,9 +195,9 @@ async function copyToFeatureStudio(fsCode) {
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)
 
   // Change the color of the run button back to white after the tree is updated
-  document.getElementById('interface').sheet.cssRules[2].style.backgroundColor = "rgba(255, 255, 255, 0.5)"
+  document.getElementById('interface').sheet.cssRules[4].style.backgroundColor = "rgba(255, 255, 255, 0.5)"
   document.getElementById('runButton').innerHTML = "Show me the CAD!"
-  document.getElementById('interface').sheet.cssRules[2].style.color = "rgb(153, 153, 153)"
+  document.getElementById('interface').sheet.cssRules[4].style.color = "rgb(153, 153, 153)"
 }
 
 
