@@ -18,12 +18,12 @@
 
 async function hasExportFeature(){
     var featureList = await getFeatureList();
-    console.log(featureList)
+    // console.log(featureList)
     for (var i = 0; i < featureList.features.length; i++) {
-      console.log(featureList["features"])
-      console.log(featureList["features"][i])
-      console.log(i)
-      if (featureList["features"][i]["message"]["name"] == "Blockly Created Feature") {
+      // console.log(featureList["features"])
+      // console.log(featureList["features"][i][])
+      // console.log(i)
+      if (featureList["features"][i]["name"] == "Blockly Created Feature") {
           var hasStudio = true
           return hasStudio
       }
