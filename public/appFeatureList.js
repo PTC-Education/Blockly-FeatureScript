@@ -18,8 +18,8 @@
 
 async function hasExportFeature(){
     var featureList = await getFeatureList();
-    // console.log(featureList)
-    for (var i = 0; i < featureList.features.length; i++) {
+    console.log(featureList)
+    for (var i = 0; i < featureList["features"].length; i++) {
       // console.log(featureList["features"])
       // console.log(featureList["features"][i][])
       // console.log(i)
