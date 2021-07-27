@@ -96,7 +96,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   async function createFeatureStudio() {
   
     raw = JSON.stringify({
-      "name": `blockly-export`
+      "name": `FeatureBlocks Studio`
     })
    
     header =  {'Content-Type':'application/json'}
@@ -119,7 +119,7 @@ async function updateFeatureStudioContents(fSId, sourceMicroversion, fsCode) {
   
   async function hasExportStudio(featureStudios){
     for (var i = 0; i < featureStudios.length; i++) {
-      if (featureStudios[i].name == "blockly-export") {
+      if (featureStudios[i].name == "FeatureBlocks Studio") {
         var hasStudio = true
         var index = i
         return {

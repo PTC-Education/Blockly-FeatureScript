@@ -18,8 +18,12 @@
 
 async function hasExportFeature(){
     var featureList = await getFeatureList();
-    for (var i = 0; i < featureList.features.length; i++) {
-      if (featureList.features[i].message.name == "Blockly Created Feature") {
+    // console.log(featureList)
+    for (var i = 0; i < featureList["features"].length; i++) {
+      // console.log(featureList["features"])
+      // console.log(featureList["features"][i][])
+      // console.log(i)
+      if (featureList["features"][i]["name"] == "FeatureBlocks Feature") {
           var hasStudio = true
           return hasStudio
       }
@@ -67,7 +71,7 @@ async function createBlocklyFeature(namespace, sourceMicroversion, fSId) {
         "typeName": "BTMFeature",
         "message" : {
           "featureType" : "myFeature",
-          "name" : "Blockly Created Feature",
+          "name" : "FeatureBlocks Feature",
           "parameters" : [],
           "namespace" : `${namespace}`
         }

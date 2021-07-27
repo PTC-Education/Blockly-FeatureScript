@@ -138,7 +138,7 @@
 
   <category name="Features" colour="#5ba55b">
     <block type="feature">
-      <field name="featurename">Blockly Created Feature</field>
+      <field name="featurename">FeatureBlocks Feature</field>
       <field name="preconditions"></field>
       <field name="actions"></field>
     </block>
@@ -415,7 +415,7 @@
     </block>
   </category>
 
-  <category name="GeomOperations" colour="#745CA6">
+  <category name="3D Operations" colour="#745CA6">
     <block type='extrude'>
       <value name="endDepth">
         <shadow type="math_number">
