@@ -159,7 +159,7 @@ async function updateJSONTree(applicationID, changeID, blocklyXML) {
       "value": `${blocklyXML}`}
     }
   )
-  console.log(`${blocklyXML}`)
+  // console.log(`${blocklyXML}`)
   // Define Content-Type for correct body parsing
   header =  {'Content-Type':'application/json'}
   
