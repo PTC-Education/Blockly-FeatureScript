@@ -123,7 +123,7 @@ Blockly.Blocks['features'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Initialize Feature -- Name:")
-        .appendField(new Blockly.FieldTextInput("Blockly Created Feature"), "featurename");
+        .appendField(new Blockly.FieldTextInput("FeatureBlocks Feature"), "featurename");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Preconditions");
@@ -145,7 +145,7 @@ Blockly.Blocks['feature'] = {
     init: function() {
       this.appendDummyInput()
           .appendField("New Feature -- Name:")
-          .appendField(new Blockly.FieldTextInput("Blockly Created Feature"), "featurename");
+          .appendField(new Blockly.FieldTextInput("FeatureBlocks Feature"), "featurename");
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField("Define Feature's actions");
