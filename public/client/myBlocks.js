@@ -7,7 +7,7 @@
 
 // Main ID fetching function for generating IDs in Loops 
 
-var lengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
+// var lengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
 
 /*
 --------------------------------------------------------------------------------------
