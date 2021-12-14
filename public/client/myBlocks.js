@@ -7,8 +7,6 @@
 
 // Main ID fetching function for generating IDs in Loops 
 
-// var lengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
-
 /*
 --------------------------------------------------------------------------------------
 
@@ -517,10 +515,11 @@ Blockly.JavaScript['opsphere'] = function(block) {
   var value_diameter = Blockly.JavaScript.valueToCode(block, 'diameter', Blockly.JavaScript.ORDER_ATOMIC);
   var value_center_xyz = Blockly.JavaScript.valueToCode(block, 'center_xyz', Blockly.JavaScript.ORDER_ATOMIC);
   var blockID = getID(block);
+  var lengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
   var code = `
     opSphere(context, `+blockID+`, {
-        "radius": `+ value_diameter +` * inch,
-        "center": `+value_center_xyz+` * inch
+        "radius": `+ value_diameter +` * `+lengthUnit+`,
+        "center": `+value_center_xyz+` * `+lengthUnit+`
         });
   `
   return code;
