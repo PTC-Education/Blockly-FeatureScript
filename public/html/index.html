@@ -121,7 +121,6 @@ async function runCode(highlighting) {
   // join the array back into a single string
   var fsCodeNoVar = lines.join('\n');
   var fsCodeFinal = fsCodeNoVar.replace(/lengthUnit/gi,defaultLengthUnit)
-  console.log(fsCodeFinal)
 
   fsCode =  fsPrefix + fsCodeFinal;
   // copyToClipboard(fsCode);
