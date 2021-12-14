@@ -96,6 +96,8 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Creating CAD..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
+  var lengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
+
   var fsPrefix = `
     FeatureScript 1389;
     import(path : "onshape/std/geometry.fs", version : "1389.0");
@@ -119,9 +121,9 @@ async function runCode(highlighting) {
   }
   // join the array back into a single string
   var fsCodeNoVar = lines.join('\n');
-  
+  var fsCodFinal = fsCodeNoVar.replace(/lengthUnit/g,lengthUnit)
 
-  fsCode =  fsPrefix + fsCodeNoVar;
+  fsCode =  fsPrefix + fsCodFinal;
   // copyToClipboard(fsCode);
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
