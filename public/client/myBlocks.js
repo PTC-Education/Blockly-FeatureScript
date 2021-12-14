@@ -539,8 +539,8 @@ Blockly.JavaScript['fcuboid'] = function(block) {
   var blockID = getID(block);
   var code = `
   fCuboid(context, `+blockID+`, {
-      "corner1": `+value_corner1_xyz+` * inch,
-      "corner2": `+value_corner2_xyz+` * inch
+      "corner1": `+value_corner1_xyz+` * lengthUnit,
+      "corner2": `+value_corner2_xyz+` * lengthUnit
       });
 `
   return code;
@@ -563,9 +563,9 @@ Blockly.JavaScript['fcylinder'] = function(block) {
   var blockID = getID(block);
   var code = `
   fCylinder(context, `+blockID+`, {
-      "topCenter": `+value_top_xyz+` * inch,
-      "bottomCenter": `+value_bottom_xyz+` * inch,
-      "radius" : `+value_radius+` * inch
+      "topCenter": `+value_top_xyz+` * lengthUnit,
+      "bottomCenter": `+value_bottom_xyz+` * lengthUnit,
+      "radius" : `+value_radius+` * lengthUnit
       });
 `
   return code;
@@ -589,10 +589,10 @@ Blockly.JavaScript['fcone'] = function(block) {
   var blockID = getID(block);
   var code = `
   fCone(context, `+blockID+`, {
-      "topCenter": `+value_top_xyz+` * inch,
-      "bottomCenter": `+value_bottom_xyz+` * inch,
-      "topRadius" : `+value_topRadius+` * inch,
-      "bottomRadius" : `+value_bottomRadius+` * inch
+      "topCenter": `+value_top_xyz+` * lengthUnit,
+      "bottomCenter": `+value_bottom_xyz+` * lengthUnit,
+      "topRadius" : `+value_topRadius+` * lengthUnit,
+      "bottomRadius" : `+value_bottomRadius+` * lengthUnit
       });
 `
   return code;
@@ -614,8 +614,8 @@ Blockly.JavaScript['fellipsoid'] = function(block) {
   var blockID = getID(block); 
   var code = `
   fEllipsoid(context, `+blockID+`, {
-    "center" : `+value_center_xyz+` * inch,
-    "radius" : `+value_radial_xyz+` * inch
+    "center" : `+value_center_xyz+` * lengthUnit,
+    "radius" : `+value_radial_xyz+` * lengthUnit
   });
 `
   return code;
@@ -695,8 +695,8 @@ Blockly.JavaScript['skcircle'] = function(block) {
   var blockID = getID(block);
   var code = `
   skCircle(`+text_skname+`, `+blockID+`, {
-    "center" : `+value_c_vector+` * inch,
-    "radius" : `+value_r+` * inch  
+    "center" : `+value_c_vector+` * lengthUnit,
+    "radius" : `+value_r+` * lengthUnit  
 });
   `;
   return code;
@@ -720,8 +720,8 @@ Blockly.JavaScript['skrectangle'] = function(block) {
 
   var code = `
   skRectangle(`+text_skname+`, `+blockID+`, {
-    "firstCorner" : `+value_startxy+` * inch,
-    "secondCorner" : `+value_endxy+`* inch
+    "firstCorner" : `+value_startxy+` * lengthUnit,
+    "secondCorner" : `+value_endxy+`* lengthUnit
   });
   `;
   return code;
@@ -746,8 +746,8 @@ Blockly.JavaScript['skregularpolygon'] = function(block) {
 
   var code = `
   skRegularPolygon(`+text_skname+`, `+blockID+`, {
-    "center" : `+value_center_xy+` * inch,
-    "firstVertex" : `+value_vertex_xy+` * inch,
+    "center" : `+value_center_xy+` * lengthUnit,
+    "firstVertex" : `+value_vertex_xy+` * lengthUnit,
     "sides" : `+value_sides+`
   });
   `;
@@ -771,7 +771,7 @@ Blockly.JavaScript['skpoint'] = function(block) {
 
     var code = `
     skPoint(`+text_skname+`, `+blockID+`, {
-      "position" : `+value_position_xy+` * inch
+      "position" : `+value_position_xy+` * lengthUnit
   });
     `;
     return code; 
@@ -795,8 +795,8 @@ Blockly.JavaScript['sklinesegment'] = function(block) {
 
   var code = `
   skLineSegment(`+text_skname+`, `+blockID+`, {
-    "start" : `+value_start_xy+` * inch,
-    "end" : `+value_end_xy+` * inch
+    "start" : `+value_start_xy+` * lengthUnit,
+    "end" : `+value_end_xy+` * lengthUnit
   });
   `;
   return code;
@@ -819,11 +819,11 @@ Blockly.JavaScript['skpolyline'] = function(block) {
   var code = `
   skPolyline(`+text_skname+`, `+blockID+`, {
     "points" : [
-        vector( 0,  0) * inch,
-        vector( 0, -1) * inch,
-        vector( 1,  1) * inch,
-        vector(-1,  0) * inch,
-        vector( 0,  0) * inch
+        vector( 0,  0) * lengthUnit,
+        vector( 0, -1) * lengthUnit,
+        vector( 1,  1) * lengthUnit,
+        vector(-1,  0) * lengthUnit,
+        vector( 0,  0) * lengthUnit
     ]
   });
   `;
@@ -845,11 +845,11 @@ Blockly.JavaScript['points'] = function(block) {
 
   var code = `
     "points" : [
-        vector( 0,  0) * inch,
-        vector( 0, -1) * inch,
-        vector( 1,  1) * inch,
-        vector(-1,  0) * inch,
-        vector( 0,  0) * inch
+        vector( 0,  0) * lengthUnit,
+        vector( 0, -1) * lengthUnit,
+        vector( 1,  1) * lengthUnit,
+        vector(-1,  0) * lengthUnit,
+        vector( 0,  0) * lengthUnit
     ]
   `;
   return code;
@@ -877,9 +877,9 @@ Blockly.JavaScript['skarc'] = function(block) {
 
   var code = `  
   skArc(`+text_skname+`, `+blockID+`, {
-    "start" : `+value_start_xy+` * inch,
-    "mid" : `+value_mid_xy+` * inch,
-    "end" : `+value_end_xy+` * inch
+    "start" : `+value_start_xy+` * lengthUnit,
+    "mid" : `+value_mid_xy+` * lengthUnit,
+    "end" : `+value_end_xy+` * lengthUnit
 });
   `;
   return code;
@@ -907,10 +907,10 @@ Blockly.JavaScript['skellipticalarc'] = function(block) {
 
   var code = `
   skEllipticalArc(`+text_skname+`, `+blockID+`, {
-    "center" : `+value_center_xy+` * inch,
+    "center" : `+value_center_xy+` * lengthUnit,
     "majorAxis" : normalize(`+value_major_xy+`),
-    "minorRadius" : `+value_minorRadius+` * inch,
-    "majorRadius" : `+value_majorRadius+` * inch,
+    "minorRadius" : `+value_minorRadius+` * lengthUnit,
+    "majorRadius" : `+value_majorRadius+` * lengthUnit,
     "startParameter" : `+value_startParameter+`,
     "endParameter" : `+value_endParameter+`
 });
@@ -961,9 +961,9 @@ Blockly.JavaScript['skellipse'] = function(block) {
 
   var code = `  
   skEllipse(`+text_skname+`, `+blockID+`, {
-    "center" : `+value_center_xy+` * inch,
-    "majorRadius" : `+value_majorRadius+` * inch,
-    "minorRadius" : `+value_minorRadius+` * inch
+    "center" : `+value_center_xy+` * lengthUnit,
+    "majorRadius" : `+value_majorRadius+` * lengthUnit,
+    "minorRadius" : `+value_minorRadius+` * lengthUnit
 });
   `;
   return code;
@@ -997,7 +997,7 @@ Blockly.JavaScript['extrude'] = function(block) {
   extrude(context, `+ids[0]+`, {
     "entities" : qSketchRegion(`+ids[1]+`),
     "endBound" : BoundingType.`+text_mode+`,
-    "depth" : `+value_endDepth+` * inch
+    "depth" : `+value_endDepth+` * lengthUnit
 });
   `;
   return code;
@@ -1030,7 +1030,7 @@ Blockly.JavaScript['revolves'] = function(block) {
 
   opRevolve(context, id + "`+revolveID+`", {
     "entities" : qSketchRegion(id + "`+text_skname1+`"),
-    "axis" : line(vector(`+points[0]+`, `+points[1]+`, 0) * inch, vector(`+unitVector[0]+`, `+unitVector[1]+`, `+unitVector[2]+`)),
+    "axis" : line(vector(`+points[0]+`, `+points[1]+`, 0) * lengthUnit, vector(`+unitVector[0]+`, `+unitVector[1]+`, `+unitVector[2]+`)),
     "angleForward" : `+value_degrees+` * degree
 });
   `;
@@ -1239,7 +1239,7 @@ Blockly.JavaScript['plane'] = function(block) {
   var text_planename = block.getFieldValue('planename').toLowerCase();
   var code = `
   opPlane(context, id + "`+text_planename+`", {
-    "plane" : plane(`+value_center_xyz+` * inch, `+value_normal_xyz+`)
+    "plane" : plane(`+value_center_xyz+` * lengthUnit, `+value_normal_xyz+`)
   });
   `;
   return code;

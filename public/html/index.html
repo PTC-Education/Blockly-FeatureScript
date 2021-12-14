@@ -94,10 +94,8 @@ async function runCode(highlighting) {
   document.getElementById('runButton').style.backgroundColor = "rgba(192, 192, 192, 0.5)"
   document.getElementById('runButton').innerHTML = "Creating CAD..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
-  console.log(localStorage.getItem('defaultLengthUnits'))
   
   var defaultLengthUnit = localStorage.getItem('defaultLengthUnits');
-  console.log(defaultLengthUnit)
 
   var fsPrefix = `
     FeatureScript 1389;
