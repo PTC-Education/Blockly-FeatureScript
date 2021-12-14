@@ -44,12 +44,18 @@ apiRouter.get('/elements', (req, res) => {
 
 
 /**
- * Get the Session info from Onshape to get User ID information
+ * Get the default settings from Onshape user
  */
-apiRouter.get('/users/sessioninfo', (req, res) => {
-    forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
+apiRouter.get('/users/settings', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/users/settings`, req, res);
 });
 
+/**
+ * Get the Session info from Onshape to get User ID information
+ */
+ apiRouter.get('/users/sessioninfo', (req, res) => {
+    forwardRequestToOnshape(`${onshapeApiUrl}/users/sessioninfo`, req, res);
+});
 
 /**
  * Get all Feature Studio elements from the document 

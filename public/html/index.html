@@ -68,6 +68,7 @@
 <script src="../appStorage.js" charset="utf-8"></script>
 <script src="../appFeatureList.js" charset="utf-8"></script>
 <script src="../appExportStudio.js" charset="utf-8"></script>
+<script src="../appSettings.js" charset="utf-8"></script>
 
 <script>
 
@@ -77,6 +78,16 @@ getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
+getDefaultSettings()
+  .then((value) => {
+    var defaultLengthUnits;
+    for(var i = 0; i < value.defaultUnits.units.length; i++) {
+      if(value.defaultUnits.units[i].key == "LENGTH"){
+        defaultLengthUnits = value.defaultUnits.units[i].value
+      }
+    }
+    localStorage.setItem('defaultLengthUnits',defaultLengthUnits)
+  })
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running

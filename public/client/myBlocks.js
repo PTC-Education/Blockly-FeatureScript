@@ -516,6 +516,7 @@ Create a sphere 3D part
 Blockly.JavaScript['opsphere'] = function(block) {
   var value_diameter = Blockly.JavaScript.valueToCode(block, 'diameter', Blockly.JavaScript.ORDER_ATOMIC);
   var value_center_xyz = Blockly.JavaScript.valueToCode(block, 'center_xyz', Blockly.JavaScript.ORDER_ATOMIC);
+  var lengthUnits = JSON.parse(localStorage.getItem('lengthUnits'));
   var blockID = getID(block);
   var code = `
     opSphere(context, `+blockID+`, {
