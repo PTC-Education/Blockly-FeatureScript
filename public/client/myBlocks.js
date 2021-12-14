@@ -519,8 +519,8 @@ Blockly.JavaScript['opsphere'] = function(block) {
   var blockID = getID(block);
   var code = `
     opSphere(context, `+blockID+`, {
-        "radius": `+ value_diameter +` * `+lengthUnit+`,
-        "center": `+value_center_xyz+` * `+lengthUnit+`
+        "radius": `+ value_diameter +` * inch,
+        "center": `+value_center_xyz+` * inch
         });
   `
   return code;
