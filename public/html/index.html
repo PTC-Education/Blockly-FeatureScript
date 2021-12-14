@@ -95,7 +95,7 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Creating CAD..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
-  var defaultLengthUnit = JSON.parse(localStorage.getItem('defaultLengthUnits'));
+  var defaultLengthUnit = localStorage.getItem('defaultLengthUnits');
   console.log(defaultLengthUnit)
 
   var fsPrefix = `
