@@ -50,9 +50,9 @@
 </head>
 
 <body>
-  <div id="bannerDiv" style="text-align: center;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSf_Oi1nwBRhoVDTyBYbYlaxF-4qcI8a4Rajzw_JUAYZVtOvbw/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" style="color: #656565">Feedback</a>
-      |  Getting Started
-<br> FeatureBlocks Beta v0.01 | <a href="https://www.onshape.com/en/" style="text-decoration: none;color: #656565;">©2013 - Present, Onshape Inc.</a></div>
+  <div id="bannerDiv" style="text-align: center;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc6V2tIxCCEVLylwSDKk3pZJFG-Uu7gbq_F0stzwHO8NUcZ7g/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" style="color: #656565">Feedback</a>
+      |  <a href="https://www.youtube.com/watch?v=JqvT3McioFw" target="_blank" rel="noopener noreferrer" style="color: #656565">Getting Started</a>
+<br> FeatureBlocks Beta v0.01 | <a href="https://www.onshape.com/en/" target="_blank" style="text-decoration: none;color: #656565;">©2013 - Present, Onshape Inc.</a></div>
   <div id="blocklyDiv"></div>
   <button id="runButton" onclick="runCode(true); return">Show me the CAD</button>
 </body>
@@ -68,6 +68,7 @@
 <script src="../appStorage.js" charset="utf-8"></script>
 <script src="../appFeatureList.js" charset="utf-8"></script>
 <script src="../appExportStudio.js" charset="utf-8"></script>
+<script src="../appSettings.js" charset="utf-8"></script>
 
 <script>
 
@@ -77,6 +78,16 @@ getAppElementInfo()
   .then((value) => getChangeID(value.applicationID)
   .then((value) => Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(value.tree.blockly), Blockly.mainWorkspace)));
 
+getDefaultSettings()
+  .then((value) => {
+    var defaultLengthUnits;
+    for(var i = 0; i < value.defaultUnits.units.length; i++) {
+      if(value.defaultUnits.units[i].key == "LENGTH"){
+        defaultLengthUnits = value.defaultUnits.units[i].value
+      }
+    }
+    localStorage.setItem('defaultLengthUnits',defaultLengthUnits)
+  })
 
 async function runCode(highlighting) {
   // Change the color of the button to indicate the process running
@@ -84,6 +95,8 @@ async function runCode(highlighting) {
   document.getElementById('runButton').innerHTML = "Creating CAD..."
   document.getElementById('runButton').style.color = "rgb(0, 0, 0)"
   
+  var defaultLengthUnit = localStorage.getItem('defaultLengthUnits');
+
   var fsPrefix = `
     FeatureScript 1389;
     import(path : "onshape/std/geometry.fs", version : "1389.0");
@@ -107,9 +120,9 @@ async function runCode(highlighting) {
   }
   // join the array back into a single string
   var fsCodeNoVar = lines.join('\n');
-  
+  var fsCodeFinal = fsCodeNoVar.replace(/lengthUnit/gi,defaultLengthUnit)
 
-  fsCode =  fsPrefix + fsCodeNoVar;
+  fsCode =  fsPrefix + fsCodeFinal;
   // copyToClipboard(fsCode);
   copyToFeatureStudio(fsCode);
   // TODO: The following shows execution of code in sync with it running, would be very helpful for troubleshooting.
@@ -190,8 +203,7 @@ async function copyToFeatureStudio(fsCode) {
   // Get the xml and stringified xml representation of the current Blockly main workspace
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
   var xml_text = Blockly.Xml.domToText(xml);
-  console.log("platypus")
-  console.log(xml_text)
+  // console.log(xml_text)
 
   // Update the JSON tree of the app element to persist storage of the last exported Blockly main workspace
   await updateJSONTree(appElementInfo.applicationID, appElementInfo.changeID, xml_text)

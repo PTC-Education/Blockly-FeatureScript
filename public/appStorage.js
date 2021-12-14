@@ -34,7 +34,7 @@ async function createNewAppElement(fSId, sourceMicroversion, fsCode) {
       "name": "FeatureBlocks Storage",
       "description": "String",
       "jsonTree": {
-        "blockly":"empty"
+        "blockly":'<xml xmlns="https://developers.google.com/blockly/xml"><block type="feature" id="o]%Ffg%vnqW+S-c66R?5" x="10" y="150"><field name="featurename">FeatureBlocks Feature</field><statement name="actions"><block type="fcuboid" id="^8:YmHbv{TziJS344BJh"><value name="corner1_xyz"><shadow type="vector3Field" id="V#L~8GwrCVh1dn!Uga=B"><field name="x">0</field><field name="y">0</field><field name="z">0</field></shadow></value><value name="corner2_xyz"><shadow type="vector3Field" id="2J}GWgSFbT;z/o|OJat{"><field name="x">1</field><field name="y">2</field><field name="z">3</field></shadow></value></block></statement></block></xml>'
       }
     })
     
@@ -159,7 +159,7 @@ async function updateJSONTree(applicationID, changeID, blocklyXML) {
       "value": `${blocklyXML}`}
     }
   )
-  
+  // console.log(`${blocklyXML}`)
   // Define Content-Type for correct body parsing
   header =  {'Content-Type':'application/json'}
   
@@ -170,4 +170,4 @@ async function updateJSONTree(applicationID, changeID, blocklyXML) {
     } catch (error) {
         console.error(error);
     }
-  };
+};
