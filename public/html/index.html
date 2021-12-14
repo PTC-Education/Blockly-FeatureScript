@@ -80,6 +80,7 @@ getAppElementInfo()
 
 getDefaultSettings()
   .then((value) => {
+    console.log(value)
     var defaultLengthUnits;
     for(var i = 0; i < value.defaultUnits.units.length; i++) {
       if(value.defaultUnits.units[i].key == "LENGTH"){
